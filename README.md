@@ -11,7 +11,7 @@
 - husky
 - commitlint
 - ant design vue
-- sass
+- sass/less
 
 ### 开发指南
 
