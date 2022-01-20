@@ -1,6 +1,6 @@
-# Vite Template with Vue3 + Typescript
+# 青训营项目
 
-### 集成功能
+### 技术栈
 
 - pnpm
 - axios
@@ -16,6 +16,8 @@
 ### 开发指南
 
 ```bash
+// 安装pnpm
+npm install -g pnpm
 
 // 安装全部依赖
 pnpm install
@@ -36,7 +38,7 @@ pnpm build
 
   ```vue
   <template>
-  	// 无需导入直接使用
+  	// 组件无需导入直接使用
   	<HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
   	<a-button type="primary"> Primary </a-button>
   </template>
