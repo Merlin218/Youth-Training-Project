@@ -2,16 +2,16 @@
 
 ### 技术栈
 
-- pnpm
+- [pnpm](https://www.pnpm.cn/)
 - axios
-- pinia
-- vue-router
+- [pinia](https://pinia.vuejs.org/introduction.html)
+- [vue-router](https://next.router.vuejs.org/zh/introduction.html)
 - eslint
 - prettier
 - husky
 - commitlint
-- ant design vue
-- sass/less
+- [ant design vue](https://2x.antdv.com/docs/vue/introduce-cn/)
+- [sass](https://sass.bootcss.com/documentation) / [less](https://less.bootcss.com/#%E6%A6%82%E8%A7%88)
 
 ### 开发指南
 
@@ -24,7 +24,6 @@ pnpm install
 
 // 安装某个依赖
 pnpm install xxx  -D/-S
-
 
 // 运行
 pnpm dev
