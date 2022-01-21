@@ -4,6 +4,7 @@ import path from 'path';
 import styleImport from 'vite-plugin-style-import';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
+import configs from './src/configs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,7 +31,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api': {
-				target: 'https://shibe.online/api',
+				target: configs.proxyUrl,
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, ''),
 			},
@@ -45,6 +46,28 @@ export default defineConfig({
 			utils: path.resolve(__dirname, './src/utils'),
 			configs: path.resolve(__dirname, './src/configs'),
 			store: path.resolve(__dirname, './src/store'),
+		},
+		extensions: ['.js', '.json', '.ts'], // 使用路径别名时想要省略的后缀名，可以自己 增减
+	},
+	build: {
+		terserOptions: {
+			compress: {
+				//生产环境时移除console
+				drop_console: true,
+				drop_debugger: true,
+			},
+		},
+		// 取消计算文件大小，加快打包速度
+		brotliSize: false,
+		sourcemap: true,
+		// assetsDir: 'static/img',
+		rollupOptions: {
+			output: {
+				chunkFileNames: 'js/[name]-[hash].js',
+				entryFileNames: 'js/[name]-[hash].js',
+				assetFileNames: '[ext]/[name]-[hash].[ext]',
+			},
+			//     // 配置CDN
 		},
 	},
 	css: {
