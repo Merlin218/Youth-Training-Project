@@ -20,7 +20,8 @@ module.exports = {
 		'import/no-unresolved': 'off',
 		'no-unused-expressions': 'off',
 		'no-param-reassign': 'off',
-		'prettier/prettier': 'error',
+		'prettier/prettier': 'off',
 		'import/prefer-default-export': 'off',
+		'vue/multi-word-component-names': 'off',
 	},
 };
