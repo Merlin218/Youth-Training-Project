@@ -42,8 +42,9 @@ pnpm build
   	<a-button type="primary"> Primary </a-button>
   </template>
   ```
+
 - 大家开发时，每人新建自己的分支进行开发，后续合并
-- commit提交规范：`type(scope): desc`，注意`:`后有一个空格
+- commit 提交规范：`type(scope): desc`，注意`:`后有一个空格
 
 ### 结构树
 
