@@ -1,7 +1,7 @@
 export type responseType = {
 	code: string;
-	msg: string;
-	data: any;
+	message: string;
+	result: any;
 };
 
 export type CustomConfig = {
