@@ -2,7 +2,7 @@
 	<a-layout id="components-layout-demo-top" class="layout">
 		<a-layout-header class="header">
 			<div class="logo" />
-			<a-menu theme="dark" :inline-collapsed="false" mode="horizontal" @select="handleMenuChange">
+			<a-menu theme="dark" :selected-keys="selectedKeys" :inline-collapsed="false" mode="horizontal" @select="handleMenuChange">
 				<a-menu-item key="/projects"> 项目 </a-menu-item>
 				<a-menu-item key="/start"> 开始 </a-menu-item>
 				<a-menu-item key="/preproccess"> 预处理 </a-menu-item>
@@ -15,7 +15,7 @@
 			<a-breadcrumb style="margin: 16px 0">
 				<a-breadcrumb-item>{{ $route.name }}</a-breadcrumb-item>
 			</a-breadcrumb>
-			<div :style="{ background: '#fff', padding: '24px', minHeight: '400px' }">
+			<div :style="{ background: '#fff', padding: '24px', minHeight: `${contentMinHeight}px` }">
 				<router-view v-slot="{ Component }">
 					<transition :name="$route.meta.transition as string || 'fade'" mode="out-in">
 						<keep-alive>
@@ -30,9 +30,15 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
+
+const selectedKeys = ref([route.path]);
+
+const contentMinHeight = window.innerHeight * 0.8;
 
 const handleMenuChange = ({ key }: { key: string }) => {
 	router.push(key);
