@@ -3,18 +3,20 @@
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
 declare module 'vue' {
-  export interface GlobalComponents {
-    AAvatar: typeof import('ant-design-vue/es')['Avatar']
-    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
-    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
-    ALayout: typeof import('ant-design-vue/es')['Layout']
-    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
-    ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
-    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
-    AMenu: typeof import('ant-design-vue/es')['Menu']
-    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
-  }
+	export interface GlobalComponents {
+		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
+		ACard: typeof import('ant-design-vue/es')['Card'];
+		ACol: typeof import('ant-design-vue/es')['Col'];
+		ALayout: typeof import('ant-design-vue/es')['Layout'];
+		ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent'];
+		ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter'];
+		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
+		AMenu: typeof import('ant-design-vue/es')['Menu'];
+		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+		ARow: typeof import('ant-design-vue/es')['Row'];
+		ATable: typeof import('ant-design-vue/es')['Table'];
+		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
+	}
 }
 
-export { }
+export {};
