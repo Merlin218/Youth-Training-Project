@@ -7,16 +7,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { ComponentName } from '@/types/visual/g2PlotComponent';
-import { componentInfo } from '@/configs/visual';
+import { G2PlotChartConfig } from '@/configs/visual';
+import { ChartNameType } from '@/types/visual/charts';
 
-const props = withDefaults(defineProps<{ componentName: ComponentName }>(), {
-	componentName: 'AreaChart',
+const props = withDefaults(defineProps<{ componentName: ChartNameType }>(), {
+	componentName: 'Line',
 });
 
-const componentText = computed(() => {
-	const component = componentInfo.find(item => item.name === props.componentName);
-	return component?.text;
-});
+const componentText = computed(() => G2PlotChartConfig[props.componentName].text);
 </script>
 <style scoped></style>

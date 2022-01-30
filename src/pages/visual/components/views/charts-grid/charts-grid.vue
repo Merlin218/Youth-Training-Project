@@ -1,7 +1,7 @@
 <template>
 	<div class="component__grid">
 		<div v-for="(component, index) in componentList" :key="component.name" :class="activeIdx === index ? 'component__item active' : 'component__item'" @click="changeActiveIdx(index, component.name)">
-			<component :is="component.name" v-bind="config"></component>
+			<chart-display :id="component.name" :name="component.name" :options="options"></chart-display>
 			<p class="component__text">{{ component.text }}</p>
 		</div>
 	</div>
@@ -9,22 +9,29 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { ComponentNameType, ComponentPropsType } from '@/types/visual/g2PlotComponent';
-import { componentInfo } from '@/configs/visual';
+import { G2PlotChartConfig } from '@/configs/visual';
 import { useVisualStore } from '@/store/visual';
+import { ChartNameType } from '@/types/visual/charts';
 
 const store = useVisualStore();
-const componentList = ref<{ name: ComponentNameType; text: string }[]>(componentInfo);
+const componentList = ref(
+	Object.keys(G2PlotChartConfig).map((item: ChartNameType) => {
+		return {
+			name: item,
+			...G2PlotChartConfig[item],
+		};
+	})
+);
 
-const activeIdx = computed(() => componentInfo.findIndex(item => item.name === store.userConfiguration.componentName));
-const changeActiveIdx = (index: number, name: ComponentNameType) => {
-	store.userConfiguration.componentName = name;
+const activeIdx = computed(() => componentList.value.findIndex(item => item.name === store.chartName));
+const changeActiveIdx = (index: number, name: ChartNameType) => {
+	store.chartName = name;
 };
 
-const config = ref<ComponentPropsType>({
+const options = ref({
 	width: 200,
 	height: 150,
-	autoFit: true,
+	autoFit: false,
 	xField: 'year',
 	yField: 'value',
 	tooltip: {

@@ -14,7 +14,6 @@
 	"dependencies": {
 		"@antv/g2plot": "^2.4.7",
 		"@babel/runtime": "^7.16.7",
-		"@opd/g2plot-vue": "^3.6.3",
 		"@types/codemirror": "^5.60.5",
 		"ant-design-vue": "^2.2.8",
 		"axios": "^0.25.0",

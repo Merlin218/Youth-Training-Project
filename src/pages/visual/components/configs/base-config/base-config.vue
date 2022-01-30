@@ -1,5 +1,5 @@
 <template>
-	<a-form :model="store.userConfiguration.componentProps">
+	<a-form :model="store.chartOptions">
 		<a-form-item> </a-form-item>
 	</a-form>
 </template>

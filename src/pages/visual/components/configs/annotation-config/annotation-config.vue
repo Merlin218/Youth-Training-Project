@@ -23,12 +23,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { LineChartProps } from '@opd/g2plot-vue';
+import { LineOptions } from '@antv/g2plot';
 import { useVisualStore } from '@/store/visual';
 
 const store = useVisualStore();
 
-const config: LineChartProps = store.userConfiguration.componentProps;
+const config: LineOptions = store.chartOptions;
 
 const annotationActive = ref<number>(0);
 

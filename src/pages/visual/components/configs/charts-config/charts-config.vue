@@ -1,6 +1,6 @@
 <template>
 	<keep-alive>
-		<line-chart-config v-if="componentName === 'LineChart'"></line-chart-config>
+		<line-chart-config v-if="componentName === 'Line'"></line-chart-config>
 	</keep-alive>
 </template>
 
@@ -17,7 +17,7 @@ const store = useVisualStore();
 // 			.join('-')}-config`
 // );
 
-const componentName = computed(() => store.userConfiguration.componentName);
+const componentName = computed(() => store.chartName);
 </script>
 
 <style scoped></style>
