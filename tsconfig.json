@@ -19,7 +19,8 @@
 			"pages/*": ["src/pages/*"],
 			"utils/*": ["src/utils/*"],
 			"configs/*": ["src/configs/*"],
-			"store/*": ["src/store/*"]
+			"store/*": ["src/store/*"],
+			"types/*": ["src/types/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]

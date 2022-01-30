@@ -11,6 +11,7 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		Components({
+			dirs: ['src/**/*'],
 			resolvers: [
 				AntDesignVueResolver(), // ant-design-vue
 			],
@@ -46,6 +47,7 @@ export default defineConfig({
 			utils: path.resolve(__dirname, './src/utils'),
 			configs: path.resolve(__dirname, './src/configs'),
 			store: path.resolve(__dirname, './src/store'),
+			types: path.resolve(__dirname, './src/types'),
 		},
 		extensions: ['.js', '.json', '.ts'], // 使用路径别名时想要省略的后缀名，可以自己 增减
 	},

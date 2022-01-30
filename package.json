@@ -12,6 +12,9 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
 	},
 	"dependencies": {
+		"@antv/g2plot": "^2.4.7",
+		"@babel/runtime": "^7.16.7",
+		"@opd/g2plot-vue": "^3.6.3",
 		"ant-design-vue": "^2.2.8",
 		"axios": "^0.25.0",
 		"pinia": "^2.0.0-rc.10",

@@ -6,7 +6,7 @@
 				<a-menu-item key="/projects"> 项目 </a-menu-item>
 				<a-menu-item key="/start"> 开始 </a-menu-item>
 				<a-menu-item key="/preproccess"> 预处理 </a-menu-item>
-				<a-menu-item key="/chart"> 绘图 </a-menu-item>
+				<a-menu-item key="/visual"> 可视化 </a-menu-item>
 				<a-menu-item key="/publish"> 发布 </a-menu-item>
 			</a-menu>
 			<a-avatar size="large" icon="user" />

@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
 				name: '开始',
 				component: () => import('../pages/start/index.vue'),
 			},
+			{
+				path: '/visual',
+				name: '可视化',
+				component: () => import('../pages/visual/index.vue'),
+			},
 		],
 	},
 ];
