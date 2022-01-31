@@ -1,10 +1,10 @@
 <template>
-	<a-form :model="store.chartOptions">
+	<a-form :model="config">
 		<a-form-item label="曲线平滑">
 			<a-switch :checked="config?.smooth" @change="changeSmooth"></a-switch>
 		</a-form-item>
 		<a-form-item label="镜像反转">
-			<a-radio-group :value="config?.reflect">
+			<a-radio-group :value="config?.reflect" @change="changeReflect">
 				<a-radio v-for="item in configOptions.reflect" :key="item.value" :value="item.value">{{ item.text }}</a-radio>
 			</a-radio-group>
 		</a-form-item>
@@ -18,7 +18,7 @@ import { useVisualStore } from '@/store/visual';
 
 const store = useVisualStore();
 
-const config: ComputedRef<LineOptions | undefined> = computed(() => store.chartInstance?.options);
+const config: ComputedRef<LineOptions | undefined> = computed(() => store.chartInstance.options);
 
 const configOptions = ref<{ [key: string]: any[] }>({
 	reflect: [
@@ -29,9 +29,17 @@ const configOptions = ref<{ [key: string]: any[] }>({
 	] as { value: string | string[] | undefined; text: string }[],
 });
 
+// 曲线平滑
 const changeSmooth = (e: any) => {
 	store.chartInstance?.update({
 		smooth: e,
+	});
+};
+
+// 图表反转
+const changeReflect = ({ target: { value } }: any) => {
+	store.chartInstance?.update({
+		reflect: value,
 	});
 };
 </script>

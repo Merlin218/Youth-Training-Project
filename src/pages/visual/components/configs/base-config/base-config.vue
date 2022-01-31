@@ -1,17 +1,15 @@
 <template>
-	<a-form :model="store.chartOptions">
-		<a-form-item> </a-form-item>
-	</a-form>
+	<a-form :model="config"> </a-form>
 </template>
 
 <script lang="ts" setup>
+import { computed, ComputedRef } from 'vue';
 import { useVisualStore } from '@/store/visual';
+import { ChartOptionsType } from '@/types/visual/charts';
 
 const store = useVisualStore();
 
-// const options = ref<{ [key: string]: any[] }>({
-
-// });
+const config: ComputedRef<ChartOptionsType> = computed(() => store.chartInstance.options);
 </script>
 
 <style></style>

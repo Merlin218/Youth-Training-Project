@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div style="width: 33%">
-			<a-collapse :value="stepActive" accordion @change="handleStepChange">
+			<a-collapse v-model:value="stepActive" accordion @change="handleStepChange">
 				<a-collapse-panel v-for="step in stepConfig" :key="step.key" :header="step.header">
 					<!-- 选择图表类型 -->
 					<select-chart v-show="step.key === '1'" :component-name="store.chartName"></select-chart>
@@ -10,13 +10,13 @@
 					<!-- 配置图标特有信息 -->
 					<charts-config v-show="step.key === '3'"></charts-config>
 					<!-- 标记配置 -->
-					<!-- <annotation-config v-show="step.key === '4'"></annotation-config> -->
+					<annotation-config v-show="step.key === '4'"></annotation-config>
 				</a-collapse-panel>
 			</a-collapse>
 		</div>
 		<div style="width: 63%">
 			<charts-grid v-if="stepActive === '1'"></charts-grid>
-			<chart-display v-if="stepActive !== '1'" :use-store="true" :name="store.chartName" :options="chartOptions" :monitor="true"></chart-display>
+			<chart-display v-else id="chart" :use-store="true" :name="store.chartName" :options="chartOptions"></chart-display>
 		</div>
 	</div>
 </template>
@@ -35,56 +35,187 @@ const store = useVisualStore();
 // 			.join('-')}-config`
 // )
 
-const stepActive = ref('1');
+const stepActive = ref('0');
 
 const handleStepChange = (key: string) => {
 	stepActive.value = key;
 };
 
 const chartOptions = ref<any>({
-	width: 400,
+	width: 600,
 	height: 350,
-	autoFit: false,
-	xField: 'year',
+	autoFit: true,
+	xField: 'city',
 	yField: 'value',
-	smooth: true,
-	meta: {
-		value: {
-			max: 15,
+	seriesField: 'type',
+	isGroup: 'true',
+	legend: {
+		selected: {
+			// 默认置灰
+			茶叶: false,
 		},
 	},
-	annotations: [
-		{
-			type: 'text',
-			offsetX: 0,
-			offsetY: 0,
-			position: ['1997', '7'],
-			content: '辅助文本',
-			style: {
-				fill: 'red',
-			},
-		},
-		{
-			type: 'text',
-			offsetX: 0,
-			offsetY: 0,
-			position: ['1997', '7'],
-			content: '辅助文本',
-			style: {
-				fill: 'red',
-			},
-		},
-	],
 	data: [
-		{ year: '1991', value: 3 },
-		{ year: '1992', value: 4 },
-		{ year: '1993', value: 3.5 },
-		{ year: '1994', value: 5 },
-		{ year: '1995', value: 4.9 },
-		{ year: '1996', value: 6 },
-		{ year: '1997', value: 7 },
-		{ year: '1998', value: 9 },
-		{ year: '1999', value: 11 },
+		{
+			city: '石家庄',
+			type: '水果',
+			value: 14500,
+		},
+		{
+			city: '石家庄',
+			type: '米面',
+			value: 8500,
+		},
+		{
+			city: '石家庄',
+			type: '特产零食',
+			value: 10000,
+		},
+		{
+			city: '石家庄',
+			type: '茶叶',
+			value: 7000,
+		},
+		{
+			city: '深圳',
+			type: '水果',
+			value: 9000,
+		},
+		{
+			city: '深圳',
+			type: '米面',
+			value: 8500,
+		},
+		{
+			city: '深圳',
+			type: '特产零食',
+			value: 11000,
+		},
+		{
+			city: '深圳',
+			type: '茶叶',
+			value: 6000,
+		},
+		{
+			city: '温州',
+			type: '水果',
+			value: 16000,
+		},
+		{
+			city: '温州',
+			type: '米面',
+			value: 5000,
+		},
+		{
+			city: '温州',
+			type: '特产零食',
+			value: 6000,
+		},
+		{
+			city: '温州',
+			type: '茶叶',
+			value: 10000,
+		},
+		{
+			city: '宁波',
+			type: '水果',
+			value: 14000,
+		},
+		{
+			city: '宁波',
+			type: '米面',
+			value: 9000,
+		},
+		{
+			city: '宁波',
+			type: '特产零食',
+			value: 10000,
+		},
+		{
+			city: '宁波',
+			type: '茶叶',
+			value: 9000,
+		},
+		{
+			city: '无锡',
+			type: '水果',
+			value: 14000,
+		},
+		{
+			city: '无锡',
+			type: '米面',
+			value: 9000,
+		},
+		{
+			city: '无锡',
+			type: '特产零食',
+			value: 10000,
+		},
+		{
+			city: '无锡',
+			type: '茶叶',
+			value: 6000,
+		},
+		{
+			city: '杭州',
+			type: '水果',
+			value: 9000,
+		},
+		{
+			city: '杭州',
+			type: '米面',
+			value: 8500,
+		},
+		{
+			city: '杭州',
+			type: '特产零食',
+			value: 10000,
+		},
+		{
+			city: '杭州',
+			type: '茶叶',
+			value: 6000,
+		},
+		{
+			city: '北京',
+			type: '水果',
+			value: 17000,
+		},
+		{
+			city: '北京',
+			type: '米面',
+			value: 6000,
+		},
+		{
+			city: '北京',
+			type: '特产零食',
+			value: 7000,
+		},
+		{
+			city: '北京',
+			type: '茶叶',
+			value: 10000,
+		},
+		{
+			city: '上海',
+			type: '水果',
+			value: 18000,
+		},
+		{
+			city: '上海',
+			type: '米面',
+			value: 11000,
+		},
+		{
+			city: '上海',
+			type: '特产零食',
+			value: 15000,
+		},
+		{
+			city: '上海',
+			type: '茶叶',
+			value: 14000,
+		},
 	],
 });
 
@@ -114,5 +245,9 @@ const stepConfig = ref([
 	flex-flow: row;
 	align-items: flex-start;
 	justify-content: space-between;
+}
+
+::v-deep .ant-collapse-content-active {
+	overflow: unset;
 }
 </style>

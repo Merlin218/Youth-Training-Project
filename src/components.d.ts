@@ -23,6 +23,8 @@ declare module 'vue' {
 		ARadio: typeof import('ant-design-vue/es')['Radio'];
 		ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup'];
 		ARow: typeof import('ant-design-vue/es')['Row'];
+		ASelect: typeof import('ant-design-vue/es')['Select'];
+		ASelectOption: typeof import('ant-design-vue/es')['SelectOption'];
 		ASwitch: typeof import('ant-design-vue/es')['Switch'];
 		BaseConfig: typeof import('./pages/visual/components/configs/base-config/base-config.vue')['default'];
 		ChartDisplay: typeof import('./pages/visual/components/views/chart-display/chart-display.vue')['default'];

@@ -35,6 +35,7 @@ specifiers:
   vite: ^2.7.2
   vite-plugin-style-import: ^1.4.1
   vue: ^3.2.25
+  vue-color-kit: ^1.0.5
   vue-router: '4'
   vue-tsc: ^0.29.8
 
@@ -47,6 +48,7 @@ dependencies:
   codemirror: registry.npmmirror.com/codemirror/5.65.1
   pinia: registry.npmmirror.com/pinia/2.0.0-rc.10_typescript@4.5.4+vue@3.2.27
   vue: registry.npmmirror.com/vue/3.2.27
+  vue-color-kit: registry.npmmirror.com/vue-color-kit/1.0.5_vue@3.2.27
   vue-router: registry.npmmirror.com/vue-router/4.0.12_vue@3.2.27
 
 devDependencies:
@@ -9399,6 +9401,22 @@ packages:
       vscode-pug-languageservice: registry.npmmirror.com/vscode-pug-languageservice/0.29.8
       vscode-typescript-languageservice: registry.npmmirror.com/vscode-typescript-languageservice/0.29.8
     dev: true
+
+  registry.npmmirror.com/vue-color-kit/1.0.5_vue@3.2.27:
+    resolution:
+      {
+        integrity: sha512-PUQzqdpI7672YYuoHdTLENHldieVMis0u9g2n7NAxiLGdiaqCD/QaYtbDOvtASpN5oSIfKxQgPV+i45MOlkKnw==,
+        registry: http://registry.npm.taobao.org/,
+        tarball: https://registry.npmmirror.com/vue-color-kit/-/vue-color-kit-1.0.5.tgz,
+      }
+    id: registry.npmmirror.com/vue-color-kit/1.0.5
+    name: vue-color-kit
+    version: 1.0.5
+    peerDependencies:
+      vue: ^3.0.5
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.27
+    dev: false
 
   registry.npmmirror.com/vue-demi/0.12.1_vue@3.2.27:
     resolution: { integrity: sha1-9+GO++z/0RqwadFHLXoG4xm0F0w=, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-demi/download/vue-demi-0.12.1.tgz }

@@ -16,13 +16,10 @@ const props = withDefaults(
 		name: ChartNameType;
 		options?: any;
 		useStore?: boolean;
-		monitor?: boolean;
 	}>(),
 	{
 		id: 'container',
-		name: 'Line',
 		options: {},
-		monitor: false,
 		useStore: false,
 	}
 );
@@ -34,11 +31,6 @@ onMounted(() => {
 	const instance = getChartInstance(props.name, props.id, props.options);
 	if (props.useStore) {
 		store.bindChartInstance(instance);
-	}
-	if (props.monitor) {
-		instance.on('plot:click', (...args: any) => {
-			console.log(...args);
-		});
 	}
 	instance.render();
 });
