@@ -2,14 +2,14 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-01-31 16:12:53
+ * @LastEditTime: 2022-02-01 12:21:15
  * @Description: 请填写简介
 -->
 <template>
 	<a-form :model="annotationConfig">
 		<a-form-item label="坐标位置">
-			<a-select v-model:value="annotationConfig.position" placeholder="请选择标记点">
-				<a-select-option v-for="item in data" :key="[item[xField], item[yField]]">{{ xField + ':' + item[xField] + '  ' + yField + ':' + item[yField] }}</a-select-option>
+			<a-select v-model:value="tmpPosition" placeholder="请选择标记点" @change="handleChange">
+				<a-select-option v-for="item in data" :key="item[xField] + ',' + item[yField]">{{ xField + ':' + item[xField] + '  ' + yField + ':' + item[yField] }}</a-select-option>
 			</a-select>
 		</a-form-item>
 		<a-form-item label="文本内容">
@@ -37,7 +37,7 @@
 				@change-color="changeColor"
 			></ColorPicker>
 		</a-form-item>
-		<a-button type="primary" @click="addAnnotation">新增标记</a-button>
+		<a-button type="primary" @click="addAnnotation">{{ btnText }}</a-button>
 	</a-form>
 </template>
 
@@ -77,6 +77,14 @@ const annotationConfig = ref<
 	id: Date.now().toString(),
 	position: ['', ''],
 });
+// 临时存储position值
+const tmpPosition = ref<string>('');
+// 按钮文字
+const btnText = ref<string>('新增标记');
+
+const handleChange = (value: string) => {
+	annotationConfig.value.position = value.split(',');
+};
 
 /**
  * @description: 重新设置配置值
@@ -84,6 +92,9 @@ const annotationConfig = ref<
  * @return {*}
  */
 const resetConfig = () => {
+	// 按钮文字
+	btnText.value = '新增标记';
+	tmpPosition.value = '';
 	annotationConfig.value = {
 		type: 'text',
 		content: '',
@@ -102,7 +113,10 @@ watch(
 		const { option }: any = store.chartInstance.chart.annotation();
 		if (option) {
 			const target = option.find((item: any) => item.id === value);
+			tmpPosition.value = target.position.join(',');
 			Object.assign(annotationConfig.value, target);
+			// 按钮文字
+			btnText.value = '修改标记';
 		}
 	}
 );
@@ -112,7 +126,7 @@ watch(
  * @return {*}
  */
 const addAnnotation = () => {
-	if (annotationConfig.value.position.some(item => item === '')) return;
+	if (annotationConfig.value.position.some(item => item === '') || annotationConfig.value.content === '') return;
 	// 添加标记
 	store.addAnnotations([annotationConfig.value]);
 	// 从g2实例中获取配置数据
