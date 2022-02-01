@@ -1,3 +1,10 @@
+/*
+ * @Author: Merlin218
+ * @Date: 2022-01-30 11:33:11
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 13:48:55
+ * @Description: 请填写简介
+ */
 import { defineStore } from 'pinia';
 import { Annotation, StateCondition } from '@antv/g2plot';
 import { ChartNameType, ChartOptionsType, ChartType } from '@/types/visual/charts';
@@ -6,6 +13,7 @@ export const useVisualStore = defineStore('visual', {
 	state: () => ({
 		chartInstance: {} as ChartType,
 		chartName: 'Line' as ChartNameType,
+		chartTitle: '' as string,
 	}),
 	getters: {
 		chartOptions: state => state.chartInstance.options,
@@ -44,8 +52,10 @@ export const useVisualStore = defineStore('visual', {
 		getStates() {
 			return this.chartInstance.getStates();
 		},
-		bindChartInstance(instance: ChartType) {
+		bindChartToStore({ instance, title, name }: { instance: ChartType; title: string; name: ChartNameType }) {
 			this.chartInstance = instance;
+			this.chartName = name;
+			this.chartTitle = title;
 		},
 	},
 });

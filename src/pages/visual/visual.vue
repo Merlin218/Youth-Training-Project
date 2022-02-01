@@ -1,16 +1,23 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-01-30 11:33:11
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 19:34:19
+ * @Description: 可视化页面
+-->
 <template>
 	<div class="container">
 		<div style="width: 33%">
-			<a-collapse v-model:value="stepActive" accordion @change="handleStepChange">
+			<a-collapse v-model:activeKey="stepActive" accordion @change="stepActive = $event">
 				<a-collapse-panel v-for="step in stepConfig" :key="step.key" :header="step.header">
 					<!-- 选择图表类型 -->
-					<select-chart v-show="step.key === '1'" :component-name="store.chartName"></select-chart>
+					<select-chart v-if="step.key === '1'" :component-name="store.chartName"></select-chart>
 					<!-- 配置基本信息 -->
-					<base-config v-show="step.key === '2'"></base-config>
-					<!-- 配置图标特有信息 -->
-					<charts-config v-show="step.key === '3'"></charts-config>
+					<base-config v-else-if="step.key === '2'"></base-config>
+					<!-- 配置图表特有信息 -->
+					<charts-config v-else-if="step.key === '3'"></charts-config>
 					<!-- 标记配置 -->
-					<annotation-config v-show="step.key === '4'"></annotation-config>
+					<annotation-config v-else-if="step.key === '4'"></annotation-config>
 				</a-collapse-panel>
 			</a-collapse>
 		</div>
@@ -22,8 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useVisualStore } from '@/store/visual';
+import { ChartOptionsType } from '@/types/visual/charts';
+import { data1 } from '@/data';
 
 const store = useVisualStore();
 
@@ -35,190 +44,32 @@ const store = useVisualStore();
 // 			.join('-')}-config`
 // )
 
-const stepActive = ref('0');
-
-const handleStepChange = (key: string) => {
-	stepActive.value = key;
-};
-
-const chartOptions = ref<any>({
+const chartOptions = ref<ChartOptionsType>({
 	width: 600,
 	height: 350,
 	autoFit: true,
-	xField: 'city',
+	xField: 'product_box',
 	yField: 'value',
-	seriesField: 'type',
-	isGroup: 'true',
+	seriesField: 'province',
+	data: data1,
+	xAxis: {
+		position: 'left',
+	},
 	legend: {
-		selected: {
-			// 默认置灰
-			茶叶: false,
+		flipPage: true,
+		// 两行分页
+		maxRow: 2,
+		pageNavigator: {
+			marker: {
+				style: {
+					fill: 'rgba(0,0,0,0.65)',
+				},
+			},
 		},
 	},
-	data: [
-		{
-			city: '石家庄',
-			type: '水果',
-			value: 14500,
-		},
-		{
-			city: '石家庄',
-			type: '米面',
-			value: 8500,
-		},
-		{
-			city: '石家庄',
-			type: '特产零食',
-			value: 10000,
-		},
-		{
-			city: '石家庄',
-			type: '茶叶',
-			value: 7000,
-		},
-		{
-			city: '深圳',
-			type: '水果',
-			value: 9000,
-		},
-		{
-			city: '深圳',
-			type: '米面',
-			value: 8500,
-		},
-		{
-			city: '深圳',
-			type: '特产零食',
-			value: 11000,
-		},
-		{
-			city: '深圳',
-			type: '茶叶',
-			value: 6000,
-		},
-		{
-			city: '温州',
-			type: '水果',
-			value: 16000,
-		},
-		{
-			city: '温州',
-			type: '米面',
-			value: 5000,
-		},
-		{
-			city: '温州',
-			type: '特产零食',
-			value: 6000,
-		},
-		{
-			city: '温州',
-			type: '茶叶',
-			value: 10000,
-		},
-		{
-			city: '宁波',
-			type: '水果',
-			value: 14000,
-		},
-		{
-			city: '宁波',
-			type: '米面',
-			value: 9000,
-		},
-		{
-			city: '宁波',
-			type: '特产零食',
-			value: 10000,
-		},
-		{
-			city: '宁波',
-			type: '茶叶',
-			value: 9000,
-		},
-		{
-			city: '无锡',
-			type: '水果',
-			value: 14000,
-		},
-		{
-			city: '无锡',
-			type: '米面',
-			value: 9000,
-		},
-		{
-			city: '无锡',
-			type: '特产零食',
-			value: 10000,
-		},
-		{
-			city: '无锡',
-			type: '茶叶',
-			value: 6000,
-		},
-		{
-			city: '杭州',
-			type: '水果',
-			value: 9000,
-		},
-		{
-			city: '杭州',
-			type: '米面',
-			value: 8500,
-		},
-		{
-			city: '杭州',
-			type: '特产零食',
-			value: 10000,
-		},
-		{
-			city: '杭州',
-			type: '茶叶',
-			value: 6000,
-		},
-		{
-			city: '北京',
-			type: '水果',
-			value: 17000,
-		},
-		{
-			city: '北京',
-			type: '米面',
-			value: 6000,
-		},
-		{
-			city: '北京',
-			type: '特产零食',
-			value: 7000,
-		},
-		{
-			city: '北京',
-			type: '茶叶',
-			value: 10000,
-		},
-		{
-			city: '上海',
-			type: '水果',
-			value: 18000,
-		},
-		{
-			city: '上海',
-			type: '米面',
-			value: 11000,
-		},
-		{
-			city: '上海',
-			type: '特产零食',
-			value: 15000,
-		},
-		{
-			city: '上海',
-			type: '茶叶',
-			value: 14000,
-		},
-	],
 });
 
+const stepActive = ref('');
 const stepConfig = ref([
 	{
 		key: '1',
@@ -237,6 +88,10 @@ const stepConfig = ref([
 		header: '配置图表标记',
 	},
 ]);
+
+onMounted(() => {
+	stepActive.value = '1';
+});
 </script>
 
 <style scoped>
@@ -249,5 +104,10 @@ const stepConfig = ref([
 
 ::v-deep .ant-collapse-content-active {
 	overflow: unset;
+}
+
+::v-deep .ant-form-item-control-input-content {
+	display: flex;
+	align-items: center;
 }
 </style>

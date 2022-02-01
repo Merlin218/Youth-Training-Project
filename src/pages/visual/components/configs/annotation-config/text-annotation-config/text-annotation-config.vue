@@ -62,12 +62,12 @@
 </template>
 
 <script setup lang="ts">
-import { Annotation } from '@antv/g2plot';
 import { computed, ref, watch } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import { useVisualStore } from '@/store/visual';
 // stylesheet
 import 'vue-color-kit/dist/vue-color-kit.css';
+import { TextAnnotationConfigType } from '@/types/visual/config';
 
 const store = useVisualStore();
 
@@ -80,16 +80,7 @@ const props = defineProps<{
 }>();
 
 // 标记配置
-const annotationConfig = ref<
-	Annotation & {
-		position: string[];
-		style: {
-			fill?: string;
-			fontSize?: number;
-		};
-		content: string;
-	}
->({
+const annotationConfig = ref<TextAnnotationConfigType>({
 	type: 'text',
 	content: '',
 	offsetX: 0,

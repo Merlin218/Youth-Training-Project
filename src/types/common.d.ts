@@ -1,3 +1,10 @@
+/*
+ * @Author: Merlin218
+ * @Date: 2022-01-22 11:35:17
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 16:34:17
+ * @Description: 请填写简介
+ */
 export type responseType = {
 	code: string;
 	message: string;
@@ -12,4 +19,8 @@ export type CustomConfig = {
 	loadingTitle?: string; // loading提示
 	successTitle?: string; // success提示
 	errorTitle?: string; // error提示
+};
+
+export type Mutable<T> = {
+	-readonly [P in keyof T]: T[P];
 };

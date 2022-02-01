@@ -10,7 +10,7 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"lib": ["esnext", "dom"],
-
+		"types": ["@antv/g2plot", "src/types/**/*"],
 		"baseUrl": "./",
 		"paths": {
 			// 根据别名配置相关路径

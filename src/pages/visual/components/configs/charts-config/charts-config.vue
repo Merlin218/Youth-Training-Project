@@ -1,6 +1,13 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-01-30 11:33:09
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 16:14:19
+ * @Description: 请填写简介
+-->
 <template>
 	<keep-alive>
-		<line-chart-config v-if="componentName === 'Line'"></line-chart-config>
+		<line-config v-if="componentName === 'Line'"></line-config>
 	</keep-alive>
 </template>
 
