@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 19:34:19
+ * @LastEditTime: 2022-02-01 21:06:36
  * @Description: 可视化页面
 -->
 <template>
@@ -52,9 +52,6 @@ const chartOptions = ref<ChartOptionsType>({
 	yField: 'value',
 	seriesField: 'province',
 	data: data1,
-	xAxis: {
-		position: 'left',
-	},
 	legend: {
 		flipPage: true,
 		// 两行分页

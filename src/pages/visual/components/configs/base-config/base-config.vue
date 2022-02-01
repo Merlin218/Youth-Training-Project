@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 19:42:42
+ * @LastEditTime: 2022-02-01 21:15:26
  * @Description: 基本配置
 -->
 <template>
@@ -10,9 +10,10 @@
 		<a-form-item label="标题">
 			<a-input v-model:value="store.chartTitle" placeholder="请输入标题"></a-input>
 		</a-form-item>
-		<a-collapse v-model:activeKey="activeKey">
-			<a-collapse-panel key="key" header="字段配置"> <key-config></key-config></a-collapse-panel>
-			<a-collapse-panel key="legend" header="图例配置" :disabled="!options.legend">
+		<a-collapse v-model:activeKey="activeKey" accordion>
+			<a-collapse-panel key="key" header="数据字段"> <key-config></key-config></a-collapse-panel>
+			<a-collapse-panel key="axis" header="坐标轴"> <axis-config></axis-config></a-collapse-panel>
+			<a-collapse-panel key="legend" header="图例" :disabled="!options.legend">
 				<template #extra>
 					<a-switch :checked="!!options.legend" @change="handleLegendActive"></a-switch>
 				</template>

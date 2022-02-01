@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 13:33:35
+ * @LastEditTime: 2022-02-01 21:14:06
  * @Description: 请填写简介
 -->
 <template>
@@ -22,8 +22,8 @@
 			</div>
 		</a-form-item>
 		<a-form-item label="坐标位置">
-			<a-select v-model:value="tmpPosition" placeholder="请选择标记点" @change="handlePositionChange">
-				<a-select-option v-for="item in data" :key="item[xField] + ',' + item[yField]">{{ xField + ':' + item[xField] + '  ' + yField + ':' + item[yField] }}</a-select-option>
+			<a-select v-model:value="tmpPosition" show-search placeholder="请选择标记点" @change="handlePositionChange">
+				<a-select-option v-for="(item, index) in data" :key="index + '.' + item[xField] + ',' + item[yField]">{{ item[xField] + ',' + item[yField] }}</a-select-option>
 			</a-select>
 		</a-form-item>
 		<a-form-item label="文本内容">
