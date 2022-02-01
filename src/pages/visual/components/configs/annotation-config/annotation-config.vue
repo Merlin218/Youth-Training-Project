@@ -1,3 +1,10 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-01-30 11:33:09
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 13:27:12
+ * @Description: 请填写简介
+-->
 <template>
 	<div>
 		<text-annotation-config :id="selectId"></text-annotation-config>
@@ -14,15 +21,8 @@ const selectId = ref<string>('');
 
 onMounted(() => {
 	store.on('annotation:click', (e: any) => {
+		selectId.value = '';
 		selectId.value = e.gEvent.delegateObject.annotation.cfg.id;
-	});
-	store.on('annotation:dblclick', (e: any) => {
-		const { id } = e.gEvent.delegateObject.annotation.cfg;
-		store.removeAnnotations([
-			{
-				id,
-			},
-		]);
 	});
 });
 </script>

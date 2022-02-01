@@ -2,13 +2,27 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 12:21:15
+ * @LastEditTime: 2022-02-01 13:33:35
  * @Description: 请填写简介
 -->
 <template>
 	<a-form :model="annotationConfig">
+		<a-form-item label="效果展示">
+			<div
+				class="annotation__display"
+				:style="{
+					height: annotationConfig.style.fontSize + 'px',
+					lineHeight: annotationConfig.style.fontSize + 'px',
+					fontSize: annotationConfig.style.fontSize + 'px',
+					marginRight: '10px',
+					color: annotationConfig.style.fill,
+				}"
+			>
+				{{ annotationConfig.content || '当前无内容' }}
+			</div>
+		</a-form-item>
 		<a-form-item label="坐标位置">
-			<a-select v-model:value="tmpPosition" placeholder="请选择标记点" @change="handleChange">
+			<a-select v-model:value="tmpPosition" placeholder="请选择标记点" @change="handlePositionChange">
 				<a-select-option v-for="item in data" :key="item[xField] + ',' + item[yField]">{{ xField + ':' + item[xField] + '  ' + yField + ':' + item[yField] }}</a-select-option>
 			</a-select>
 		</a-form-item>
@@ -34,10 +48,16 @@
 				theme="light"
 				:color="annotationConfig.style.fill"
 				:sucker-hide="true"
-				@change-color="changeColor"
+				@change-color="annotationConfig.style.fill = $event.hex"
 			></ColorPicker>
 		</a-form-item>
-		<a-button type="primary" @click="addAnnotation">{{ btnText }}</a-button>
+		<a-form-item label="文本大小">
+			<div style="display: flex; align-items: center">
+				<a-input-number v-model:value="annotationConfig.style.fontSize"></a-input-number>
+			</div>
+		</a-form-item>
+		<a-button type="primary" @click="addAnnotation">{{ modifyStatus ? '修改标记' : '新增标记' }}</a-button>
+		<a-button v-show="modifyStatus" type="primary" danger @click="removeAnnotation">删除标记</a-button>
 	</a-form>
 </template>
 
@@ -65,6 +85,7 @@ const annotationConfig = ref<
 		position: string[];
 		style: {
 			fill?: string;
+			fontSize?: number;
 		};
 		content: string;
 	}
@@ -73,37 +94,27 @@ const annotationConfig = ref<
 	content: '',
 	offsetX: 0,
 	offsetY: 0,
-	style: {},
+	style: {
+		fill: '#000000',
+		fontSize: 14,
+	},
 	id: Date.now().toString(),
 	position: ['', ''],
 });
 // 临时存储position值
 const tmpPosition = ref<string>('');
 // 按钮文字
-const btnText = ref<string>('新增标记');
-
-const handleChange = (value: string) => {
-	annotationConfig.value.position = value.split(',');
-};
+const modifyStatus = ref<boolean>(false);
+// 颜色选择器显示状态
+const colorPickerShow = ref<boolean>(false);
 
 /**
- * @description: 重新设置配置值
- * @param {*}
+ * @description: 修改位置信息
+ * @param {*} value
  * @return {*}
  */
-const resetConfig = () => {
-	// 按钮文字
-	btnText.value = '新增标记';
-	tmpPosition.value = '';
-	annotationConfig.value = {
-		type: 'text',
-		content: '',
-		offsetX: 0,
-		offsetY: 0,
-		style: {},
-		id: Date.now().toString(),
-		position: ['', ''],
-	};
+const handlePositionChange = (value: string) => {
+	annotationConfig.value.position = value.split(',');
 };
 
 // 将监听id，修改配置值
@@ -116,37 +127,78 @@ watch(
 			tmpPosition.value = target.position.join(',');
 			Object.assign(annotationConfig.value, target);
 			// 按钮文字
-			btnText.value = '修改标记';
+			modifyStatus.value = true;
 		}
 	}
 );
+
 /**
- * @description: 添加标记点
+ * @description: 重新设置配置值
  * @param {*}
  * @return {*}
  */
-const addAnnotation = () => {
-	if (annotationConfig.value.position.some(item => item === '') || annotationConfig.value.content === '') return;
-	// 添加标记
-	store.addAnnotations([annotationConfig.value]);
-	// 从g2实例中获取配置数据
+const resetConfig = () => {
+	// 按钮文字
+	modifyStatus.value = false;
+	tmpPosition.value = '';
+	annotationConfig.value = {
+		type: 'text',
+		content: '',
+		offsetX: 0,
+		offsetY: 0,
+		style: {
+			fill: '#000000',
+			fontSize: 14,
+		},
+		id: Date.now().toString(),
+		position: ['', ''],
+	};
+};
+
+/**
+ * @description: 更新g2plot实例
+ * @param {*}
+ * @return {*}
+ */
+const updateAnnotationOptions = () => {
+	// 从g2实例中获取最新标记列表
 	const { option }: any = store.chartInstance.chart.annotation();
 	// 更新实例配置
 	// g2plot内部实际上是维护了一个g2的图标，上面更改的是g2实例的配置，需要手动修改g2plot配置
 	store.update({ annotations: option });
+};
+
+/**
+ * @description: 添加/修改标记点
+ * @param {*}
+ * @return {*}
+ */
+const addAnnotation = () => {
+	// 验证数据
+	if (annotationConfig.value.position.some(item => item === '') || annotationConfig.value.content === '') return;
+	// 如果是修改标记，先移除旧标记，重新新增
+	if (modifyStatus.value && annotationConfig.value.id) {
+		store.removeAnnotations([{ id: annotationConfig.value.id }]);
+		// 修改id
+		annotationConfig.value.id = Date.now().toString();
+	}
+	// 添加标记
+	store.addAnnotations([annotationConfig.value]);
+	updateAnnotationOptions();
 	resetConfig();
 };
 
-// 颜色选择器显示状态
-const colorPickerShow = ref<boolean>(false);
-
 /**
- * @description: 改变颜色
- * @param {*} hex 颜色值
+ * @description: 删除当前标记点
+ * @param {*}
  * @return {*}
  */
-const changeColor = ({ hex }: any) => {
-	annotationConfig.value.style.fill = hex;
+const removeAnnotation = () => {
+	if (modifyStatus.value && annotationConfig.value.id) {
+		store.removeAnnotations([{ id: annotationConfig.value.id }]);
+		updateAnnotationOptions();
+		resetConfig();
+	}
 };
 </script>
 
@@ -163,5 +215,15 @@ const changeColor = ({ hex }: any) => {
 	top: -160px;
 	left: 130px;
 	width: auto !important;
+}
+
+.annotation__display {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	padding: 16px 0;
 }
 </style>
