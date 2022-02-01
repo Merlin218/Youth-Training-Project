@@ -8,7 +8,7 @@
 				<DataTable></DataTable>
 			</template>
 			<template v-else-if="activeKeys === 'code'">
-				<CodeEditor></CodeEditor>
+				<CodeEditor v-model="code" @input="codeChange"></CodeEditor>
 			</template>
 			<template v-else-if="activeKeys === 'multiple'">
 				<MultipleForm></MultipleForm>
@@ -46,6 +46,12 @@ const tabListNoTitle = ref([
 
 const onTabChange = (key: string) => {
 	activeKeys.value = key;
+};
+
+const code = ref('');
+
+const codeChange = (val: string) => {
+	console.log(code.value, val);
 };
 </script>
 

@@ -11,8 +11,10 @@ import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/addon/lint/javascript-lint.js';
 import 'codemirror/addon/lint/lint.css';
 import 'codemirror/lib/codemirror.css';
+import 'codemirror/addon/selection/active-line';
 import 'codemirror/theme/darcula.css';
 import 'codemirror/addon/hint/show-hint.css';
+import 'codemirror/addon/display/autorefresh';
 
 const props = defineProps({
 	modelValue: {
@@ -25,7 +27,7 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['update:modelValue', 'init:codeEditor', 'input']);
+const emit = defineEmits(['update:modelValue', 'init', 'input']);
 
 const codeEditor = ref<any>(null);
 
@@ -42,12 +44,13 @@ const options: EditorConfiguration = {
 	gutters: ['CodeMirror-lint-markers'],
 	lint: { options: { esversion: 2021 } },
 	readOnly: props.readonly ? 'nocursor' : false, // true: 不可编辑  false: 可编辑 'nocursor' 失焦,不可编辑
+	autoRefresh: true,
 };
 
 const initCodeEditor = () => {
 	const editor = document.getElementById('editor') as HTMLTextAreaElement;
 	codeEditor.value = CodeMirror.fromTextArea(editor, options);
-	emit('init:codeEditor', unref(codeEditor));
+	emit('init', unref(codeEditor));
 	CodeMirror.signal(editor, 'change');
 };
 
