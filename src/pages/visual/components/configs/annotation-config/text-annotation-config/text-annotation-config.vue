@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 21:14:06
+ * @LastEditTime: 2022-02-01 22:52:44
  * @Description: 请填写简介
 -->
 <template>
@@ -23,7 +23,7 @@
 		</a-form-item>
 		<a-form-item label="坐标位置">
 			<a-select v-model:value="tmpPosition" show-search placeholder="请选择标记点" @change="handlePositionChange">
-				<a-select-option v-for="(item, index) in data" :key="index + '.' + item[xField] + ',' + item[yField]">{{ item[xField] + ',' + item[yField] }}</a-select-option>
+				<a-select-option v-for="(item, index) in data" :key="index + ',' + item[xField] + ',' + item[yField]">{{ item[xField] + ',' + item[yField] }}</a-select-option>
 			</a-select>
 		</a-form-item>
 		<a-form-item label="文本内容">
@@ -56,8 +56,13 @@
 				<a-input-number v-model:value="annotationConfig.style.fontSize"></a-input-number>
 			</div>
 		</a-form-item>
-		<a-button type="primary" @click="addAnnotation">{{ modifyStatus ? '修改标记' : '新增标记' }}</a-button>
-		<a-button v-show="modifyStatus" type="primary" danger @click="removeAnnotation">删除标记</a-button>
+		<div class="btn__list">
+			<div>
+				<a-button type="primary" style="margin-right: 10px" @click="addAnnotation">{{ modifyStatus ? '修改标记' : '新增标记' }}</a-button>
+				<a-button v-show="modifyStatus" type="primary" danger @click="removeAnnotation">删除标记</a-button>
+			</div>
+			<div style="color: rgba(0, 0, 0, 0.3); margin-top: 10px">Tip: 点击图表中标注可以进行修改哦！</div>
+		</div>
 	</a-form>
 </template>
 
@@ -105,7 +110,10 @@ const colorPickerShow = ref<boolean>(false);
  * @return {*}
  */
 const handlePositionChange = (value: string) => {
+	// 将字符串分割成数组
 	annotationConfig.value.position = value.split(',');
+	// 移除第一个元素 -> 序号
+	annotationConfig.value.position.shift();
 };
 
 // 将监听id，修改配置值
@@ -216,5 +224,12 @@ const removeAnnotation = () => {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 	padding: 16px 0;
+}
+
+.btn__list {
+	display: flex;
+	flex-flow: column;
+	align-items: flex-end;
+	justify-content: flex-end;
 }
 </style>

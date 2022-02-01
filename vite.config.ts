@@ -1,3 +1,10 @@
+/*
+ * @Author: Merlin218
+ * @Date: 2022-01-30 17:06:39
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 22:23:13
+ * @Description: 请填写简介
+ */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';

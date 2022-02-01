@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 19:34:53
+ * @LastEditTime: 2022-02-01 22:43:26
  * @Description: 标注配置
 -->
 <template>
@@ -21,7 +21,6 @@ const selectId = ref<string>('');
 
 onMounted(() => {
 	store.on('annotation:click', (e: any) => {
-		selectId.value = '';
 		selectId.value = e.gEvent.delegateObject.annotation.cfg.id;
 	});
 });

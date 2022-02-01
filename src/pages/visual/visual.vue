@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 21:06:36
+ * @LastEditTime: 2022-02-01 22:42:37
  * @Description: 可视化页面
 -->
 <template>
@@ -99,11 +99,11 @@ onMounted(() => {
 	justify-content: space-between;
 }
 
-::v-deep .ant-collapse-content-active {
+:deep(.ant-collapse-content-active) {
 	overflow: unset;
 }
 
-::v-deep .ant-form-item-control-input-content {
+:deep(.ant-form-item-control-input-content) {
 	display: flex;
 	align-items: center;
 }

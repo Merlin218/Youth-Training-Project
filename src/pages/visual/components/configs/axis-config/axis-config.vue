@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:46:49
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 21:01:50
+ * @LastEditTime: 2022-02-01 22:44:48
  * @Description: 请填写简介
 -->
 <template>
@@ -114,4 +114,8 @@ watch(
 );
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.ant-divider-horizontal) {
+	margin-top: 0;
+}
+</style>
