@@ -21,7 +21,7 @@
 import { ref } from 'vue';
 import Image from './components/Image.vue';
 import DataTable from './components/DataTable.vue';
-import CodeEditor from './components/CodeEditor.vue';
+import CodeEditor from '@/components/CodeEditor.vue';
 import MultipleForm from './components/MultipleForm.vue';
 
 const activeKeys = ref('image');

@@ -15,6 +15,7 @@ declare module 'vue' {
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
 		ARow: typeof import('ant-design-vue/es')['Row'];
 		ATable: typeof import('ant-design-vue/es')['Table'];
+		CodeEditor: typeof import('./components/CodeEditor.vue')['default'];
 		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
 	}
 }
