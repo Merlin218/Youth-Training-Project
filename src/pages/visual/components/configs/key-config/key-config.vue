@@ -2,19 +2,19 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:26:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 19:33:52
+ * @LastEditTime: 2022-02-01 23:25:08
  * @Description: 字段配置
 -->
 <template>
-	<a-form :model="updateConfig">
+	<a-form :model="fieldConfig">
 		<a-form-item label="x轴字段">
-			<a-select v-model:value="updateConfig.xField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([updateConfig.yField, updateConfig.seriesField])"></a-select>
+			<a-select v-model:value="fieldConfig.xField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.yField, fieldConfig.seriesField])"></a-select>
 		</a-form-item>
 		<a-form-item label="y轴字段">
-			<a-select v-model:value="updateConfig.yField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([updateConfig.xField, updateConfig.seriesField])"></a-select>
+			<a-select v-model:value="fieldConfig.yField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.seriesField])"></a-select>
 		</a-form-item>
 		<a-form-item v-show="canSeries" label="分组字段">
-			<a-select v-model:value="updateConfig.seriesField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([updateConfig.xField, updateConfig.yField])"></a-select> </a-form-item
+			<a-select v-model:value="fieldConfig.seriesField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.yField])"></a-select> </a-form-item
 	></a-form>
 </template>
 
@@ -30,17 +30,17 @@ const options: ComputedRef<ChartOptionsType> = computed(() => store.chartInstanc
 
 const canSeries = computed(() => Object.keys(store.chartInstance.options.data[0]).length > 2);
 
-const updateConfig = ref<Mutable<Partial<ChartOptionsType>>>({
-	xField: options.value.xField,
-	yField: options.value.yField,
-	seriesField: options.value.seriesField,
+const fieldConfig = ref<Mutable<Partial<ChartOptionsType>>>({
+	xField: '',
+	yField: '',
+	seriesField: '',
 	...options.value,
 });
 
 watch(
-	() => updateConfig.value,
+	() => fieldConfig.value,
 	value => {
-		store.update({ ...options.value, ...value });
+		store.update({ ...value });
 	},
 	{ deep: true }
 );

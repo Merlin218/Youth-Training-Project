@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 13:48:55
+ * @LastEditTime: 2022-02-02 01:43:59
  * @Description: 请填写简介
  */
 import { defineStore } from 'pinia';
@@ -11,46 +11,49 @@ import { ChartNameType, ChartOptionsType, ChartType } from '@/types/visual/chart
 
 export const useVisualStore = defineStore('visual', {
 	state: () => ({
-		chartInstance: {} as ChartType,
-		chartName: 'Line' as ChartNameType,
+		chartInstance: null as ChartType | null,
+		chartName: null as ChartNameType | null,
 		chartTitle: '' as string,
 	}),
 	getters: {
-		chartOptions: state => state.chartInstance.options,
+		chartOptions: state => state.chartInstance?.options,
 	},
 	actions: {
 		render() {
-			this.chartInstance.render();
+			this.chartInstance?.render();
 		},
 		update(options: Partial<ChartOptionsType>) {
-			this.chartInstance.update(options);
+			this.chartInstance?.update(options);
 		},
 		changeData(data: Record<string, any>[]) {
-			this.chartInstance.changeData(data);
+			this.chartInstance?.changeData(data);
 		},
 		changeSize(width: number, height: number) {
-			this.chartInstance.changeSize(width, height);
+			this.chartInstance?.changeSize(width, height);
 		},
 		destroy() {
-			this.chartInstance.destroy();
+			this.chartInstance?.destroy();
+			this.chartInstance = null;
+			this.chartName = null;
+			this.chartTitle = '';
 		},
 		on(evt: string, callback: Function, once?: boolean | undefined) {
-			this.chartInstance.on(evt, callback, once);
+			this.chartInstance?.on(evt, callback, once);
 		},
 		off(evt: string, callback: Function) {
-			this.chartInstance.off(evt, callback);
+			this.chartInstance?.off(evt, callback);
 		},
 		addAnnotations(annotations: Annotation[]) {
-			this.chartInstance.addAnnotations(annotations);
+			this.chartInstance?.addAnnotations(annotations);
 		},
 		removeAnnotations(annotations: ({ id: string } & Partial<Annotation>)[]) {
-			this.chartInstance.removeAnnotations(annotations);
+			this.chartInstance?.removeAnnotations(annotations);
 		},
 		setState(type: 'active' | 'inactive' | 'selected', condition: StateCondition, status?: boolean) {
-			this.chartInstance.setState(type, condition, status);
+			this.chartInstance?.setState(type, condition, status);
 		},
 		getStates() {
-			return this.chartInstance.getStates();
+			return this.chartInstance?.getStates();
 		},
 		bindChartToStore({ instance, title, name }: { instance: ChartType; title: string; name: ChartNameType }) {
 			this.chartInstance = instance;

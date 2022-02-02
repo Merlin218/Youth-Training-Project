@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:43:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 14:07:46
+ * @LastEditTime: 2022-02-02 01:53:00
  * @Description: 请填写简介
 -->
 <template>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { getChartInstance } from '@/configs/visual';
 import { ChartNameType } from '@/types/visual/charts';
 import { useVisualStore } from '@/store/visual';
@@ -23,14 +23,15 @@ const store = useVisualStore();
 const props = withDefaults(
 	defineProps<{
 		id?: string;
-		name: ChartNameType;
+		name?: ChartNameType;
 		title?: string;
 		options?: any;
 		useStore?: boolean;
 	}>(),
 	{
-		id: 'container',
+		id: Date.now().toString(),
 		options: {},
+		name: 'Area',
 		title: '',
 		useStore: false,
 	}
@@ -38,13 +39,29 @@ const props = withDefaults(
 
 const chartTitle = computed(() => (props.useStore ? store.chartTitle : props.title || ''));
 
-onMounted(() => {
+const initChart = () => {
+	if (store.chartInstance) {
+		store.destroy();
+	}
 	// 从配置文件中拿到对应的实例
 	const instance = getChartInstance(props.name, props.id, props.options);
 	if (props.useStore) {
-		store.bindChartToStore({ instance, title: props.title || '', name: props.name });
+		store.bindChartToStore({ instance, title: props.title, name: props.name });
+		store.render();
+	} else {
+		instance.render();
 	}
-	instance.render();
+};
+
+watch(
+	() => props.name,
+	() => {
+		initChart();
+	}
+);
+
+onMounted(() => {
+	initChart();
 });
 </script>
 

@@ -2,39 +2,46 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 22:42:37
+ * @LastEditTime: 2022-02-02 11:59:25
  * @Description: 可视化页面
 -->
 <template>
-	<div class="container">
-		<div style="width: 33%">
+	<!-- 选择图表类型 -->
+	<select-chart v-show="!isSelected" v-model:chart-name="chartName" @handle-select="handleSelect"></select-chart>
+	<div v-if="isSelected" class="container__top">
+		<div style="width: 90%">
+			<a-divider class="text" orientation="left">请配置您的图表</a-divider>
+		</div>
+		<a-popconfirm placement="topLeft" ok-text="确认" cancel-text="取消" @confirm="handleBack">
+			<template #title>
+				<p>改变图表类型将会导致您的配置丢失，是否确认返回？</p>
+			</template>
+			<a-button type="primary">返回</a-button>
+		</a-popconfirm>
+	</div>
+	<div v-show="isSelected" class="container">
+		<div :style="{ width: '70%' }">
+			<chart-display id="chart" :use-store="true" :name="chartName" :options="chartOptions"></chart-display>
+		</div>
+		<div v-if="isSelected" :style="{ width: '25%', position: 'relative' }">
 			<a-collapse v-model:activeKey="stepActive" accordion @change="stepActive = $event">
 				<a-collapse-panel v-for="step in stepConfig" :key="step.key" :header="step.header">
-					<!-- 选择图表类型 -->
-					<select-chart v-if="step.key === '1'" :component-name="store.chartName"></select-chart>
 					<!-- 配置基本信息 -->
-					<base-config v-else-if="step.key === '2'"></base-config>
+					<base-config v-if="step.key === '1'"></base-config>
 					<!-- 配置图表特有信息 -->
-					<charts-config v-else-if="step.key === '3'"></charts-config>
+					<charts-config v-else-if="step.key === '2'"></charts-config>
 					<!-- 标记配置 -->
-					<annotation-config v-else-if="step.key === '4'"></annotation-config>
+					<annotation-config v-else-if="step.key === '3'"></annotation-config>
 				</a-collapse-panel>
 			</a-collapse>
-		</div>
-		<div style="width: 63%">
-			<charts-grid v-if="stepActive === '1'"></charts-grid>
-			<chart-display v-else id="chart" :use-store="true" :name="store.chartName" :options="chartOptions"></chart-display>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useVisualStore } from '@/store/visual';
-import { ChartOptionsType } from '@/types/visual/charts';
+import { ref } from 'vue';
+import { ChartNameType, ChartOptionsType } from '@/types/visual/charts';
 import { data1 } from '@/data';
-
-const store = useVisualStore();
 
 // const configComponentName: ComputedRef<string> = computed(
 // 	() =>
@@ -44,9 +51,11 @@ const store = useVisualStore();
 // 			.join('-')}-config`
 // )
 
+const chartName = ref<ChartNameType>('Area');
+
 const chartOptions = ref<ChartOptionsType>({
 	width: 600,
-	height: 350,
+	height: 500,
 	autoFit: true,
 	xField: 'product_box',
 	yField: 'value',
@@ -70,33 +79,44 @@ const stepActive = ref('');
 const stepConfig = ref([
 	{
 		key: '1',
-		header: '选择图表类型',
-	},
-	{
-		key: '2',
 		header: '配置基本信息',
 	},
 	{
-		key: '3',
+		key: '2',
 		header: '配置图表信息',
 	},
 	{
-		key: '4',
+		key: '3',
 		header: '配置图表标记',
 	},
 ]);
 
-onMounted(() => {
+const isSelected = ref<boolean>(false);
+
+const handleSelect = () => {
+	isSelected.value = true;
 	stepActive.value = '1';
-});
+};
+
+const handleBack = () => {
+	isSelected.value = false;
+};
 </script>
 
 <style scoped>
+.container__top {
+	width: 100%;
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: space-around;
+}
 .container {
+	width: 100%;
 	display: flex;
 	flex-flow: row;
 	align-items: flex-start;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 :deep(.ant-collapse-content-active) {
@@ -106,5 +126,9 @@ onMounted(() => {
 :deep(.ant-form-item-control-input-content) {
 	display: flex;
 	align-items: center;
+}
+
+.display___none {
+	display: none;
 }
 </style>
