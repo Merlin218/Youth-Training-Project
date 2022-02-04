@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-02 11:59:25
+ * @LastEditTime: 2022-02-04 12:41:12
  * @Description: 可视化页面
 -->
 <template>
@@ -21,7 +21,7 @@
 	</div>
 	<div v-show="isSelected" class="container">
 		<div :style="{ width: '70%' }">
-			<chart-display id="chart" :use-store="true" :name="chartName" :options="chartOptions"></chart-display>
+			<chart-display id="chart" :water-mark-options="waterMarkOptions" :use-store="true" :name="chartName" :options="chartOptions"></chart-display>
 		</div>
 		<div v-if="isSelected" :style="{ width: '25%', position: 'relative' }">
 			<a-collapse v-model:activeKey="stepActive" accordion @change="stepActive = $event">
@@ -42,6 +42,7 @@
 import { ref } from 'vue';
 import { ChartNameType, ChartOptionsType } from '@/types/visual/charts';
 import { data1 } from '@/data';
+import { WaterMarkOption } from '@/types/common';
 
 // const configComponentName: ComputedRef<string> = computed(
 // 	() =>
@@ -52,6 +53,17 @@ import { data1 } from '@/data';
 // )
 
 const chartName = ref<ChartNameType>('Area');
+
+const waterMarkOptions = ref<WaterMarkOption>({
+	width: 160,
+	height: 100,
+	fontSize: 16,
+	color: 'rgb(0,0,0,0.2)',
+	content: '哈哈哈哈',
+	rotate: -30,
+	gapX: 200,
+	gapY: 200,
+});
 
 const chartOptions = ref<ChartOptionsType>({
 	width: 600,
