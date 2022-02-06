@@ -5,8 +5,6 @@
 declare module 'vue' {
 	export interface GlobalComponents {
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
-		ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb'];
-		ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
 		AInput: typeof import('ant-design-vue/es')['Input'];
 		ALayout: typeof import('ant-design-vue/es')['Layout'];
@@ -20,6 +18,7 @@ declare module 'vue' {
 		ASpace: typeof import('ant-design-vue/es')['Space'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
 		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
+		CodeEditor: typeof import('./components/CodeEditor.vue')['default'];
 		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
 	}
 }
