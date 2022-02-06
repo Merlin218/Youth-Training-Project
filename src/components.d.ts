@@ -20,7 +20,6 @@ declare module 'vue' {
 		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
 		AMenu: typeof import('ant-design-vue/es')['Menu'];
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
-		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopconfirm: typeof import('ant-design-vue/es')['Popconfirm'];
 		ARadio: typeof import('ant-design-vue/es')['Radio'];
@@ -29,7 +28,6 @@ declare module 'vue' {
 		ASelect: typeof import('ant-design-vue/es')['Select'];
 		ASelectOption: typeof import('ant-design-vue/es')['SelectOption'];
 		ASwitch: typeof import('ant-design-vue/es')['Switch'];
-		ATable: typeof import('ant-design-vue/es')['Table'];
 		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];

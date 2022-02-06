@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:43:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 12:38:06
+ * @LastEditTime: 2022-02-06 19:31:35
  * @Description: 图表展示
 -->
 <template>
@@ -40,14 +40,21 @@ const props = withDefaults(
 	}
 );
 
+/**
+ * @description: 初始化图表
+ */
 const initChart = () => {
+	// 如果store中存在实例，先摧毁实例
 	if (props.useStore && store.chartInstance) {
 		store.destroy();
 	}
+	// 新建实例
 	const instance = getChartInstance(props.name, props.id, props.options);
+	// 绑定实例
 	if (props.useStore) {
 		store.bindChartToStore(instance);
 	}
+	// 渲染实例
 	instance.render();
 };
 
