@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 22:52:44
+ * @LastEditTime: 2022-02-06 11:05:21
  * @Description: 请填写简介
 -->
 <template>
@@ -39,8 +39,7 @@
 		</a-row>
 		<a-form-item label="文本颜色" style="position: relative">
 			<div style="display: flex">
-				<div class="color__display" :style="{ backgroundColor: annotationConfig.style.fill }"></div>
-				<a-input :value="annotationConfig.style.fill" style="width: 100px" placeholder="选择颜色" @click="colorPickerShow = true" @blur="colorPickerShow = false"></a-input>
+				<div class="color__display" :style="{ backgroundColor: annotationConfig.style.fill }" @click="colorPickerShow = !colorPickerShow"></div>
 			</div>
 			<ColorPicker
 				class="color__picker"
@@ -48,7 +47,7 @@
 				theme="light"
 				:color="annotationConfig.style.fill"
 				:sucker-hide="true"
-				@change-color="annotationConfig.style.fill = $event.hex"
+				@change-color="changeColor"
 			></ColorPicker>
 		</a-form-item>
 		<a-form-item label="文本大小">
@@ -103,6 +102,10 @@ const tmpPosition = ref<string>('');
 const modifyStatus = ref<boolean>(false);
 // 颜色选择器显示状态
 const colorPickerShow = ref<boolean>(false);
+
+const changeColor = ({ rgba: { r, g, b, a } }: any) => {
+	annotationConfig.value.style.fill = `rgba(${r},${g},${b},${a})`;
+};
 
 /**
  * @description: 修改位置信息
@@ -212,7 +215,7 @@ const removeAnnotation = () => {
 .color__picker {
 	position: absolute;
 	top: -160px;
-	left: 130px;
+	left: 40px;
 	width: auto !important;
 }
 

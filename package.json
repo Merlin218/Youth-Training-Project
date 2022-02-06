@@ -12,9 +12,9 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
 	},
 	"dependencies": {
+		"@ant-design/icons-vue": "^6.0.1",
 		"@antv/g2plot": "^2.4.7",
 		"@babel/runtime": "^7.16.7",
-		"@ant-design/icons-vue": "^6.0.1",
 		"@types/codemirror": "^5.60.5",
 		"ant-design-vue": "^2.2.8",
 		"axios": "^0.25.0",
@@ -22,6 +22,7 @@
 		"default-passive-events": "^2.0.0",
 		"mathjs": "^10.1.1",
 		"pinia": "^2.0.0-rc.10",
+		"pinia-plugin-persist": "^0.0.93",
 		"vue": "^3.2.25",
 		"vue-color-kit": "^1.0.5",
 		"vue-router": "4",

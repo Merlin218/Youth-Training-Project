@@ -1,9 +1,9 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@ant-design/icons-vue': ^6.0.1
   '@antv/g2plot': ^2.4.7
   '@babel/runtime': ^7.16.7
-  '@ant-design/icons-vue': ^6.0.1
   '@commitlint/cli': ^16.0.3
   '@commitlint/config-conventional': ^16.0.0
   '@types/codemirror': ^5.60.5
@@ -31,6 +31,7 @@ specifiers:
   mathjs: ^10.1.1
   mrm: ^3.0.10
   pinia: ^2.0.0-rc.10
+  pinia-plugin-persist: ^0.0.93
   prettier: ^2.5.1
   sass: ^1.49.0
   typescript: ^4.4.4
@@ -46,9 +47,9 @@ specifiers:
   xe-utils: ^3.5.4
 
 dependencies:
+  '@ant-design/icons-vue': 6.0.1_vue@3.2.27
   '@antv/g2plot': registry.npmmirror.com/@antv/g2plot/2.4.7
   '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.16.7
-  '@ant-design/icons-vue': 6.0.1_vue@3.2.27
   '@types/codemirror': registry.npmmirror.com/@types/codemirror/5.60.5
   ant-design-vue: registry.npmmirror.com/ant-design-vue/2.2.8_1d3c0f59c01af099101b44516eefc99f
   axios: registry.npmmirror.com/axios/0.25.0
@@ -56,6 +57,7 @@ dependencies:
   default-passive-events: 2.0.0
   mathjs: 10.1.1
   pinia: registry.npmmirror.com/pinia/2.0.0-rc.10_typescript@4.5.4+vue@3.2.27
+  pinia-plugin-persist: registry.npmmirror.com/pinia-plugin-persist/0.0.93_vue@3.2.27
   vue: registry.npmmirror.com/vue/3.2.27
   vue-color-kit: registry.npmmirror.com/vue-color-kit/1.0.5_vue@3.2.27
   vue-router: registry.npmmirror.com/vue-router/4.0.12_vue@3.2.27
@@ -347,7 +349,7 @@ packages:
       path-is-absolute: 1.0.1
       readdirp: 2.2.1
     optionalDependencies:
-      fsevents: 1.2.13
+      fsevents: registry.npmmirror.com/fsevents/1.2.13
     dev: false
 
   /class-utils/0.3.6:
@@ -612,18 +614,6 @@ packages:
     dependencies:
       map-cache: 0.2.2
     dev: false
-
-  /fsevents/1.2.13:
-    resolution: { integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw== }
-    engines: { node: '>= 4.0' }
-    os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.15.0
-    dev: false
-    optional: true
 
   /get-value/2.0.6:
     resolution: { integrity: sha1-3BXKHGcjh8p2vTesCjlbogQqLCg= }
@@ -8503,6 +8493,25 @@ packages:
     engines: { node: '>=0.10.0' }
     dev: true
 
+  registry.npmmirror.com/fsevents/1.2.13:
+    resolution:
+      {
+        integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==,
+        registry: http://registry.npm.taobao.org/,
+        tarball: https://registry.npmmirror.com/fsevents/-/fsevents-1.2.13.tgz,
+      }
+    name: fsevents
+    version: 1.2.13
+    engines: { node: '>= 4.0' }
+    os: [darwin]
+    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    requiresBuild: true
+    dependencies:
+      bindings: 1.5.0
+      nan: 2.15.0
+    dev: false
+    optional: true
+
   registry.npmmirror.com/fsevents/2.3.2:
     resolution:
       {
@@ -9725,6 +9734,27 @@ packages:
     version: 2.3.1
     engines: { node: '>=8.6' }
     dev: true
+
+  registry.npmmirror.com/pinia-plugin-persist/0.0.93_vue@3.2.27:
+    resolution:
+      {
+        integrity: sha512-ARHTYDMFTikIyywVnuJK859q3B8gjW8vy/E722why4ER9Obrdf5bK7H9/lYztJHuPHhfN46oDv0ab7S/2SfccQ==,
+        registry: http://registry.npm.taobao.org/,
+        tarball: https://registry.npmmirror.com/pinia-plugin-persist/-/pinia-plugin-persist-0.0.93.tgz,
+      }
+    id: registry.npmmirror.com/pinia-plugin-persist/0.0.93
+    name: pinia-plugin-persist
+    version: 0.0.93
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.27
+      vue-demi: registry.npmmirror.com/vue-demi/0.11.4_vue@3.2.27
+    dev: false
 
   registry.npmmirror.com/pinia/2.0.0-rc.10_typescript@4.5.4+vue@3.2.27:
     resolution:
@@ -10978,6 +11008,29 @@ packages:
     version: 1.0.5
     peerDependencies:
       vue: ^3.0.5
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.27
+    dev: false
+
+  registry.npmmirror.com/vue-demi/0.11.4_vue@3.2.27:
+    resolution:
+      {
+        integrity: sha512-/3xFwzSykLW2HiiLie43a+FFgNOcokbBJ+fzvFXd0r2T8MYohqvphUyDQ8lbAwzQ3Dlcrb1c9ykifGkhSIAk6A==,
+        registry: http://registry.npm.taobao.org/,
+        tarball: https://registry.npmmirror.com/vue-demi/-/vue-demi-0.11.4.tgz,
+      }
+    id: registry.npmmirror.com/vue-demi/0.11.4
+    name: vue-demi
+    version: 0.11.4
+    engines: { node: '>=12' }
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
     dependencies:
       vue: registry.npmmirror.com/vue/3.2.27
     dev: false

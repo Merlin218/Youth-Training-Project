@@ -2,23 +2,56 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-02 01:43:59
+ * @LastEditTime: 2022-02-06 00:15:46
  * @Description: 请填写简介
  */
 import { defineStore } from 'pinia';
 import { Annotation, StateCondition } from '@antv/g2plot';
 import { ChartNameType, ChartOptionsType, ChartType } from '@/types/visual/charts';
+import { data1 } from '@/data';
 
 export const useVisualStore = defineStore('visual', {
 	state: () => ({
-		chartInstance: null as ChartType | null,
-		chartName: null as ChartNameType | null,
+		chartInstance: undefined as ChartType | undefined,
+		chartName: undefined as ChartNameType | undefined,
 		chartTitle: '' as string,
+		backupChartOptions: undefined as ChartOptionsType | undefined,
+		waterMark: false as string | false,
 	}),
 	getters: {
 		chartOptions: state => state.chartInstance?.options,
 	},
 	actions: {
+		getChartConfig(name: ChartNameType) {
+			const chartOptions = {
+				width: 600,
+				height: 500,
+				autoFit: true,
+				xField: 'product_box',
+				yField: 'value',
+				seriesField: 'province',
+				data: data1,
+				legend: {
+					flipPage: true,
+					// 两行分页
+					maxRow: 2,
+					pageNavigator: {
+						marker: {
+							style: {
+								fill: 'rgba(0,0,0,0.65)',
+							},
+						},
+					},
+				},
+			};
+			const title = '';
+			const waterMarkUrl = '';
+
+			this.chartName = name;
+			this.chartTitle = title;
+			this.backupChartOptions = chartOptions;
+			this.waterMark = waterMarkUrl;
+		},
 		render() {
 			this.chartInstance?.render();
 		},
@@ -33,8 +66,8 @@ export const useVisualStore = defineStore('visual', {
 		},
 		destroy() {
 			this.chartInstance?.destroy();
-			this.chartInstance = null;
-			this.chartName = null;
+			this.chartInstance = undefined;
+			this.chartName = undefined;
 			this.chartTitle = '';
 		},
 		on(evt: string, callback: Function, once?: boolean | undefined) {
@@ -55,10 +88,11 @@ export const useVisualStore = defineStore('visual', {
 		getStates() {
 			return this.chartInstance?.getStates();
 		},
-		bindChartToStore({ instance, title, name }: { instance: ChartType; title: string; name: ChartNameType }) {
+		bindChartToStore(instance: ChartType) {
 			this.chartInstance = instance;
-			this.chartName = name;
-			this.chartTitle = title;
+		},
+		changeWaterMark(value: string | false) {
+			this.waterMark = value;
 		},
 	},
 });
