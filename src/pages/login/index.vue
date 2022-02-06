@@ -3,39 +3,21 @@
 		<div class="container">
 			<p class="title">登录系统</p>
 			<div class="input-c">
-				<Input
-					prefix="ios-contact"
-					v-model="username"
-					placeholder="用户名"
-					clearable
-					@on-blur="verifyUsername"
-				/>
+				<Input v-model="username" prefix="ios-contact" placeholder="用户名" clearable @on-blur="verifyUsername" />
 				<p class="error">{{ usernameError }}</p>
 			</div>
 			<div class="input-c">
-				<Input
-					type="password"
-					v-model="password"
-					prefix="md-lock"
-					placeholder="密码"
-					clearable
-					@on-blur="verifyPassword"
-				/>
+				<Input v-model="password" type="password" prefix="md-lock" placeholder="密码" clearable @on-blur="verifyPassword" />
 				<p class="error">{{ passwordError }}</p>
 			</div>
-			<Button
-				:loading="isShowLoading"
-				class="submit"
-				type="primary"
-				@click="loginByUserNameAndPassWord"
-			>登录</Button>
+			<Button :loading="isShowLoading" class="submit" type="primary" @click="loginByUserNameAndPassWord">登录</Button>
 			<!--<p class="account"><span @click="register">注册账号</span> | <span @click="forgetPwd">忘记密码</span></p>-->
 		</div>
 	</div>
 </template>
 
 <script>
-import { LoginByUserNameAndPassWord } from "../../../api/login";
+// import { LoginByUserNameAndPassWord } from "../../../api/login";
 
 export default {
 	name: 'Login',
@@ -47,33 +29,33 @@ export default {
 			passwordError: '',
 			isShowLoading: false,
 			bg: {
-				backgroundImage: 'url(' + require('../../../assets/bg04.jpg'),
+				// backgroundImage: 'url(' + require('../../../assets/bg04.jpg'),
 				backgroundPosition: 'center center',
-				backgroundRepeat: "no-repeat",
-				backgroundSize: "cover",
-			}
-		}
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+			},
+		};
 	},
 	mounted() {
 		document.onkeydown = e => {
-			if (e.keyCode == 13) {
-				this.loginByUserNameAndPassWord()
+			if (e.keyCode === 13) {
+				this.loginByUserNameAndPassWord();
 			}
-		}
+		};
 	},
 	methods: {
-		verifyUsername(e) {
+		verifyUsername() {
 			if (this.username === '') {
-				this.usernameError = '用户名不能为空！'
+				this.usernameError = '用户名不能为空！';
 			} else {
-				this.usernameError = ''
+				this.usernameError = '';
 			}
 		},
-		verifyPassword(e) {
+		verifyPassword() {
 			if (this.password === '') {
-				this.passwordError = '密码不能为空！'
+				this.passwordError = '密码不能为空！';
 			} else {
-				this.passwordError = ''
+				this.passwordError = '';
 			}
 		},
 		faceLogin() {
@@ -82,37 +64,38 @@ export default {
 		loginByUserNameAndPassWord() {
 			if (this.username !== '' && this.password !== '') {
 				this.isShowLoading = true;
-				return new Promise(((resolve, reject) => {
-					LoginByUserNameAndPassWord(this.username, this.password).then(response => {
-						if (response.status === 201) {
-							document.onkeydown = undefined;
-							this.$Message.success("登录成功，即将跳转到主页!");
-							// 登录成功，设置用户信息
-							this.$store.commit('setUser', {
-								userId: response.data.userId,
-								userName: response.data.userName,
-								userGender: response.data.userGender,
-								userEmail: response.data.userEmail,
-								userRoleName: response.data.userRoleName
-							});
-							this.isShowLoading = false;
-							this.$router.replace('index')
-						} else {
-							this.$Message.error(response.data.error);
-							this.isShowLoading = false;
-						}
-					}).catch(error => {
-						this.$Message.error(error.response.data.error);
-						this.isShowLoading = false;
-						reject(error);
-					})
-				}));
+				// return new Promise(((resolve, reject) => {
+				// 	LoginByUserNameAndPassWord(this.username, this.password).then(response => {
+				// 		if (response.status === 201) {
+				// 			document.onkeydown = undefined;
+				// 			this.$Message.success("登录成功，即将跳转到主页!");
+				// 			// 登录成功，设置用户信息
+				// 			this.$store.commit('setUser', {
+				// 				userId: response.data.userId,
+				// 				userName: response.data.userName,
+				// 				userGender: response.data.userGender,
+				// 				userEmail: response.data.userEmail,
+				// 				userRoleName: response.data.userRoleName
+				// 			});
+				// 			this.isShowLoading = false;
+				// 			this.$router.replace('index')
+				// 		} else {
+				// 			this.$Message.error(response.data.error);
+				// 			this.isShowLoading = false;
+				// 		}
+				// 	}).catch(error => {
+				// 		this.$Message.error(error.response.data.error);
+				// 		this.isShowLoading = false;
+				// 		reject(error);
+				// 	})
+				// }));
 			} else {
-				this.$Message.warning("请输入用户名和密码");
+				this.$Message.warning('请输入用户名和密码');
 			}
+			return 0;
 		},
-	}
-}
+	},
+};
 </script>
 
 <style>
@@ -198,4 +181,3 @@ export default {
 	color: #777;
 }
 </style>
-

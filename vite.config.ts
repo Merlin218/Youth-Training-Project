@@ -43,6 +43,7 @@ export default defineConfig({
 		// 配置路径别名
 		alias: {
 			'@': path.resolve(__dirname, './src'),
+			api: path.resolve(__dirname, './src/api'),
 			comps: path.resolve(__dirname, './src/components'),
 			pages: path.resolve(__dirname, './src/pages'),
 			utils: path.resolve(__dirname, './src/utils'),
