@@ -86,8 +86,13 @@ function nextStep() {
 	store.tableExport = table.exportTable(state.save1, state.save2);
 	if (state.curType) {
 		store.putTable().then(
-			() => {
-				message.success('保存成功');
+			d => {
+				if (!d.code) {
+					message.success('保存成功');
+					state.expVis = false;
+				} else {
+					message.error('保存失败');
+				}
 			},
 			() => {
 				message.error('保存失败');
