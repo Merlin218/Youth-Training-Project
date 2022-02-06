@@ -14,9 +14,7 @@
 		<a-layout-content class="content">
 			<div :style="{ background: '#fff', padding: '24px', minHeight: `${contentMinHeight}px` }">
 				<router-view v-slot="{ Component }">
-					<keep-alive>
-						<component :is="Component"></component>
-					</keep-alive>
+					<component :is="Component"></component>
 				</router-view>
 			</div>
 		</a-layout-content>
@@ -41,7 +39,7 @@ const handleMenuChange = ({ key }: { key: string }) => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .layout .logo {
 	width: 120px;
 	height: 31px;
