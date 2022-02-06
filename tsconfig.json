@@ -9,6 +9,7 @@
 		"sourceMap": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"types": ["@antv/g2plot"],
 		"lib": ["esnext", "dom", "dom.iterable"],
 		"allowJs": true,
 
@@ -20,7 +21,8 @@
 			"pages/*": ["src/pages/*"],
 			"utils/*": ["src/utils/*"],
 			"configs/*": ["src/configs/*"],
-			"store/*": ["src/store/*"]
+			"store/*": ["src/store/*"],
+			"types/*": ["src/types/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]

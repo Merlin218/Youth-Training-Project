@@ -1,3 +1,10 @@
+/*
+ * @Author: Merlin218
+ * @Date: 2022-01-30 17:06:39
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-01 22:23:13
+ * @Description: 请填写简介
+ */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
@@ -11,6 +18,7 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		Components({
+			dirs: ['src/**/*'],
 			resolvers: [
 				AntDesignVueResolver(), // ant-design-vue
 			],
@@ -49,6 +57,7 @@ export default defineConfig({
 			utils: path.resolve(__dirname, './src/utils'),
 			configs: path.resolve(__dirname, './src/configs'),
 			store: path.resolve(__dirname, './src/store'),
+			types: path.resolve(__dirname, './src/types'),
 		},
 		extensions: ['.js', '.json', '.ts'], // 使用路径别名时想要省略的后缀名，可以自己 增减
 	},

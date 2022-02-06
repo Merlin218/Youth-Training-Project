@@ -23,6 +23,7 @@ declare module 'vue' {
 		ATable: typeof import('ant-design-vue/es')['Table'];
 		CodeEditor: typeof import('./components/CodeEditor.vue')['default'];
 		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
+		WaterMark: typeof import('./components/WaterMark.vue')['default'];
 	}
 }
 
