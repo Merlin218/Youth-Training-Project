@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
 				name: '开始',
 				component: () => import('../pages/start/index.vue'),
 			},
+			{
+				path: '/projects',
+				name: '项目',
+				component: () => import('../pages/projects/index.vue'),
+			},
 		],
 	},
 ];
