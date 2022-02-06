@@ -41,6 +41,7 @@ specifiers:
   vxe-table: ^4.1.20
   webpack-env: ^0.8.0
   xe-utils: ^3.5.4
+  xlsx: ^0.17.5
 
 dependencies:
   '@ant-design/icons-vue': 6.0.1_vue@3.2.27
@@ -7989,6 +7990,20 @@ packages:
     dependencies:
       locate-path: registry.nlark.com/locate-path/2.0.0
     dev: true
+
+  /xlsx/0.17.5:
+    resolution: { integrity: sha512-lXNU0TuYsvElzvtI6O7WIVb9Zar1XYw7Xb3VAx2wn8N/n0whBYrCnHMxtFyIiUU1Wjf09WzmLALDfBO5PqTb1g== }
+    engines: { node: '>=0.8' }
+    hasBin: true
+    dependencies:
+      adler-32: 1.2.0
+      cfb: 1.2.1
+      codepage: 1.15.0
+      crc-32: 1.2.1
+      ssf: 0.11.2
+      wmf: 1.0.2
+      word: 0.3.0
+    dev: false
 
   registry.npmmirror.com/find-up/3.0.0:
     resolution:

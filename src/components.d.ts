@@ -3,29 +3,24 @@
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
 declare module 'vue' {
-  export interface GlobalComponents {
-    AAvatar: typeof import('ant-design-vue/es')['Avatar']
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ACol: typeof import('ant-design-vue/es')['Col']
-    AForm: typeof import('ant-design-vue/es')['Form']
-    AFormItem: typeof import('ant-design-vue/es')['FormItem']
-    AInput: typeof import('ant-design-vue/es')['Input']
-    ALayout: typeof import('ant-design-vue/es')['Layout']
-    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
-    ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
-    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
-    AMenu: typeof import('ant-design-vue/es')['Menu']
-    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
-    AModal: typeof import('ant-design-vue/es')['Modal']
-    ARadio: typeof import('ant-design-vue/es')['Radio']
-    ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup']
-    ARow: typeof import('ant-design-vue/es')['Row']
-    ASelect: typeof import('ant-design-vue/es')['Select']
-    ASwitch: typeof import('ant-design-vue/es')['Switch']
-    ATable: typeof import('ant-design-vue/es')['Table']
-    CodeEditor: typeof import('./components/CodeEditor.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
-  }
+	export interface GlobalComponents {
+		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
+		AButton: typeof import('ant-design-vue/es')['Button'];
+		AInput: typeof import('ant-design-vue/es')['Input'];
+		ALayout: typeof import('ant-design-vue/es')['Layout'];
+		ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent'];
+		ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter'];
+		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
+		AMenu: typeof import('ant-design-vue/es')['Menu'];
+		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+		APopover: typeof import('ant-design-vue/es')['Popover'];
+		ASelect: typeof import('ant-design-vue/es')['Select'];
+		ASpace: typeof import('ant-design-vue/es')['Space'];
+		ATag: typeof import('ant-design-vue/es')['Tag'];
+		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
+		CodeEditor: typeof import('./components/CodeEditor.vue')['default'];
+		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
+	}
 }
 
-export { }
+export {};
