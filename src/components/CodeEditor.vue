@@ -31,8 +31,7 @@ const emit = defineEmits(['update:modelValue', 'init', 'input']);
 
 const codeEditor = ref<any>(null);
 
-const fakeCode = 'function myScript(){return 100;}\n';
-const code = ref<string>(fakeCode || props.modelValue);
+const code = ref<string>(props.modelValue);
 const options: EditorConfiguration = {
 	mode: { name: 'javascript', json: true }, // 不设置的话，默认使用第一个引用
 	// 缩进格式
