@@ -1,0 +1,65 @@
+{
+	"name": "vite-template-vue3-ts",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "pnpm prettier && pnpm lint:development && vite --host --mode development",
+		"build": "pnpm prettier && pnpm lint:production && vue-tsc --noEmit && vite build --mode production",
+		"preview": "vite preview",
+		"lint:development": "cross-env NODE_ENV=development eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
+		"lint:production": "cross-env NODE_ENV=production eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
+		"prettier": "prettier --write .",
+		"prepare": "husky install",
+		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+	},
+	"dependencies": {
+		"@ant-design/icons-vue": "^6.0.1",
+		"@types/codemirror": "^5.60.5",
+		"ant-design-vue": "^2.2.8",
+		"axios": "^0.25.0",
+		"codemirror": "^5.65.1",
+		"default-passive-events": "^2.0.0",
+		"mathjs": "^10.1.1",
+		"pinia": "^2.0.0-rc.10",
+		"vue": "^3.2.25",
+		"vue-router": "4",
+		"vxe-table": "^4.1.20",
+		"webpack-env": "^0.8.0",
+		"xe-utils": "^3.5.4"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^16.0.3",
+		"@commitlint/config-conventional": "^16.0.0",
+		"@types/node": "*",
+		"@typescript-eslint/eslint-plugin": "^5.10.0",
+		"@typescript-eslint/parser": "^5.10.0",
+		"@vitejs/plugin-vue": "^2.0.0",
+		"@vue/compiler-sfc": "^3.2.27",
+		"conventional-changelog-cli": "^2.2.2",
+		"cross-env": "^7.0.2",
+		"dart-sass": "^1.25.0",
+		"eslint": "^8.7.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.25.2",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-vue": "^8.3.0",
+		"husky": "^7.0.4",
+		"less": "^4.1.2",
+		"lint-staged": "^12.2.0",
+		"mrm": "^3.0.10",
+		"prettier": "^2.5.1",
+		"sass": "^1.49.0",
+		"typescript": "^4.4.4",
+		"unplugin-vue-components": "^0.17.13",
+		"vite": "^2.7.2",
+		"vite-plugin-style-import": "^1.4.1",
+		"vue-tsc": "^0.29.8"
+	},
+	"lint-staged": {
+		"src/**/*.{ts,tsx,vue,js,jsx}": [
+			"pnpm lint:development",
+			"pnpm prettier",
+			"git add "
+		]
+	}
+}
