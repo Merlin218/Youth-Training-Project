@@ -46,6 +46,7 @@ declare module 'vue' {
 		FieldDefine: typeof import('./pages/preproccess/preproccess/FieldDefine.vue')['default'];
 		FieldSelect: typeof import('./pages/preproccess/preproccess/FieldSelect.vue')['default'];
 		FieldSift: typeof import('./pages/preproccess/preproccess/FieldSift.vue')['default'];
+		HandleFile: typeof import('./pages/start/components/HandleFile.vue')['default'];
 		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
 		Image: typeof import('./pages/publish/components/Image.vue')['default'];
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
@@ -54,8 +55,10 @@ declare module 'vue' {
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
 		Register: typeof import('./pages/login/register.vue')['default'];
+		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];
 		TableEditor: typeof import('./pages/preproccess/preproccess/TableEditor.vue')['default'];
 		TextAnnotationConfig: typeof import('./pages/visual/components/configs/annotation/TextAnnotationConfig.vue')['default'];
+		TextArea: typeof import('./pages/start/components/TextArea.vue')['default'];
 		Undefined: typeof import('./pages/index.vue')['default'];
 		Visual: typeof import('./pages/visual/visual.vue')['default'];
 		WaterMark: typeof import('./components/WaterMark.vue')['default'];

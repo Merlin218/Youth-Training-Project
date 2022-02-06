@@ -42,6 +42,11 @@ const routes: RouteRecordRaw[] = [
 				],
 			},
 			{
+				path: '/projects',
+				name: '项目',
+				component: () => import('../pages/projects/index.vue'),
+			},
+			{
 				path: '/publish',
 				name: '发布',
 				component: () => import('../pages/publish/index.vue'),
