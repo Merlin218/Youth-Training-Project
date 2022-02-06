@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-03 21:26:54
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-04 19:28:29
+ * @LastEditTime: 2022-02-06 21:13:02
  * @Description: 请填写简介
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
 						component: () => import('../pages/visual/components/ChartConfig.vue'),
 					},
 				],
+			},
+			{
+				path: '/projects',
+				name: '项目',
+				component: () => import('../pages/projects/index.vue'),
 			},
 			{
 				path: '/publish',

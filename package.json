@@ -26,6 +26,7 @@
 		"vue": "^3.2.25",
 		"vue-color-kit": "^1.0.5",
 		"vue-router": "4",
+		"xlsx": "^0.17.5",
 		"vxe-table": "^4.1.20",
 		"webpack-env": "^0.8.0",
 		"xe-utils": "^3.5.4"
