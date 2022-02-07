@@ -17,19 +17,19 @@ export const useTableStore = defineStore({
 	actions: {
 		getTable() {
 			return createRequest({
-				url: '/table',
+				url: '/getProjectData',
 				method: 'get',
 				params: {
 					t: Date.now(),
-					tid: 123,
+					project_id: '32958067-a627-4b64-abaa-43c52734b649',
 				},
 			}).then(
 				(d: IgetTableAPI | any) => {
 					if (!d.code) {
 						this.table.bind({
-							title: d.data.title,
-							data: d.data.data || [],
-							cols: d.data.cols,
+							title: d.result.data.title,
+							data: d.result.data.data || [],
+							cols: d.result.data.cols,
 						});
 					} else {
 						this.table.getted = false;
@@ -45,10 +45,11 @@ export const useTableStore = defineStore({
 		},
 		putTable() {
 			return createRequest({
-				url: '/table',
-				method: 'put',
+				url: '/updateProjectData',
+				method: 'post',
 				data: {
-					data: this.tableExport,
+					project_id: '32958067-a627-4b64-abaa-43c52734b649',
+					data_string: JSON.stringify(this.tableExport),
 				},
 			});
 		},
