@@ -1,7 +1,7 @@
 <template>
 	<div class="login">
 		<div class="login-form">
-			<h1 style="color: #333; margin-bottom: 40px">Myblog Admin Register</h1>
+			<h1 style="color: #333; margin-bottom: 40px">Register</h1>
 			<!-- <Form
 				:label-width="80"
 				:rules="ruleInline"
@@ -48,10 +48,10 @@
 </template>
 
 <script>
-//import mixins from './mixins';
+// import mixins from './mixins';
 
 export default {
-	//mixins: [mixins],
+	// mixins: [mixins],
 	data() {
 		return {
 			submit: {
