@@ -3,6 +3,7 @@
 		<div class="login-form">
 			<h1 style="color:#333;margin-bottom:40px;">Login</h1>
 			<!-- <Form :label-width="80" @keyup.native.enter="handleSubmit"> -->
+			<Form :label-width="80">
 				<FormItem label="账号：">
 					<Input type="text" placeholder="Username" v-model="submit.username" />
 				</FormItem>
@@ -20,13 +21,13 @@
 					<Button type="primary" @click="handleSubmit">登陆</Button>
 					<Button @click="handleReset" style="margin-left: 8px">重置</Button>
 				</FormItem>
-			<!-- </Form> -->
+			</Form>
 		</div>
 	</div>
 </template>
 
 <script>
-//import mixins from '../mixins/index'
+import mixins from '../index'
 export default {
 	mixins: [mixins],
 	data() {
@@ -54,7 +55,7 @@ export default {
 			if (res.data.token) {
 				localStorage.setItem("token", res.data.token);
 				localStorage.setItem("home_id", res.data.home_id);
-				// this.$router.push({ path: "/admin/articles-list" });
+				// this.$router.push({ path: "/admin" });
 				this.$Message.success('登录成功,即将跳转到主页')
 				setTimeout(() => this.$router.push({ path: `/home/${res.data.home_id}` }), 3000)
 			}

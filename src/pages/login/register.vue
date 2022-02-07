@@ -9,25 +9,35 @@
 				:model="submit"
 				@keyup.native.enter="handleSubmit"
 			> -->
+			<Form
+				:label-width="80"
+				:rules="ruleInline"
+				ref="submit"
+				:model="submit"
+			>
 				<FormItem label="账号：" :label-width="100" prop="username">
 					<Input type="text" placeholder="请输入 不能超过十六位" v-model="submit.username">
 						<!-- <Icon type="ios-person-outline" slot="prepend"></Icon> -->
+						<Icon type="ios-person-outline"></Icon>
 					</Input>
 				</FormItem>
 				<FormItem label="密码：" :label-width="100" prop="password">
 					<Input type="password" v-model="submit.password" password>
 						<!-- <Icon type="ios-lock-outline" slot="prepend"></Icon> -->
+						<Icon type="ios-lock-outline"></Icon>
 					</Input>
 				</FormItem>
 				<FormItem label="确认密码：" :label-width="100" prop="confirmPassword">
 					<Input type="password" v-model="submit.confirmPassword" password>
 						<!-- <Icon type="ios-lock-outline" slot="prepend"></Icon> -->
+						<Icon type="ios-lock-outline"></Icon>
 					</Input>
 				</FormItem>
 				<FormItem label="验证码：" :label-width="100">
 					<div class="flex">
 						<Input type="text" style="width:40%;margin-right:30px" v-model="verCode">
 							<!-- <Icon type="ios-megaphone-outline" slot="prepend"></Icon> -->
+							<Icon type="ios-megaphone-outline"></Icon>
 						</Input>
 						<canvas id="myCanvas"></canvas>
 						<Button type="text" style="margin-left:10px" @click="createCode">换一个</Button>
@@ -37,13 +47,13 @@
 					<Button type="primary" @click="handleSubmit">注册</Button>
 					<router-link to="/" style="margin-left:30px;">返回首页</router-link>
 				</FormItem>
-			<!-- </Form> -->
+			</Form>
 		</div>
 	</div>
 </template>
 
 <script>
-// import mixins from "../mixins/index";
+import mixins from "./index";
 export default {
 	mixins: [mixins],
 	data() {
@@ -128,7 +138,7 @@ export default {
 						return
 					}
 					delete this.submit['confirmPassword']
-					// this.$ajax.post('/blog/register', this.submit).then(res => {
+					// this.$ajax.post('/register', this.submit).then(res => {
 					// 	if (res.success) {
 					// 		this.$Message.success(res.message, '请登录')
 					// 		this.$router.push('/login')
