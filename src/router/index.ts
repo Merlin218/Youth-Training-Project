@@ -1,3 +1,10 @@
+/*
+ * @Author: Merlin218
+ * @Date: 2022-02-03 21:26:54
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-06 21:13:02
+ * @Description: 请填写简介
+ */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
@@ -15,6 +22,24 @@ const routes: RouteRecordRaw[] = [
 				path: '/start',
 				name: '开始',
 				component: () => import('../pages/start/index.vue'),
+			},
+			{
+				path: '/visual',
+				name: '可视化',
+				component: () => import('../pages/visual/visual.vue'),
+				redirect: '/visual/select',
+				children: [
+					{
+						path: '/visual/select',
+						name: '选择图表',
+						component: () => import('../pages/visual/components/ChartSelect.vue'),
+					},
+					{
+						path: '/visual/config',
+						name: '配置图表',
+						component: () => import('../pages/visual/components/ChartConfig.vue'),
+					},
+				],
 			},
 			{
 				path: '/projects',

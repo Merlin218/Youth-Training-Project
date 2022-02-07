@@ -9,8 +9,8 @@
 		"sourceMap": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"types": ["@antv/g2plot"],
 		"lib": ["esnext", "dom", "dom.iterable"],
-
 		"baseUrl": "./",
 		"paths": {
 			// 根据别名配置相关路径
@@ -19,7 +19,8 @@
 			"pages/*": ["src/pages/*"],
 			"utils/*": ["src/utils/*"],
 			"configs/*": ["src/configs/*"],
-			"store/*": ["src/store/*"]
+			"store/*": ["src/store/*"],
+			"types/*": ["src/types/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
