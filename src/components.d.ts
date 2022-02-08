@@ -19,7 +19,10 @@ declare module 'vue' {
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
+		ASelect: typeof import('ant-design-vue/es')['Select'];
+		ASpace: typeof import('ant-design-vue/es')['Space'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
+		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];
 		Changepassword: typeof import('./pages/login/changepassword.vue')['default'];
