@@ -5,10 +5,30 @@
 			<!-- <Form :label-width="80" @keyup.native.enter="handleSubmit"> -->
 			<Form :label-width="80">
 				<FormItem label="账号：">
-					<Input v-model="submit.username" type="text" placeholder="Username" />
+					<!-- <template> -->
+					<a-input placeholder="Username" />
+					<br />
+					<br />
+					<a-input-password placeholder="input password" />
+					<!-- </template> -->
+					<!-- <div class="components-input-demo-presuffix">
+						<a-input ref="userNameInput" v-model="userName" placeholder="Username">
+							<a-icon slot="prefix" type="user" />
+							<a-tooltip slot="suffix" title="Extra information">
+								<a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+							</a-tooltip>
+						</a-input>
+						<br />
+						<br />
+						<a-input-password placeholder="input password" />
+					</div> -->
+					<!-- <Input v-model="submit.username" type="text" placeholder="Username" /> -->
 				</FormItem>
 				<FormItem label="密码：">
-					<Input v-model="submit.password" type="password" />
+					<template>
+						<a-input-password placeholder="input password" />
+					</template>
+					<!-- <Input v-model="submit.password" type="password" /> -->
 				</FormItem>
 				<FormItem label="验证码：">
 					<div class="flex">
@@ -33,6 +53,7 @@ export default {
 	// mixins: [mixins],
 	data() {
 		return {
+			userName: '',
 			submit: {
 				username: '',
 				password: '',
@@ -87,6 +108,10 @@ export default {
 		},
 		handleReset() {
 			this.submit = {};
+		},
+		emitEmpty() {
+			this.$refs.userNameInput.focus();
+			this.userName = '';
 		},
 	},
 };
