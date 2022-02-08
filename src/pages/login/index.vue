@@ -49,7 +49,8 @@
 					<div>
 						<a-button type="primary" style="margin-left: 8px" @click="handleSubmit">登陆</a-button>
 						<a-button @click="handleReset">重置</a-button>
-						<a-button type="link" to="/register">去注册</a-button>
+						<router-link to="/register" style="margin-left: 30px">去注册</router-link>
+						<!-- <a-button type="link" to="/register">去注册</a-button> -->
 					</div>
 					<!-- <Button type="primary" @click="handleSubmit">登陆</Button>
 					<Button style="margin-left: 8px" @click="handleReset">重置</Button> -->

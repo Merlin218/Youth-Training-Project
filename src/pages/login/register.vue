@@ -41,9 +41,9 @@
 				<br />
 				<FormItem>
 					<a-button type="primary" style="margin-left: 8px" @click="handleSubmit">注册</a-button>
-					<a-button type="link" to="/">返回首页</a-button>
-					<!-- <Button type="primary" @click="handleSubmit">注册</Button>
-					<router-link to="/" style="margin-left: 30px">返回首页</router-link> -->
+					<!-- <a-button type="link" to="/">返回首页</a-button> -->
+					<!-- <Button type="primary" @click="handleSubmit">注册</Button> -->
+					<router-link to="/" style="margin-left: 30px">返回首页</router-link>
 				</FormItem>
 			</Form>
 		</div>
