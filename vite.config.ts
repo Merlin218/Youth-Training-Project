@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 17:06:39
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 12:18:12
+ * @LastEditTime: 2022-02-08 18:18:29
  * @Description: 请填写简介
  */
 import { defineConfig } from 'vite';
@@ -51,6 +51,7 @@ export default defineConfig({
 		// 配置路径别名
 		alias: {
 			'@': path.resolve(__dirname, './src'),
+			api: path.resolve(__dirname, './src/api'),
 			comps: path.resolve(__dirname, './src/components'),
 			pages: path.resolve(__dirname, './src/pages'),
 			utils: path.resolve(__dirname, './src/utils'),

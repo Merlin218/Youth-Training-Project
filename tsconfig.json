@@ -11,6 +11,8 @@
 		"esModuleInterop": true,
 		"types": ["@antv/g2plot"],
 		"lib": ["esnext", "dom", "dom.iterable"],
+		"allowJs": true,
+
 		"baseUrl": "./",
 		"paths": {
 			// 根据别名配置相关路径
