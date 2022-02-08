@@ -15,21 +15,22 @@ export const useTableStore = defineStore({
 		tableExport: null,
 	}),
 	actions: {
-		getTable() {
+		getTable(project_id) {
 			return createRequest({
 				url: '/getProjectData',
 				method: 'get',
 				params: {
 					t: Date.now(),
-					project_id: '32958067-a627-4b64-abaa-43c52734b649',
+					project_id, // : '32958067-a627-4b64-abaa-43c52734b649',
 				},
 			}).then(
 				(d: IgetTableAPI | any) => {
 					if (!d.code) {
+						const tableData = JSON.parse(d.result.data);
 						this.table.bind({
-							title: d.result.data.title,
-							data: d.result.data.data || [],
-							cols: d.result.data.cols,
+							title: tableData.title,
+							data: tableData.data || [],
+							cols: tableData.cols,
 						});
 					} else {
 						this.table.getted = false;
