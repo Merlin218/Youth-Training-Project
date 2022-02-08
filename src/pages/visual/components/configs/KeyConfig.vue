@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:26:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 23:25:08
+ * @LastEditTime: 2022-02-08 10:50:10
  * @Description: 字段配置
 -->
 <template>
@@ -14,7 +14,7 @@
 			<a-select v-model:value="fieldConfig.yField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.seriesField])"></a-select>
 		</a-form-item>
 		<a-form-item v-show="canSeries" label="分组字段">
-			<a-select v-model:value="fieldConfig.seriesField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.yField])"></a-select> </a-form-item
+			<a-select v-model:value="fieldConfig.seriesField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.yField], 'string')"></a-select> </a-form-item
 	></a-form>
 </template>
 
@@ -50,7 +50,13 @@ watch(
  * @param {*} filter 过滤项
  * @return {*}
  */
-const getOptions = (filter?: (string | undefined)[]) => {
+/**
+ * @description: 过滤获取select的options
+ * @param {*} filter 过滤项
+ * @param {*} such 保留指定类型的示例值，例如保留string类型的key，则传任意一个字符串即可，用于typeof判断
+ * @return {*}
+ */
+const getOptions = (filter?: (string | undefined)[], such?: any) => {
 	let data = Object.keys(options.value.data[0]);
 	if (typeof filter !== 'undefined') {
 		filter.forEach(item => {
@@ -58,6 +64,9 @@ const getOptions = (filter?: (string | undefined)[]) => {
 				data = data.filter(x => x !== item);
 			}
 		});
+	}
+	if (typeof such !== 'undefined') {
+		data = data.filter(x => typeof options.value.data[0][x] === typeof such);
 	}
 	return data.map(item => {
 		return {

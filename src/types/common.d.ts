@@ -2,11 +2,11 @@
  * @Author: Merlin218
  * @Date: 2022-01-22 11:35:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-04 17:40:23
+ * @LastEditTime: 2022-02-08 11:50:27
  * @Description: 请填写简介
  */
 export declare type responseType = {
-	code: string;
+	code: number;
 	message: string;
 	result: any;
 };
