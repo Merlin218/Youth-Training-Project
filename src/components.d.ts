@@ -11,6 +11,7 @@ declare module 'vue' {
 		ACollapse: typeof import('ant-design-vue/es')['Collapse'];
 		ACollapsePanel: typeof import('ant-design-vue/es')['CollapsePanel'];
 		ADivider: typeof import('ant-design-vue/es')['Divider'];
+		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
 		AFormItem: typeof import('ant-design-vue/es')['FormItem'];
 		AInput: typeof import('ant-design-vue/es')['Input'];
@@ -24,14 +25,16 @@ declare module 'vue' {
 		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopconfirm: typeof import('ant-design-vue/es')['Popconfirm'];
+		APopover: typeof import('ant-design-vue/es')['Popover'];
 		ARadio: typeof import('ant-design-vue/es')['Radio'];
-		ARadioButton: typeof import('ant-design-vue/es')['RadioButton'];
 		ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup'];
 		ARow: typeof import('ant-design-vue/es')['Row'];
 		ASelect: typeof import('ant-design-vue/es')['Select'];
 		ASelectOption: typeof import('ant-design-vue/es')['SelectOption'];
+		ASpace: typeof import('ant-design-vue/es')['Space'];
 		ASwitch: typeof import('ant-design-vue/es')['Switch'];
 		ATable: typeof import('ant-design-vue/es')['Table'];
+		ATag: typeof import('ant-design-vue/es')['Tag'];
 		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];
@@ -47,7 +50,6 @@ declare module 'vue' {
 		FieldSelect: typeof import('./pages/preproccess/preproccess/FieldSelect.vue')['default'];
 		FieldSift: typeof import('./pages/preproccess/preproccess/FieldSift.vue')['default'];
 		HandleFile: typeof import('./pages/start/components/HandleFile.vue')['default'];
-		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
 		Image: typeof import('./pages/publish/components/Image.vue')['default'];
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
 		LegendConfig: typeof import('./pages/visual/components/configs/LegendConfig.vue')['default'];
@@ -55,6 +57,7 @@ declare module 'vue' {
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
 		Register: typeof import('./pages/login/register.vue')['default'];
+		Scroller: typeof import('./components/Scroller.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];
 		TableEditor: typeof import('./pages/preproccess/preproccess/TableEditor.vue')['default'];
 		TextAnnotationConfig: typeof import('./pages/visual/components/configs/annotation/TextAnnotationConfig.vue')['default'];

@@ -15,6 +15,8 @@
 		"@ant-design/icons-vue": "^6.0.1",
 		"@antv/g2plot": "^2.4.7",
 		"@babel/runtime": "^7.16.7",
+		"@better-scroll/core": "^2.4.2",
+		"@better-scroll/mouse-wheel": "^2.4.2",
 		"@types/codemirror": "^5.60.5",
 		"ant-design-vue": "^2.2.8",
 		"axios": "^0.25.0",
@@ -26,10 +28,10 @@
 		"vue": "^3.2.25",
 		"vue-color-kit": "^1.0.5",
 		"vue-router": "4",
-		"xlsx": "^0.17.5",
 		"vxe-table": "^4.1.20",
 		"webpack-env": "^0.8.0",
-		"xe-utils": "^3.5.4"
+		"xe-utils": "^3.5.4",
+		"xlsx": "^0.17.5"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^16.0.3",
