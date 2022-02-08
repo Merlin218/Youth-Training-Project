@@ -24,7 +24,7 @@ const store = useVisualStore();
 // 			.join('-')}-config`
 // );
 
-const componentName = computed(() => store.chartName);
+const componentName = computed(() => store.chartType);
 </script>
 
 <style scoped></style>

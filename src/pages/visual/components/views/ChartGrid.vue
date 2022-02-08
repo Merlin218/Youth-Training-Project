@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:31:24
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 12:28:30
+ * @LastEditTime: 2022-02-08 13:34:31
  * @Description: 图表矩阵
 -->
 <template>
@@ -26,9 +26,9 @@ const props = defineProps<{
 
 const componentList = ref(G2PlotChartConfig);
 
-const chartName = ref<ChartNameType>(props.name || 'Area');
+const chartType = ref<ChartNameType>(props.name || 'Area');
 
-const activeIdx = ref<ChartNameType>(chartName.value);
+const activeIdx = ref<ChartNameType>(chartType.value);
 const changeActiveIdx = (name: ChartNameType) => {
 	activeIdx.value = name;
 	emit('update:name', name);

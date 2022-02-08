@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 17:06:39
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 22:23:13
+ * @LastEditTime: 2022-02-08 18:18:29
  * @Description: 请填写简介
  */
 import { defineConfig } from 'vite';
@@ -39,7 +39,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api': {
-				target: 'https://datavis.all1024.com/cms',
+				target: configs.proxyUrl,
 				changeOrigin: true,
 				rewrite: path => {
 					return path.replace(/^\/api/, '');
@@ -79,7 +79,7 @@ export default defineConfig({
 				entryFileNames: 'js/[name]-[hash].js',
 				assetFileNames: '[ext]/[name]-[hash].[ext]',
 			},
-			//     // 配置CDN
+			// 配置CDN
 		},
 	},
 	css: {

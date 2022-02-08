@@ -6,6 +6,7 @@ declare module 'vue' {
 	export interface GlobalComponents {
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
+		ACheckboxGroup: typeof import('ant-design-vue/es')['CheckboxGroup'];
 		ACard: typeof import('ant-design-vue/es')['Card'];
 		ACol: typeof import('ant-design-vue/es')['Col'];
 		ACollapse: typeof import('ant-design-vue/es')['Collapse'];
@@ -22,6 +23,7 @@ declare module 'vue' {
 		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
 		AMenu: typeof import('ant-design-vue/es')['Menu'];
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopconfirm: typeof import('ant-design-vue/es')['Popconfirm'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
@@ -49,6 +51,7 @@ declare module 'vue' {
 		FieldSelect: typeof import('./pages/preproccess/preproccess/FieldSelect.vue')['default'];
 		FieldSift: typeof import('./pages/preproccess/preproccess/FieldSift.vue')['default'];
 		HandleFile: typeof import('./pages/start/components/HandleFile.vue')['default'];
+		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
 		Image: typeof import('./pages/publish/components/Image.vue')['default'];
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
 		LegendConfig: typeof import('./pages/visual/components/configs/LegendConfig.vue')['default'];
@@ -61,6 +64,7 @@ declare module 'vue' {
 		TableEditor: typeof import('./pages/preproccess/preproccess/TableEditor.vue')['default'];
 		TextAnnotationConfig: typeof import('./pages/visual/components/configs/annotation/TextAnnotationConfig.vue')['default'];
 		TextArea: typeof import('./pages/start/components/TextArea.vue')['default'];
+		TooltipConfig: typeof import('./pages/visual/components/configs/TooltipConfig.vue')['default'];
 		Undefined: typeof import('./pages/index.vue')['default'];
 		Visual: typeof import('./pages/visual/visual.vue')['default'];
 		WaterMark: typeof import('./components/WaterMark.vue')['default'];

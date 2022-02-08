@@ -2,56 +2,38 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 19:33:35
- * @Description: 请填写简介
+ * @LastEditTime: 2022-02-08 14:04:18
+ * @Description: 图表状态管理
  */
 import { defineStore } from 'pinia';
 import { Annotation, StateCondition } from '@antv/g2plot';
 import { ChartNameType, ChartOptionsType, ChartType } from '@/types/visual/charts';
-import { data1 } from '@/data';
+import { WaterMarkOptionType } from '@/types/visual/config';
 
 export const useVisualStore = defineStore('visual', {
 	state: () => ({
+		projectData: undefined as any,
+		chartPicId: undefined as string | undefined,
 		chartInstance: undefined as ChartType | undefined,
-		chartName: undefined as ChartNameType | undefined,
+		chartType: undefined as ChartNameType | undefined,
 		chartTitle: '' as string,
 		backupChartOptions: undefined as ChartOptionsType | undefined,
-		waterMark: false as string | false,
+		waterMarkUrl: undefined as string | undefined,
+		waterMarkOptions: false as WaterMarkOptionType | false,
 	}),
 	getters: {
 		chartOptions: state => state.chartInstance?.options,
 	},
 	actions: {
-		getChartConfig(name: ChartNameType) {
-			// 此处请求后台数据
-			const chartOptions = {
-				width: 600,
-				height: 500,
-				autoFit: true,
-				xField: 'product_box',
-				yField: 'value',
-				seriesField: 'province',
-				data: data1,
-				legend: {
-					flipPage: true,
-					// 两行分页
-					maxRow: 2,
-					pageNavigator: {
-						marker: {
-							style: {
-								fill: 'rgba(0,0,0,0.65)',
-							},
-						},
-					},
-				},
-			};
-			const title = '';
-			const waterMarkUrl = '';
-
-			this.chartName = name;
-			this.chartTitle = title;
-			this.backupChartOptions = chartOptions;
-			this.waterMark = waterMarkUrl;
+		initChart({ chartpic_id: chartPicId, chart_type: resChartType, chart_title: chartTitle, vis_config: visConfig, watermark_config: watermarkConfig }: any) {
+			this.chartPicId = chartPicId;
+			this.chartType = resChartType;
+			this.chartTitle = chartTitle;
+			this.backupChartOptions = JSON.parse(visConfig);
+			this.waterMarkOptions = JSON.parse(watermarkConfig);
+		},
+		backupProjectData(data: any) {
+			this.projectData = data;
 		},
 		render() {
 			this.chartInstance?.render();
@@ -68,9 +50,10 @@ export const useVisualStore = defineStore('visual', {
 		destroy() {
 			this.chartInstance?.destroy();
 			this.chartInstance = undefined;
-			this.chartName = undefined;
+			this.chartType = undefined;
 			this.chartTitle = '';
-			this.waterMark = false;
+			this.waterMarkOptions = false;
+			this.waterMarkUrl = undefined;
 		},
 		on(evt: string, callback: Function, once?: boolean | undefined) {
 			this.chartInstance?.on(evt, callback, once);
@@ -93,8 +76,9 @@ export const useVisualStore = defineStore('visual', {
 		bindChartToStore(instance: ChartType) {
 			this.chartInstance = instance;
 		},
-		changeWaterMark(value: string | false) {
-			this.waterMark = value;
+		changeWaterMark(options: WaterMarkOptionType | false, url: string | undefined) {
+			this.waterMarkOptions = options;
+			this.waterMarkUrl = url;
 		},
 	},
 });
