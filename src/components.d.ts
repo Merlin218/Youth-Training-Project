@@ -22,7 +22,6 @@ declare module 'vue' {
 		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
 		AMenu: typeof import('ant-design-vue/es')['Menu'];
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
-		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopconfirm: typeof import('ant-design-vue/es')['Popconfirm'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];

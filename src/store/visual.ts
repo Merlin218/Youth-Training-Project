@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 00:15:46
+ * @LastEditTime: 2022-02-06 19:33:35
  * @Description: 请填写简介
  */
 import { defineStore } from 'pinia';
@@ -23,6 +23,7 @@ export const useVisualStore = defineStore('visual', {
 	},
 	actions: {
 		getChartConfig(name: ChartNameType) {
+			// 此处请求后台数据
 			const chartOptions = {
 				width: 600,
 				height: 500,
@@ -69,6 +70,7 @@ export const useVisualStore = defineStore('visual', {
 			this.chartInstance = undefined;
 			this.chartName = undefined;
 			this.chartTitle = '';
+			this.waterMark = false;
 		},
 		on(evt: string, callback: Function, once?: boolean | undefined) {
 			this.chartInstance?.on(evt, callback, once);

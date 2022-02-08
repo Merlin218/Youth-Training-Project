@@ -43,17 +43,22 @@
 <script lang="ts" setup>
 import { onMounted, reactive } from 'vue';
 import { message, notification } from 'ant-design-vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useTableStore } from '../../store/process';
 import TableEditor from './preproccess/TableEditor.vue';
 import FieldSelect from './preproccess/FieldSelect.vue';
 import FieldDefine from './preproccess/FieldDefine.vue';
+import { TableCol } from './preproccess/ProTable';
 
 const store = useTableStore();
 const { table } = store;
+const router = useRouter();
+const route = useRoute();
 
 // 请求表格
 onMounted(async () => {
-	if (!(await store.getTable())) {
+	// if (!route.query.project_id) return;
+	if (!(await store.getTable(route.query.project_id))) {
 		notification.open({
 			message: '网络错误',
 			description: '请求数据失败, 请检查你的网络.',
@@ -65,7 +70,7 @@ onMounted(async () => {
 // 下一步模态框状态
 const state = reactive({
 	expVis: false,
-	save1: false,
+	save1: true,
 	save2: true,
 	curType: 0,
 });
@@ -78,6 +83,11 @@ function showModal(type: number) {
 
 // 下一步与保存数据按钮
 function nextStep() {
+	if (!table.geted) {
+		message.error('表格获取失败');
+		state.expVis = false;
+		return;
+	}
 	if (table.cols.find(d => !d.computed && d?.errors?.haveError)) {
 		message.error('存在有误数据, 无法继续');
 		state.expVis = false;
@@ -86,13 +96,27 @@ function nextStep() {
 	store.tableExport = table.exportTable(state.save1, state.save2);
 	if (state.curType) {
 		store.putTable().then(
-			() => {
-				message.success('保存成功');
+			d => {
+				if (!d.code) {
+					message.success('保存成功');
+					state.expVis = false;
+				} else {
+					message.error('保存失败');
+				}
 			},
 			() => {
 				message.error('保存失败');
 			}
 		);
+	} else {
+		const compCols = store.tableExport.cols.filter(d => TableCol.colType.find(dd => dd.typeName === d.type)?.compareable);
+		if (!compCols.length) {
+			message.error('可计算字段数少于1');
+			return;
+		}
+		store.tableExport.x = compCols.slice(0).shift().cKey;
+		store.tableExport.y = compCols.slice(0).pop().cKey;
+		router.push('visual');
 	}
 }
 </script>
