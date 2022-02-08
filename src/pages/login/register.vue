@@ -1,48 +1,48 @@
 <template>
 	<div class="login">
-		<div class="login-form">
+		<div class="login-a-form">
 			<h1 style="color: #333; margin-bottom: 40px">Register</h1>
-			<!-- <Form
+			<!-- <a-form
 				:label-width="80"
 				:rules="ruleInline"
 				ref="submit"
 				:model="submit"
 				@keyup.native.enter="handleSubmit"
 			> -->
-			<Form ref="submit" :label-width="80" :rules="ruleInline" :model="submit">
-				<FormItem label="账号：" :label-width="100" prop="username">
-					<Input v-model="submit.username" type="text" placeholder="请输入 不能超过十六位">
+			<a-form ref="submit" :label-width="80" :rules="ruleInline" :model="submit">
+				<a-form-item label="账号：" :label-width="100" prop="username">
+					<a-input v-model="submit.username" type="text" placeholder="请输入 不能超过十六位">
 						<!-- <Icon type="ios-person-outline" slot="prepend"></Icon> -->
 						<Icon type="ios-person-outline"></Icon>
-					</Input>
-				</FormItem>
-				<FormItem label="密码：" :label-width="100" prop="password">
-					<Input v-model="submit.password" type="password" password>
+					</a-input>
+				</a-form-item>
+				<a-form-item label="密码：" :label-width="100" prop="password">
+					<a-input v-model="submit.password" type="password" password>
 						<!-- <Icon type="ios-lock-outline" slot="prepend"></Icon> -->
 						<Icon type="ios-lock-outline"></Icon>
-					</Input>
-				</FormItem>
-				<FormItem label="确认密码：" :label-width="100" prop="confirmPassword">
-					<Input v-model="submit.confirmPassword" type="password" password>
+					</a-input>
+				</a-form-item>
+				<a-form-item label="确认密码：" :label-width="100" prop="confirmPassword">
+					<a-input v-model="submit.confirmPassword" type="password" password>
 						<!-- <Icon type="ios-lock-outline" slot="prepend"></Icon> -->
 						<Icon type="ios-lock-outline"></Icon>
-					</Input>
-				</FormItem>
-				<FormItem label="验证码：" :label-width="100">
+					</a-input>
+				</a-form-item>
+				<a-form-item label="验证码：" :label-width="100">
 					<div class="flex">
-						<Input v-model="verCode" type="text" style="width: 40%; margin-right: 30px">
+						<a-input v-model="verCode" type="text" style="width: 40%; margin-right: 30px">
 							<!-- <Icon type="ios-megaphone-outline" slot="prepend"></Icon> -->
 							<Icon type="ios-megaphone-outline"></Icon>
-						</Input>
+						</a-input>
 						<canvas id="myCanvas"></canvas>
-						<Button type="text" style="margin-left: 10px" @click="createCode">换一个</Button>
+						<a-button type="text" style="margin-left: 10px" @click="createCode">换一个</a-button>
 					</div>
-				</FormItem>
-				<FormItem>
-					<Button type="primary" @click="handleSubmit">注册</Button>
+				</a-form-item>
+				<a-form-item>
+					<a-button type="primary" @click="handleSubmit">注册</a-button>
 					<router-link to="/" style="margin-left: 30px">返回首页</router-link>
-				</FormItem>
-			</Form>
+				</a-form-item>
+			</a-form>
 		</div>
 	</div>
 </template>
@@ -123,9 +123,7 @@ export default {
 			},
 		};
 	},
-	mounted() {
-		this.createCode();
-	},
+	mounted() {},
 	methods: {
 		handleSubmit() {
 			this.$refs.submit.validate(valid => {
@@ -149,50 +147,22 @@ export default {
 				}
 			});
 		},
-		createCode() {
-			this.createC = '';
-			const c = document.getElementById('myCanvas');
-			const ctx = c.getContext('2d');
-			c.width = '120';
-			c.height = '40';
-			ctx.fillStyle = '#6adbcf';
-			ctx.fillRect(0, 0, 120, 40);
-			ctx.shadowOffsetX = 2;
-			ctx.shadowOffsetY = 2;
-			ctx.shadowBlur = 2;
-			ctx.shadowColor = '#666666';
-			ctx.font = '30px sans-serif';
-			const codes = 'qwertyuioplkjhgfdsazxcvbnm1234567890';
-			const bgColor = ['#f5f5f5', '#666', '#bcbcbc', 'yellow'];
-			for (let i = 0; i < 4; i += 1) {
-				const r = Math.floor(Math.random() * codes.length);
-				const x = 10 + i * 20;
-				const y = 20 + Math.random() * 10;
-				this.createC += codes[r];
-				const b = Math.floor(Math.random() * bgColor.length);
-				ctx.fillStyle = bgColor[b];
-				ctx.fillText(codes[r], x, y);
-			}
-		},
 	},
 };
 </script>
 
 <style>
 .login {
-	/* background: url("../assets/login.jpg") center center; */
-	background: #f8f8f9;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	background-size: cover;
 	display: flex;
 	justify-content: center;
 }
-.login-form {
+.login-a-form {
 	text-align: center;
 	padding: 20px;
 	border-radius: 10px;
-	color: #fff !important;
 	margin-top: 4rem;
 }
 .flex {
