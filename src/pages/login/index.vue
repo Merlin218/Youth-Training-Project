@@ -7,9 +7,9 @@
 				<FormItem label="账号：">
 					<!-- <template> -->
 					<a-input placeholder="Username" />
+					<!-- <br />
 					<br />
-					<br />
-					<a-input-password placeholder="input password" />
+					<a-input-password placeholder="input password" />-->
 					<!-- </template> -->
 					<!-- <div class="components-input-demo-presuffix">
 						<a-input ref="userNameInput" v-model="userName" placeholder="Username">
@@ -21,25 +21,37 @@
 						<br />
 						<br />
 						<a-input-password placeholder="input password" />
-					</div> -->
+					</div>-->
 					<!-- <Input v-model="submit.username" type="text" placeholder="Username" /> -->
 				</FormItem>
+				<br />
+				<br />
 				<FormItem label="密码：">
-					<template>
-						<a-input-password placeholder="input password" />
-					</template>
+					<!-- <template> -->
+					<a-input-password placeholder="Password" />
+					<!-- </template> -->
 					<!-- <Input v-model="submit.password" type="password" /> -->
 				</FormItem>
+				<br />
+				<br />
 				<FormItem label="验证码：">
 					<div class="flex">
-						<Input v-model="code" type="text" style="width: 40%; margin-right: 30px" />
+						<a-input placeholder="Verification code" style="width: 40%" />
+						<!-- <Input v-model="code" type="text" style="width: 40%; margin-right: 30px" /> -->
 						<canvas id="myCanvas"></canvas>
-						<Button type="text" style="margin-left: 10px" @click="createCode">换一个</Button>
+						<a-button @click="createCode">换一个</a-button>
+						<!-- <Button type="text" style="margin-left: 10px" @click="createCode">换一个</Button> -->
 					</div>
 				</FormItem>
+				<br />
+				<br />
 				<FormItem>
-					<Button type="primary" @click="handleSubmit">登陆</Button>
-					<Button style="margin-left: 8px" @click="handleReset">重置</Button>
+					<div>
+						<a-button type="primary" @click="handleSubmit">登陆</a-button>
+						<a-button @click="handleReset">重置</a-button>
+					</div>
+					<!-- <Button type="primary" @click="handleSubmit">登陆</Button>
+					<Button style="margin-left: 8px" @click="handleReset">重置</Button> -->
 				</FormItem>
 			</Form>
 		</div>
