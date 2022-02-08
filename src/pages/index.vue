@@ -9,39 +9,57 @@
 				<a-menu-item key="/visual"> 可视化 </a-menu-item>
 				<a-menu-item key="/publish"> 发布 </a-menu-item>
 			</a-menu>
-			<a-avatar size="large" icon="user" />
+			<a-dropdown trigger="click">
+				<a-avatar size="large" icon="user" style="cursor: pointer" />
+				<template #overlay>
+					<a-menu>
+						<a-menu-item key="1"> <LogoutOutlined /> 登出 </a-menu-item>
+					</a-menu>
+				</template>
+			</a-dropdown>
 		</a-layout-header>
 		<a-layout-content class="content">
-			<div :style="{ background: '#fff', padding: '24px', minHeight: `${contentMinHeight}px` }">
-				<router-view v-slot="{ Component }">
-					<keep-alive>
+			<Scroller :height="contentHeight" background-color="#fff">
+				<div :style="{ padding: '40px 20px' }">
+					<router-view v-slot="{ Component }">
 						<component :is="Component"></component>
-					</keep-alive>
-				</router-view>
-			</div>
+					</router-view>
+				</div>
+			</Scroller>
 		</a-layout-content>
 		<a-layout-footer class="footer"> Chart ©2022 Created by BugRight </a-layout-footer>
 	</a-layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { LogoutOutlined } from '@ant-design/icons-vue';
 
 const router = useRouter();
 const route = useRoute();
 
 const selectedKeys = ref<Array<string>>([route.path]);
 
-const contentMinHeight = window.innerHeight * 0.8;
+const contentHeight = window.innerHeight - 171;
 
 const handleMenuChange = ({ key }: { key: string }) => {
+	if (key.includes(selectedKeys.value[0])) return;
 	selectedKeys.value = [key];
 	router.push(key);
 };
+
+watch(
+	() => route.path,
+	newPath => {
+		handleMenuChange({ key: newPath });
+	}
+);
+
+onMounted(() => {});
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .layout .logo {
 	width: 120px;
 	height: 31px;
@@ -63,7 +81,6 @@ const handleMenuChange = ({ key }: { key: string }) => {
 	margin-top: 100px;
 }
 .footer {
-	margin-top: 50px;
 	text-align: center;
 	position: relative;
 	left: 0;
