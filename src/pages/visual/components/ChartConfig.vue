@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 23:44:21
+ * @LastEditTime: 2022-02-09 00:14:27
  * @Description: 请填写简介
 -->
 <template>
@@ -18,41 +18,43 @@
 		</a-popconfirm>
 		<a-button type="primary" @click="toNext">下一步</a-button>
 	</div>
-	<div class="container">
-		<div :style="{ width: '70%' }" class="display__container">
-			<chart-display id="storeChart" :url="store.waterMarkUrl" :name="store.chartType" :options="store.backupChartOptions" :title="store.chartTitle" :use-store="true"></chart-display>
+	<scroller id="config" height="100%">
+		<div class="container">
+			<div :style="{ width: '70%' }" class="display__container">
+				<chart-display id="storeChart" :url="store.waterMarkUrl" :name="store.chartType" :options="store.backupChartOptions" :title="store.chartTitle" :use-store="true"></chart-display>
+			</div>
+			<div :style="{ width: '25%', position: 'relative' }">
+				<a-collapse v-model:activeKey="stepActive" accordion @change="stepActive = $event">
+					<a-collapse-panel :key="stepConfig[0].key" :header="stepConfig[0].header">
+						<!-- 配置基本信息 -->
+						<base-config></base-config>
+					</a-collapse-panel>
+					<a-collapse-panel :key="stepConfig[1].key" :header="stepConfig[1].header">
+						<!-- 配置图表特有信息 -->
+						<other-config></other-config>
+					</a-collapse-panel>
+					<a-collapse-panel :key="stepConfig[2].key" :header="stepConfig[2].header">
+						<!-- 标记配置 -->
+						<annotation-config></annotation-config>
+					</a-collapse-panel>
+					<a-collapse-panel :key="stepConfig[3].key" :header="stepConfig[3].header" :disabled="!store.chartOptions?.tooltip">
+						<template #extra>
+							<a-switch :checked="!!store.chartOptions?.tooltip" @change="handleTooltipActive"></a-switch>
+						</template>
+						<!-- 悬浮提示配置 -->
+						<tooltip-config></tooltip-config>
+					</a-collapse-panel>
+					<a-collapse-panel :key="stepConfig[4].key" :header="stepConfig[4].header" :disabled="!store.waterMarkOptions">
+						<template #extra>
+							<a-switch :checked="!!store.waterMarkOptions" @change="handleMarkActive"></a-switch>
+						</template>
+						<!-- 水印配置 -->
+						<water-mark-config></water-mark-config>
+					</a-collapse-panel>
+				</a-collapse>
+			</div>
 		</div>
-		<div :style="{ width: '25%', position: 'relative' }">
-			<a-collapse v-model:activeKey="stepActive" accordion @change="stepActive = $event">
-				<a-collapse-panel :key="stepConfig[0].key" :header="stepConfig[0].header">
-					<!-- 配置基本信息 -->
-					<base-config></base-config>
-				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[1].key" :header="stepConfig[1].header">
-					<!-- 配置图表特有信息 -->
-					<other-config></other-config>
-				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[2].key" :header="stepConfig[2].header">
-					<!-- 标记配置 -->
-					<annotation-config></annotation-config>
-				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[3].key" :header="stepConfig[3].header" :disabled="!store.chartOptions?.tooltip">
-					<template #extra>
-						<a-switch :checked="!!store.chartOptions?.tooltip" @change="handleTooltipActive"></a-switch>
-					</template>
-					<!-- 悬浮提示配置 -->
-					<tooltip-config></tooltip-config>
-				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[4].key" :header="stepConfig[4].header" :disabled="!store.waterMarkOptions">
-					<template #extra>
-						<a-switch :checked="!!store.waterMarkOptions" @change="handleMarkActive"></a-switch>
-					</template>
-					<!-- 水印配置 -->
-					<water-mark-config></water-mark-config>
-				</a-collapse-panel>
-			</a-collapse>
-		</div>
-	</div>
+	</scroller>
 </template>
 
 <script setup lang="ts">
@@ -63,6 +65,7 @@ import { message } from 'ant-design-vue';
 import { useVisualStore } from '@/store/visual';
 import { defaultWaterMarkOption, defaultWaterMarkUrl } from '@/configs/visual';
 import { visualApi } from '@/api';
+import Scroller from '@/components/Scroller.vue';
 
 const router = useRouter();
 const store = useVisualStore();

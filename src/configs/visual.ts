@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 20:39:36
+ * @LastEditTime: 2022-02-09 00:18:15
  * @Description: 请填写简介
  */
 import { Area, Line, Column, Bar } from '@antv/g2plot';
@@ -23,7 +23,7 @@ export const G2PlotChartConfig: chartConfigType = {
 		defaultConfigs: {
 			width: 300,
 			height: 200,
-			autoFit: true,
+			autoFit: false,
 			xField: 'year',
 			yField: 'value',
 			smooth: true,
@@ -46,7 +46,7 @@ export const G2PlotChartConfig: chartConfigType = {
 		defaultConfigs: {
 			width: 300,
 			height: 200,
-			autoFit: true,
+			autoFit: false,
 			xField: 'year',
 			yField: 'value',
 			smooth: true,
@@ -69,7 +69,7 @@ export const G2PlotChartConfig: chartConfigType = {
 		defaultConfigs: {
 			width: 300,
 			height: 200,
-			autoFit: true,
+			autoFit: false,
 			xField: 'year',
 			yField: 'value',
 			data: [
@@ -91,7 +91,7 @@ export const G2PlotChartConfig: chartConfigType = {
 		defaultConfigs: {
 			width: 300,
 			height: 200,
-			autoFit: true,
+			autoFit: false,
 			xField: 'year',
 			yField: 'value',
 			data: [
