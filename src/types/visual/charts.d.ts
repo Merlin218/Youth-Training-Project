@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 12:28:27
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 17:16:38
+ * @LastEditTime: 2022-02-08 20:39:49
  * @Description: 请填写简介
  */
 import { Area, AreaOptions, Bar, BarOptions, Column, ColumnOptions, Line, LineOptions } from '@antv/g2plot';
@@ -30,12 +30,12 @@ export declare type ChartOptionsType = nameToOptions[ChartNameType];
 
 export declare type getChartType<T extends ChartNameType> = nameToClass[T];
 
-export declare type getChartOptions<T extends ChartNameType> = nameToClass[T];
+export declare type getChartOptions<T extends ChartNameType> = nameToOptions[T];
 
 export declare type chartConfigType = {
 	[T in ChartNameType]: {
-		instance: getChartType<T>;
+		name: T;
 		text: string;
-		defaultConfigs: Mutable<getChartOptions<T>>;
+		defaultConfigs: getChartOptions<T>;
 	};
 };

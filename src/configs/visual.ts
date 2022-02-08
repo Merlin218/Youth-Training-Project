@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 16:52:11
+ * @LastEditTime: 2022-02-08 20:39:36
  * @Description: 请填写简介
  */
 import { Area, Line, Column, Bar } from '@antv/g2plot';
@@ -16,25 +16,17 @@ export const G2PlotInstanceConfig = {
 	// Pie,
 };
 
-export const G2PlotChartConfig = {
+export const G2PlotChartConfig: chartConfigType = {
 	Area: {
 		name: 'Area',
 		text: '区域图',
 		defaultConfigs: {
 			width: 300,
 			height: 200,
-			autoFit: false,
+			autoFit: true,
 			xField: 'year',
 			yField: 'value',
-			tooltip: {
-				showContent: false,
-			},
 			smooth: true,
-			meta: {
-				value: {
-					max: 15,
-				},
-			},
 			data: [
 				{ year: '1991', value: 3 },
 				{ year: '1992', value: 4 },
@@ -51,19 +43,71 @@ export const G2PlotChartConfig = {
 	Line: {
 		name: 'Line',
 		text: '折线图',
-		defaultConfigs: {},
+		defaultConfigs: {
+			width: 300,
+			height: 200,
+			autoFit: true,
+			xField: 'year',
+			yField: 'value',
+			smooth: true,
+			data: [
+				{ year: '1991', value: 3 },
+				{ year: '1992', value: 4 },
+				{ year: '1993', value: 3.5 },
+				{ year: '1994', value: 5 },
+				{ year: '1995', value: 4.9 },
+				{ year: '1996', value: 6 },
+				{ year: '1997', value: 7 },
+				{ year: '1998', value: 9 },
+				{ year: '1999', value: 11 },
+			],
+		},
 	},
 	Column: {
 		name: 'Column',
 		text: '柱状图',
-		defaultConfigs: {},
+		defaultConfigs: {
+			width: 300,
+			height: 200,
+			autoFit: true,
+			xField: 'year',
+			yField: 'value',
+			data: [
+				{ year: '1991', value: 3 },
+				{ year: '1992', value: 4 },
+				{ year: '1993', value: 3.5 },
+				{ year: '1994', value: 5 },
+				{ year: '1995', value: 4.9 },
+				{ year: '1996', value: 6 },
+				{ year: '1997', value: 7 },
+				{ year: '1998', value: 9 },
+				{ year: '1999', value: 11 },
+			],
+		},
 	},
 	Bar: {
 		name: 'Bar',
 		text: '条形图',
-		defaultConfigs: {},
+		defaultConfigs: {
+			width: 300,
+			height: 200,
+			autoFit: true,
+			xField: 'year',
+			yField: 'value',
+			data: [
+				{ year: '1991', value: 3 },
+				{ year: '1992', value: 4 },
+				{ year: '1993', value: 3.5 },
+				{ year: '1994', value: 5 },
+				{ year: '1995', value: 4.9 },
+				{ year: '1996', value: 6 },
+				{ year: '1997', value: 7 },
+				{ year: '1998', value: 9 },
+				{ year: '1999', value: 11 },
+			],
+		},
 	},
-} as unknown as chartConfigType;
+};
 
 export const getChartInstance = (chartType: ChartNameType, container: string, options?: any) => {
 	return new G2PlotInstanceConfig[chartType](container, options);

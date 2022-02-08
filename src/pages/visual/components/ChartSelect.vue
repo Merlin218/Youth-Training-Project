@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 18:04:02
+ * @LastEditTime: 2022-02-08 19:16:56
  * @Description: 选择图表
 -->
 <template>
@@ -10,7 +10,9 @@
 		<a-divider class="text" orientation="left">请选择您需要的类型</a-divider>
 		<!-- 图表矩阵 -->
 		<chart-grid v-model:name="chartType"></chart-grid>
-		<a-button class="btn" type="primary" :disabled="!componentText" @click="toConfigPage">已选择：{{ componentText || '未选择' }} </a-button>
+		<div class="btn">
+			<a-button type="primary" :disabled="!componentText" @click="toConfigPage">已选择：{{ componentText || '未选择' }} </a-button>
+		</div>
 	</div>
 	<teleport to="#modal">
 		<a-modal title="注意" :visible="showModal" ok-text="确认" cancel-text="取消" @ok="handleExist" @cancel="showModal = false"> <p>您在之前已配置过该图表，是否基于之前的配置修改？</p> </a-modal>>
@@ -116,8 +118,10 @@ onBeforeMount(async () => {
 	margin-bottom: 40px;
 }
 .btn {
-	position: absolute;
-	bottom: 0;
-	right: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 10px;
+	margin-right: 20px;
 }
 </style>
