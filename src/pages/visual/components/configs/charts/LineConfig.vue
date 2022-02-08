@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 19:34:40
+ * @LastEditTime: 2022-02-07 17:02:29
  * @Description: 折线图配置
 -->
 <template>
@@ -21,13 +21,10 @@ import { Mutable } from '@/types/common';
 
 const store = useVisualStore();
 
-const options: ComputedRef<LineOptions> = computed(() => store.chartInstance.options);
+const options: ComputedRef<LineOptions | undefined> = computed(() => store.chartInstance?.options);
 
 const updateConfig = ref<Mutable<Partial<LineOptions>>>({
-	smooth: options.value.smooth,
-	xAxis: {
-		position: 'bottom',
-	},
+	smooth: options.value?.smooth,
 });
 
 watch(

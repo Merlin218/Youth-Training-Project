@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:46:49
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 23:09:21
+ * @LastEditTime: 2022-02-07 17:05:39
  * @Description: 请填写简介
 -->
 <template>
@@ -43,8 +43,8 @@ import { useVisualStore } from '@/store/visual';
 
 const store = useVisualStore();
 
-const xAxis = computed(() => store.chartInstance.options.xAxis);
-const yAxis = computed(() => store.chartInstance.options.yAxis);
+const xAxis = computed(() => store.chartInstance?.options.xAxis);
+const yAxis = computed(() => store.chartInstance?.options.yAxis);
 
 /**
  * @description: x坐标轴标题配置

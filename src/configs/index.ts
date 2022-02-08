@@ -1,6 +1,6 @@
 const configs = {
 	baseUrl: '/api',
-	proxyUrl: 'localhost:9000',
+	proxyUrl: 'https://datavis.all1024.com',
 };
 
 export default configs;

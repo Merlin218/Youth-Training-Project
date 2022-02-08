@@ -13,16 +13,16 @@ export const useTableStore = defineStore({
 	// table: 获取的数据, tableExport用于下一阶段处理的数据
 	state: () => ({
 		table: new ProTable({ getted: false }),
-		tableExport: null,
+		tableExport: null as any,
 	}),
 	actions: {
-		getTable(project_id) {
+		getTable(projectId: string) {
 			return createRequest({
 				url: '/getProjectData',
 				method: 'get',
 				params: {
 					t: Date.now(),
-					project_id, // : '32958067-a627-4b64-abaa-43c52734b649',
+					project_id: projectId, // : '32958067-a627-4b64-abaa-43c52734b649',
 				},
 			}).then(
 				(d: IgetTableAPI | any) => {
