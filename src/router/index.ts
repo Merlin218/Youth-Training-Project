@@ -73,7 +73,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	if (to.path === '/login' || docCookies.getItem('user')) {
+	if (to.path === '/login') {
+		if (!docCookies.getItem('user')) {
+			next();
+		} else {
+			router.push('/projects');
+		}
+	} else if (docCookies.getItem('user')) {
 		next();
 	} else {
 		message.info('未登录，请先登录');

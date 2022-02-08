@@ -6,8 +6,6 @@ declare module 'vue' {
 	export interface GlobalComponents {
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
-		ACard: typeof import('ant-design-vue/es')['Card'];
-		ACol: typeof import('ant-design-vue/es')['Col'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
 		AFormItem: typeof import('ant-design-vue/es')['FormItem'];
@@ -21,14 +19,7 @@ declare module 'vue' {
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
-		ARow: typeof import('ant-design-vue/es')['Row'];
-		ASelect: typeof import('ant-design-vue/es')['Select'];
-		ASpace: typeof import('ant-design-vue/es')['Space'];
-		ASwitch: typeof import('ant-design-vue/es')['Switch'];
-		ATable: typeof import('ant-design-vue/es')['Table'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
-		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
-		ATooltip: typeof import('ant-design-vue/es')['Tooltip'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];
 		Changepassword: typeof import('./pages/login/changepassword.vue')['default'];
@@ -55,6 +46,7 @@ declare module 'vue' {
 		TableEditor: typeof import('./pages/preproccess/preproccess/TableEditor.vue')['default'];
 		TextAnnotationConfig: typeof import('./pages/visual/components/configs/annotation/TextAnnotationConfig.vue')['default'];
 		TextArea: typeof import('./pages/start/components/TextArea.vue')['default'];
+		TooltipConfig: typeof import('./pages/visual/components/configs/TooltipConfig.vue')['default'];
 		Undefined: typeof import('./pages/index.vue')['default'];
 		Visual: typeof import('./pages/visual/visual.vue')['default'];
 		WaterMark: typeof import('./components/WaterMark.vue')['default'];
