@@ -1,25 +1,59 @@
 <template>
 	<div class="login">
 		<div class="login-form">
-			<h1 style="color: #333; margin-bottom: 40px">Login</h1>
+			<h1 style="color: #333; margin-bottom: 40px">登录</h1>
 			<!-- <Form :label-width="80" @keyup.native.enter="handleSubmit"> -->
 			<Form :label-width="80">
 				<FormItem label="账号：">
-					<Input v-model="submit.username" type="text" placeholder="Username" />
+					<!-- <template> -->
+					<a-input placeholder="用户名" />
+					<!-- <br />
+					<br />
+					<a-input-password placeholder="input password" />-->
+					<!-- </template> -->
+					<!-- <div class="components-input-demo-presuffix">
+						<a-input ref="userNameInput" v-model="userName" placeholder="Username">
+							<a-icon slot="prefix" type="user" />
+							<a-tooltip slot="suffix" title="Extra information">
+								<a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+							</a-tooltip>
+						</a-input>
+						<br />
+						<br />
+						<a-input-password placeholder="input password" />
+					</div>-->
+					<!-- <Input v-model="submit.username" type="text" placeholder="Username" /> -->
 				</FormItem>
+				<br />
+				<br />
 				<FormItem label="密码：">
-					<Input v-model="submit.password" type="password" />
+					<!-- <template> -->
+					<a-input-password placeholder="密码" />
+					<!-- </template> -->
+					<!-- <Input v-model="submit.password" type="password" /> -->
 				</FormItem>
+				<br />
+				<br />
 				<FormItem label="验证码：">
 					<div class="flex">
-						<Input v-model="code" type="text" style="width: 40%; margin-right: 30px" />
+						<a-input placeholder="验证码" style="width: 40%" />
+						<!-- <Input v-model="code" type="text" style="width: 40%; margin-right: 30px" /> -->
 						<canvas id="myCanvas"></canvas>
-						<Button type="text" style="margin-left: 10px" @click="createCode">换一个</Button>
+						<a-button @click="createCode">换一个</a-button>
+						<!-- <Button type="text" style="margin-left: 10px" @click="createCode">换一个</Button> -->
 					</div>
 				</FormItem>
+				<br />
+				<br />
 				<FormItem>
-					<Button type="primary" @click="handleSubmit">登陆</Button>
-					<Button style="margin-left: 8px" @click="handleReset">重置</Button>
+					<div>
+						<a-button type="primary" style="margin-left: 8px" @click="handleSubmit">登陆</a-button>
+						<a-button @click="handleReset">重置</a-button>
+						<router-link to="/register" style="margin-left: 30px">去注册</router-link>
+						<!-- <a-button type="link" to="/register">去注册</a-button> -->
+					</div>
+					<!-- <Button type="primary" @click="handleSubmit">登陆</Button>
+					<Button style="margin-left: 8px" @click="handleReset">重置</Button> -->
 				</FormItem>
 			</Form>
 		</div>
@@ -33,6 +67,7 @@ export default {
 	// mixins: [mixins],
 	data() {
 		return {
+			userName: '',
 			submit: {
 				username: '',
 				password: '',
@@ -87,6 +122,10 @@ export default {
 		},
 		handleReset() {
 			this.submit = {};
+		},
+		emitEmpty() {
+			this.$refs.userNameInput.focus();
+			this.userName = '';
 		},
 	},
 };
