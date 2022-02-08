@@ -1,12 +1,12 @@
 <template>
 	<div class="login">
 		<div class="login-form">
-			<h1 style="color: #333; margin-bottom: 40px">Login</h1>
+			<h1 style="color: #333; margin-bottom: 40px">登录</h1>
 			<!-- <Form :label-width="80" @keyup.native.enter="handleSubmit"> -->
 			<Form :label-width="80">
 				<FormItem label="账号：">
 					<!-- <template> -->
-					<a-input placeholder="Username" />
+					<a-input placeholder="用户名" />
 					<!-- <br />
 					<br />
 					<a-input-password placeholder="input password" />-->
@@ -28,7 +28,7 @@
 				<br />
 				<FormItem label="密码：">
 					<!-- <template> -->
-					<a-input-password placeholder="Password" />
+					<a-input-password placeholder="密码" />
 					<!-- </template> -->
 					<!-- <Input v-model="submit.password" type="password" /> -->
 				</FormItem>
@@ -36,7 +36,7 @@
 				<br />
 				<FormItem label="验证码：">
 					<div class="flex">
-						<a-input placeholder="Verification code" style="width: 40%" />
+						<a-input placeholder="验证码" style="width: 40%" />
 						<!-- <Input v-model="code" type="text" style="width: 40%; margin-right: 30px" /> -->
 						<canvas id="myCanvas"></canvas>
 						<a-button @click="createCode">换一个</a-button>
@@ -47,7 +47,7 @@
 				<br />
 				<FormItem>
 					<div>
-						<a-button type="primary" @click="handleSubmit">登陆</a-button>
+						<a-button type="primary" style="margin-left: 8px" @click="handleSubmit">登陆</a-button>
 						<a-button @click="handleReset">重置</a-button>
 					</div>
 					<!-- <Button type="primary" @click="handleSubmit">登陆</Button>
