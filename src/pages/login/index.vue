@@ -1,88 +1,97 @@
 <template>
 	<div class="login">
-		<div class="login-form">
-			<h1 style="color: #333; margin-bottom: 40px">Login</h1>
-			<!-- <Form :label-width="80" @keyup.native.enter="handleSubmit"> -->
-			<Form :label-width="80">
-				<FormItem label="账号：">
-					<Input v-model="submit.username" type="text" placeholder="Username" />
-				</FormItem>
-				<FormItem label="密码：">
-					<Input v-model="submit.password" type="password" />
-				</FormItem>
-				<FormItem label="验证码：">
-					<div class="flex">
-						<Input v-model="code" type="text" style="width: 40%; margin-right: 30px" />
-						<canvas id="myCanvas"></canvas>
-						<Button type="text" style="margin-left: 10px" @click="createCode">换一个</Button>
-					</div>
-				</FormItem>
-				<FormItem>
-					<Button type="primary" @click="handleSubmit">登陆</Button>
-					<Button style="margin-left: 8px" @click="handleReset">重置</Button>
-				</FormItem>
-			</Form>
-		</div>
+		<h1 style="color: #333; margin-bottom: 40px">登录</h1>
+		<a-form>
+			<a-form-item label="账号：" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+				<a-input ref="username" placeholder="用户名">
+					<template #prefix>
+						<UserOutlined />
+					</template>
+				</a-input>
+			</a-form-item>
+			<a-form-item label="密码：" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+				<a-input-password ref="password" placeholder="密码" />
+			</a-form-item>
+			<a-form-item label="验证码：" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+				<div class="flex">
+					<a-input placeholder="验证码" style="width: 40%" @change="codeInput" />
+					<div id="svgWrapper"></div>
+					<a-button type="link" @click="refreshImg">换一个</a-button>
+				</div>
+			</a-form-item>
+			<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+				<div class="flex">
+					<span></span>
+					<a-button type="primary" style="margin-left: 8px" @click="handleSubmit">登陆</a-button>
+					<a-button @click="handleReset">重置</a-button>
+					<!-- <router-link to="/register" style="margin-left: 30px">去注册</router-link> -->
+				</div>
+			</a-form-item>
+		</a-form>
 	</div>
 </template>
 
 <script>
-// import mixins from './mixins';
+import { message } from 'ant-design-vue';
+import { UserOutlined } from '@ant-design/icons-vue';
+import { loginApi } from '@/api';
+import { useMainStore } from '@/store/user';
 
 export default {
-	// mixins: [mixins],
+	components: { UserOutlined },
 	data() {
 		return {
 			submit: {
-				username: '',
+				user_name: '',
 				password: '',
 			},
-			createC: '',
 			code: '',
+			randomNum: 0.0,
 		};
 	},
 	mounted() {
-		this.createCode();
+		this.refreshImg();
 	},
 	methods: {
-		async handleSubmit() {
-			if (this.code !== this.createC) {
-				this.$Message.error('验证码输入错误');
-				return;
+		refreshNum() {
+			let newNum = 0;
+			while (newNum === 0 || newNum === this.randomNum) {
+				newNum = Math.random() * 10;
 			}
-			this.$Spin.show();
-			let res; // = await this.$ajax.post("/login", this.submit);
-			this.$Spin.hide();
-			if (res.data.token) {
-				localStorage.setItem('token', res.data.token);
-				localStorage.setItem('home_id', res.data.home_id);
-				// this.$router.push({ path: "/admin" });
-				this.$Message.success('登录成功,即将跳转到主页');
-				setTimeout(() => this.$router.push({ path: `/home/${res.data.home_id}` }), 3000);
-			}
+			this.randomNum = newNum;
 		},
-		createCode() {
-			const c = document.getElementById('myCanvas');
-			const ctx = c.getContext('2d');
-			c.width = '120';
-			c.height = '40';
-			ctx.fillStyle = '#6adbcf';
-			ctx.fillRect(0, 0, 120, 40);
-			ctx.shadowOffsetX = 2;
-			ctx.shadowOffsetY = 2;
-			ctx.shadowBlur = 2;
-			ctx.shadowColor = '#666666';
-			ctx.font = '30px sans-serif';
-			const codes = 'qwertyuioplkjhgfdsazxcvbnm1234567890';
-			const bgColor = ['#f5f5f5', '#666', '#bcbcbc', 'yellow'];
-			for (let i = 0; i < 4; i += 1) {
-				const r = Math.floor(Math.random() * codes.length);
-				const x = 10 + i * 20;
-				const y = 20 + Math.random() * 10;
-				this.createC += codes[r];
-				const b = Math.floor(Math.random() * bgColor.length);
-				ctx.fillStyle = bgColor[b];
-				ctx.fillText(codes[r], x, y);
+		codeInput(e) {
+			document.cookie = `captcha_client=${e.target.value}`;
+		},
+		async refreshImg() {
+			this.refreshNum();
+			const svgWrapper = document.getElementById('svgWrapper');
+			svgWrapper.innerHTML = '';
+			const res = await loginApi.getImg({ v: this.randomNum });
+			svgWrapper.innerHTML = res;
+		},
+		async handleSubmit() {
+			const store = useMainStore();
+			const form = {
+				user_name: this.$refs.username.stateValue,
+				password: this.$refs.password.input.stateValue,
+			};
+			const fakeUser = {
+				user_name: 'alexzhli',
+				password: '123456',
+			};
+			const res = await loginApi.login(form || fakeUser);
+			store.updateStatus();
+			switch (res.code) {
+				case 0:
+					message.success('登录成功,即将跳转到主页');
+					setTimeout(() => this.$router.push({ path: `/projects` }), 3000);
+					break;
+				case 1:
+					message.error(res.message);
+					break;
+				default:
+					break;
 			}
 		},
 		handleReset() {
@@ -94,23 +103,23 @@ export default {
 
 <style>
 .login {
-	/* background: url("../assets/login.jpg") center center; */
-	background: #f8f8f9;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	background-size: cover;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-}
-.login-form {
-	text-align: center;
-	padding: 20px;
-	border-radius: 10px;
-	color: #fff !important;
-	margin-top: 4rem;
+	align-items: center;
 }
 .flex {
+	width: 340px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+}
+#svgWrapper {
+	width: 123px;
+	height: 43px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 }
 </style>

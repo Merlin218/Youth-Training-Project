@@ -62,6 +62,9 @@ const request = (AxiosConfig: AxiosRequestConfig, customConfig: CustomConfig) =>
 						content: customConfigs.useMsgFromEnd && res.data.message ? res.data.message : customConfigs.successTitle,
 						duration: 2,
 					});
+			} else if (typeof res.data === 'string') {
+				customConfigs.loading && hideGlobalMessage();
+				return customConfigs.dataFormat ? res.data : res;
 			} else if (res.data.code === 0) {
 				// 更新loading
 				customConfigs.loading &&

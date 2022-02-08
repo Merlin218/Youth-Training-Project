@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
 import { ProTable } from '../pages/preproccess/preproccess/ProTable';
