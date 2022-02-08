@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia';
+import docCookies from '@/utils/cookie';
 
 export const useMainStore = defineStore({
 	id: 'user',
 	state: () => ({
-		name: '超级管理员',
-		isLogin: false,
+		username: docCookies.getItem('user'),
 	}),
 	actions: {
 		// 支持同步或异步
-		changeLoginStatus(status: boolean) {
-			this.isLogin = status;
+		updateStatus() {
+			this.username = docCookies.getItem('user');
 		},
 	},
 });

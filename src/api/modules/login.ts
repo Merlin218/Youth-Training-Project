@@ -1,11 +1,22 @@
 import createRequest from '../axios';
 
 const loginApi = {
-	login: (params: any) =>
+	getImg: (params: any) =>
+		createRequest({
+			url: '/login/getcaptcha',
+			method: 'get',
+			params,
+		}),
+	login: (data: any) =>
 		createRequest({
 			url: '/login/validateUsr',
 			method: 'post',
-			params,
+			data,
+		}),
+	logout: () =>
+		createRequest({
+			url: '/login/logout',
+			method: 'post',
 		}),
 };
 

@@ -4,14 +4,10 @@
 
 declare module 'vue' {
 	export interface GlobalComponents {
-		AAutoComplete: typeof import('ant-design-vue/es')['AutoComplete'];
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
-		ACascader: typeof import('ant-design-vue/es')['Cascader'];
-		ACheckbox: typeof import('ant-design-vue/es')['Checkbox'];
-		ACheckboxGroup: typeof import('ant-design-vue/es')['CheckboxGroup'];
+		ACard: typeof import('ant-design-vue/es')['Card'];
 		ACol: typeof import('ant-design-vue/es')['Col'];
-		ADatePicker: typeof import('ant-design-vue/es')['DatePicker'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
 		AFormItem: typeof import('ant-design-vue/es')['FormItem'];
@@ -25,13 +21,13 @@ declare module 'vue' {
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
-		ARadio: typeof import('ant-design-vue/es')['Radio'];
-		ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup'];
 		ARow: typeof import('ant-design-vue/es')['Row'];
 		ASelect: typeof import('ant-design-vue/es')['Select'];
-		ASelectOption: typeof import('ant-design-vue/es')['SelectOption'];
+		ASpace: typeof import('ant-design-vue/es')['Space'];
 		ASwitch: typeof import('ant-design-vue/es')['Switch'];
+		ATable: typeof import('ant-design-vue/es')['Table'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
+		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		ATooltip: typeof import('ant-design-vue/es')['Tooltip'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];

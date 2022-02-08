@@ -6,6 +6,8 @@
  * @Description: 请填写简介
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { message } from 'ant-design-vue';
+import docCookies from '@/utils/cookie';
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -68,6 +70,15 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
+});
+
+router.beforeEach((to, from, next) => {
+	if (to.path === '/login' || docCookies.getItem('user')) {
+		next();
+	} else {
+		message.info('未登录，请先登录');
+		router.push('/login');
+	}
 });
 
 export default router;

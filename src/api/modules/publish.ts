@@ -1,7 +1,12 @@
-// import createRequest from '../axios';
+import createRequest from '../axios';
 
 const publishApi = {
-	// test: createRequest({}),
+	updateCurrentChartPicExport: (params: any) =>
+		createRequest({
+			url: '/cms/updateCurrentChartPicExport',
+			method: 'post',
+			params,
+		}),
 };
 
 export default publishApi;
