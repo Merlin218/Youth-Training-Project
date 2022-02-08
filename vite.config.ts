@@ -39,7 +39,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api': {
-				target: 'http://localhost:9000',
+				target: 'https://datavis.all1024.com',
 				changeOrigin: true,
 				rewrite: path => {
 					return path.replace(/^\/api/, '');

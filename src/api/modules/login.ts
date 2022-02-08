@@ -3,12 +3,10 @@ import createRequest from '../axios';
 const loginApi = {
 	login: (params: any) =>
 		createRequest({
-			url: '/shibes',
+			url: '/login/validateUsr',
 			method: 'post',
 			params,
 		}),
 };
-
-loginApi.login;
 
 export default loginApi;

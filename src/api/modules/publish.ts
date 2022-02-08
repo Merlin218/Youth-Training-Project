@@ -1,7 +1,7 @@
-import createRequest from '../axios';
+// import createRequest from '../axios';
 
 const publishApi = {
-	test: createRequest({}),
+	// test: createRequest({}),
 };
 
 export default publishApi;

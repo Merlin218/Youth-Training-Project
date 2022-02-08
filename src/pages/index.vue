@@ -9,14 +9,23 @@
 				<a-menu-item key="/visual"> 可视化 </a-menu-item>
 				<a-menu-item key="/publish"> 发布 </a-menu-item>
 			</a-menu>
-			<a-dropdown trigger="click">
-				<a-avatar size="large" icon="user" style="cursor: pointer" />
-				<template #overlay>
-					<a-menu>
-						<a-menu-item key="1"> <LogoutOutlined /> 登出 </a-menu-item>
-					</a-menu>
-				</template>
-			</a-dropdown>
+			<template v-if="store.isLogin">
+				<a-dropdown trigger="click">
+					<a-avatar size="large" style="cursor: pointer">
+						<UserOutlined />
+					</a-avatar>
+					<template #overlay>
+						<a-menu>
+							<a-menu-item key="1"> <LogoutOutlined /> 登出 </a-menu-item>
+						</a-menu>
+					</template>
+				</a-dropdown>
+			</template>
+			<template v-else>
+				<div>
+					<a-button type="link" @click="toLogin"> 登录 </a-button>
+				</div>
+			</template>
 		</a-layout-header>
 		<a-layout-content class="content">
 			<Scroller :height="contentHeight" background-color="#fff">
@@ -34,10 +43,12 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { LogoutOutlined } from '@ant-design/icons-vue';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
+import { useMainStore } from '@/store/user';
 
 const router = useRouter();
 const route = useRoute();
+const store = useMainStore();
 
 const selectedKeys = ref<Array<string>>([route.path]);
 
@@ -47,6 +58,10 @@ const handleMenuChange = ({ key }: { key: string }) => {
 	if (key.includes(selectedKeys.value[0])) return;
 	selectedKeys.value = [key];
 	router.push(key);
+};
+
+const toLogin = () => {
+	router.push('/login');
 };
 
 watch(
