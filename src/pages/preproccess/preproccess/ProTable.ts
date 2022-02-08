@@ -72,6 +72,8 @@ export class TableCol {
 
 	errors: IColErr; // 列中所有error
 
+	editable?: boolean;
+
 	constructor({ cid, cname, cKey, type = 'string', data, equation = null, computed = false }) {
 		this.cid = cid;
 		this.computed = computed;
@@ -84,6 +86,7 @@ export class TableCol {
 		this.dataSift = new TableColDataDef({});
 		this.compareable = false;
 		this.data = data;
+		this.editable = true;
 		if (!this.computed) {
 			// 如果不是计算属性就检查类型, 初始化数据定义与筛选, 计算错误
 			this.checkType();
