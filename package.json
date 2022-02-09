@@ -22,7 +22,6 @@
 		"axios": "^0.25.0",
 		"clipboard": "^2.0.10",
 		"codemirror": "^5.65.1",
-		"default-passive-events": "^2.0.0",
 		"html2canvas": "^1.4.1",
 		"mathjs": "^10.1.1",
 		"pinia": "^2.0.0-rc.10",
