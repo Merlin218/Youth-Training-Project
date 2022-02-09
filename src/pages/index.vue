@@ -71,7 +71,7 @@ const toLogin = () => {
 
 const logout = async () => {
 	await loginApi.logout();
-	docCookies.setItem('user', '');
+	docCookies.setItem('user', '', null, '/');
 	store.updateStatus();
 	router.push('/login');
 };

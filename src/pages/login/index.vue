@@ -36,6 +36,7 @@ import { message } from 'ant-design-vue';
 import { UserOutlined } from '@ant-design/icons-vue';
 import { loginApi } from '@/api';
 import { useMainStore } from '@/store/user';
+import docCookies from '@/utils/cookie';
 
 export default {
 	components: { UserOutlined },
@@ -61,7 +62,7 @@ export default {
 			this.randomNum = newNum;
 		},
 		codeInput(e) {
-			document.cookie = `captcha_client=${e.target.value}`;
+			docCookies.setItem('captcha_client', e.target.value, null, '/');
 		},
 		async refreshImg() {
 			console.log(1);
