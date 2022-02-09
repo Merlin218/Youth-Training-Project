@@ -22,14 +22,18 @@ declare module 'vue' {
 		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
 		AMenu: typeof import('ant-design-vue/es')['Menu'];
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopconfirm: typeof import('ant-design-vue/es')['Popconfirm'];
+		APopover: typeof import('ant-design-vue/es')['Popover'];
 		ARadio: typeof import('ant-design-vue/es')['Radio'];
 		ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup'];
 		ARow: typeof import('ant-design-vue/es')['Row'];
 		ASelect: typeof import('ant-design-vue/es')['Select'];
 		ASelectOption: typeof import('ant-design-vue/es')['SelectOption'];
 		ASwitch: typeof import('ant-design-vue/es')['Switch'];
+		ATable: typeof import('ant-design-vue/es')['Table'];
+		ATag: typeof import('ant-design-vue/es')['Tag'];
 		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];
@@ -60,7 +64,6 @@ declare module 'vue' {
 		TooltipConfig: typeof import('./pages/visual/components/configs/TooltipConfig.vue')['default'];
 		Undefined: typeof import('./pages/index.vue')['default'];
 		Visual: typeof import('./pages/visual/visual.vue')['default'];
-		WaterMark: typeof import('./components/WaterMark.vue')['default'];
 		WaterMarkConfig: typeof import('./pages/visual/components/configs/WaterMarkConfig.vue')['default'];
 	}
 }
