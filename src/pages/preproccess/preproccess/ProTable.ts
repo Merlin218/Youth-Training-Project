@@ -363,6 +363,9 @@ export class ProTable {
 					cnt++;
 				}
 			});
+			// eslint-disable-next-line
+			delete d._X_ID;
+			delete d.rowId;
 			if (cnt) res.data.push(dataInv);
 		});
 		return res;
