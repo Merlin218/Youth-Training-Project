@@ -59,9 +59,9 @@ const routes: RouteRecordRaw[] = [
 				component: () => import('../pages/publish/index.vue'),
 			},
 			{
-				path: '/preproccess',
+				path: '/preprocess',
 				name: '数据预处理',
-				component: () => import('../pages/preproccess/index.vue'),
+				component: () => import('../pages/preprocess/index.vue'),
 			},
 		],
 	},

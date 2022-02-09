@@ -6,7 +6,7 @@
 				<a-menu theme="dark" :selected-keys="selectedKeys" :inline-collapsed="false" mode="horizontal" @select="handleMenuChange">
 					<a-menu-item key="/projects"> 项目 </a-menu-item>
 					<a-menu-item key="/start"> 开始 </a-menu-item>
-					<a-menu-item key="/preproccess"> 预处理 </a-menu-item>
+					<a-menu-item key="/preprccess"> 预处理 </a-menu-item>
 					<a-menu-item key="/visual"> 可视化 </a-menu-item>
 					<a-menu-item key="/publish"> 发布 </a-menu-item>
 				</a-menu>
