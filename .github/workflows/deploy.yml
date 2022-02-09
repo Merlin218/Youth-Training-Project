@@ -21,22 +21,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           # 选择要使用的 node 版本
-<<<<<<< Updated upstream
-          node-version: "14"
-          
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        with:
-            path: ~/.pnpm-store
-            key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-            restore-keys: |
-              ${{ runner.os }}-
-
-      - uses: pnpm/action-setup@v2.1.0
-        with:
-            version: 6.0.2
-            run_install: true
-=======
           node-version: '14'
 
       - name: Cache pnpm modules
@@ -51,7 +35,6 @@ jobs:
         with:
           version: 6.0.2
           run_install: true
->>>>>>> Stashed changes
 
       # 运行构建脚本
       - name: Build site
@@ -60,18 +43,9 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-<<<<<<< Updated upstream
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-            ARGS: '-rltgoDzvO --delete'
-            SOURCE: dist/*
-            REMOTE_HOST: ${{ secrets.HOST }}
-            REMOTE_USER: root
-            TARGET: /www/wwwroot/www.merlin218.top/data-to-chart
-=======
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           ARGS: '-rltgoDzvO --delete'
           SOURCE: dist/*
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: root
           TARGET: /www/wwwroot/www.merlin218.top/data-to-chart
->>>>>>> Stashed changes
