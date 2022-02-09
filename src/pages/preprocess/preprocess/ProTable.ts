@@ -268,7 +268,8 @@ export class ProTable {
 	// 目前支持的数据类型
 	static colType = ['string', 'number', 'boolean', 'date'];
 
-	static rowCounter = 0; // 行计数
+	// static rowCounter = 0; // 行计数
+	rowCounter: number; // 行计数
 
 	static colCounter = 0; // 列计数
 
@@ -276,8 +277,9 @@ export class ProTable {
 		this.geted = getted;
 		this.title = title;
 		this.data = data;
+		this.rowCounter = 1;
 		// eslint-disable-next-line
-		this.data.forEach(d => (d.rowId = ProTable.rowCounter++));
+		this.data.forEach(d => (d.rowId = this.rowCounter++));
 		this.cols = cols.map(d => {
 			// eslint-disable-next-line
 			ProTable.colCounter = Math.max(++ProTable.colCounter, d.cid);
@@ -291,7 +293,7 @@ export class ProTable {
 		this.title = title;
 		this.data = data;
 		// eslint-disable-next-line
-		this.data.forEach(d => (d.rowId = ProTable.rowCounter++));
+		this.data.forEach(d => (d.rowId = this.rowCounter++));
 		this.cols = cols.map(d => {
 			// eslint-disable-next-line
 			ProTable.colCounter = Math.max(++ProTable.colCounter, d.cid);
@@ -322,13 +324,13 @@ export class ProTable {
 		// eslint-disable-next-line
 		++ProTable.colCounter;
 		cid = cid || ProTable.colCounter;
-		const cKey = `comp${cid}`;
+		const cKey = cname.replaceAll(/[ $]/g, '_'); // `comp${cid}`;		// Opps not a good change
 		this.data.forEach(d => {
 			d[cKey] = null;
 		});
 		const ccol = new TableCol({
 			cid,
-			cname,
+			cname: cname.replaceAll(/[ $]/g, '_'),
 			type,
 			data: this.data,
 			cKey,
@@ -352,7 +354,8 @@ export class ProTable {
 			cname: d.cname,
 			type: d.type,
 		}));
-		const data = shifted ? this.mappedTable() : this.data;
+		let data = shifted ? this.mappedTable() : this.data;
+		data = JSON.parse(JSON.stringify(data));
 		data.forEach(d => {
 			const dataInv = {};
 			let cnt = 0;

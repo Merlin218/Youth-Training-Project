@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+		<div class="bg"></div>
 		<div class="new-project">
 			<Modal />
 		</div>
@@ -24,13 +25,13 @@
 </template>
 
 <script lang="ts">
-import { onMounted, reactive, toRefs, ref, provide } from 'vue';
+import { onMounted, reactive, toRefs, ref, defineComponent, provide } from 'vue';
 import { FilterOutlined } from '@ant-design/icons-vue';
 import { projectsApi } from '@/api';
 import ProjectList from './components/ProjectList.vue';
 import Modal from './components/Modal.vue';
 
-export default {
+export default defineComponent({
 	name: 'Projects',
 	components: {
 		ProjectList,
@@ -102,7 +103,7 @@ export default {
 			handleReversePostList,
 		};
 	},
-};
+});
 </script>
 <style lang="scss" scoped>
 h2 {
@@ -111,6 +112,21 @@ h2 {
 
 .container {
 	margin: 0 40px 60px 40px;
+	position: relative;
+	.new-project,
+	.project {
+		z-index: 1;
+	}
+	.bg {
+		position: absolute;
+		top: 430px;
+		right: -90px;
+		width: 500px;
+		height: 300px;
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-image: url('https://cdn.jsdelivr.net/gh/Merlin218/image-storage@master/picX/projects.1gg9dh8halfk.webp');
+	}
 }
 
 .project {
