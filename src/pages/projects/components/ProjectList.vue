@@ -14,7 +14,7 @@
 				<a-button size="small" type="link" class="recently__item__detail">详情</a-button>
 			</a-popover>
 			<div v-if="item.index_pic" class="recently__item__picture" :style="{ 'background-image': `url(${item.index_pic})` }"></div>
-			<div v-else class="recently__item__default">暂无图片</div>
+			<div v-else class="recently__item__default"></div>
 			<a-tag v-if="item.first_finished === 1" color="orange">开始</a-tag>
 			<a-tag v-if="item.second_finished === 1" color="green">预处理</a-tag>
 			<a-tag v-if="item.third_finished === 1" color="cyan">绘图</a-tag>
@@ -77,8 +77,8 @@ export default defineComponent({
 		position: relative;
 		height: 300px;
 		padding: 14px 25px;
-		border-radius: 8px;
-		border: 2px solid #eee;
+		border-radius: 16px;
+		border: 1px solid #eee;
 		background-color: #fff;
 		&__picture {
 			height: 190px;
@@ -91,12 +91,10 @@ export default defineComponent({
 		&__default {
 			height: 190px;
 			width: 250px;
-			margin-bottom: 4px;
-			background-color: #f5f7fa;
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
-			color: #999;
+			background-image: url('https://cdn.jsdelivr.net/gh/Merlin218/image-storage@master/picX/undraw_Traveling_re_weve.g32zkgx32og.webp');
+			background-repeat: no-repeat;
+			background-size: contain;
+			opacity: 0.3;
 		}
 		&__title {
 			font-weight: 700;

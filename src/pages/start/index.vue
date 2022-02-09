@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="bg" :style="{ backgroundImage: 'url(' + getPicUrl('city') + ')' }"></div>
+		<div class="bg"></div>
 		<div class="select-area">
 			<h2>您想如何上传数据？</h2>
 			<div class="select-area__item select-area__upload">
@@ -122,6 +122,7 @@ export default defineComponent({
 		height: 300px;
 		background-repeat: no-repeat;
 		background-size: contain;
+		background-image: url('https://cdn.jsdelivr.net/gh/Merlin218/image-storage@master/picX/city.4yghw7h3ti0w.webp');
 	}
 }
 

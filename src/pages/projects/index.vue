@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="bg" :style="{ backgroundImage: 'url(' + getPicUrl('projects') + ')' }"></div>
+		<div class="bg"></div>
 		<div class="new-project">
 			<Modal />
 		</div>
@@ -97,6 +97,7 @@ h2 {
 		height: 300px;
 		background-repeat: no-repeat;
 		background-size: contain;
+		background-image: url('https://cdn.jsdelivr.net/gh/Merlin218/image-storage@master/picX/projects.1gg9dh8halfk.webp');
 	}
 }
 

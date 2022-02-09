@@ -1,10 +1,3 @@
-/*
- * @Author: Merlin218
- * @Date: 2022-02-09 18:03:09
- * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 02:23:41
- * @Description: 请填写简介
- */
 import { defineStore } from 'pinia';
 import { ChartData } from '@/types/project/index';
 

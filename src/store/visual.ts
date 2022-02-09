@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 23:37:19
+ * @LastEditTime: 2022-02-10 03:19:36
  * @Description: 图表状态管理
  */
 import { defineStore } from 'pinia';
@@ -35,6 +35,7 @@ export const useVisualStore = defineStore('visual', {
 			this.tableData = toTable(options.data || []);
 			this.backupChartOptions = options;
 			this.waterMarkOptions = JSON.parse(watermarkConfig);
+			console.log(this.waterMarkOptions);
 		},
 		backupProjectData(data: any) {
 			this.projectData = data;
