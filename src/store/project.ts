@@ -2,15 +2,11 @@ import { defineStore } from 'pinia';
 
 export const useProjectStore = defineStore('project', {
 	state: () => ({
-		id: '' as string, // 项目 id
 		title: '' as string, // 项目标题
 		jsonContent: '' as string, // json 内容
 		strContent: '' as string, // textarea 显示的内容
 	}),
 	actions: {
-		updateId(id: string) {
-			this.id = id;
-		},
 		updateJsonContent(jsonContent: string) {
 			this.jsonContent = jsonContent;
 		},

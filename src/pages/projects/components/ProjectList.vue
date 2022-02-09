@@ -13,7 +13,8 @@
 				</template>
 				<a-button size="small" type="link" class="recently__item__detail">详情</a-button>
 			</a-popover>
-			<div class="recently__item__picture" :style="{ 'background-image': `url(${item.index_pic})` }"></div>
+			<div v-if="item.index_pic" class="recently__item__picture" :style="{ 'background-image': `url(${item.index_pic})` }"></div>
+			<div v-else class="recently__item__default">暂无图片</div>
 			<a-tag v-if="item.first_finished === 1" color="orange">开始</a-tag>
 			<a-tag v-if="item.second_finished === 1" color="green">预处理</a-tag>
 			<a-tag v-if="item.third_finished === 1" color="cyan">绘图</a-tag>
@@ -24,6 +25,7 @@
 
 <script>
 import { defineComponent, toRefs } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
 	name: 'ProjectList',
@@ -36,8 +38,26 @@ export default defineComponent({
 	setup(props) {
 		// eslint 规范
 		const { projectList: recentList } = toRefs(props);
+		const router = useRouter();
+		const handleJump = item => {
+			let path = '';
+			if (item.share_hash !== '') {
+				path = '/publish';
+			} else if (item.third_finished === 1) {
+				path = '/publish';
+			} else if (item.second_finished === 1) {
+				path = '/visual';
+			} else if (item.first_finished === 1) {
+				path = '/preprocess';
+			} else {
+				path = '/start';
+			}
+			router.push({ path, query: { project_id: item.project_id } });
+		};
+
 		return {
 			recentList,
+			handleJump,
 		};
 	},
 });
@@ -64,6 +84,16 @@ export default defineComponent({
 			background-size: contain;
 			background-repeat: no-repeat;
 			background-position: center;
+		}
+		&__default {
+			height: 190px;
+			width: 250px;
+			margin-bottom: 4px;
+			background-color: #f5f7fa;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			color: #999;
 		}
 		&__title {
 			font-weight: 700;

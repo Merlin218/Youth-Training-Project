@@ -1,12 +1,7 @@
 <template>
 	<div class="container">
 		<div class="new-project">
-			<a-button type="primary" size="large" @click="handleCreate">
-				<template #icon>
-					<PlusOutlined />
-				</template>
-				新建项目
-			</a-button>
+			<Modal />
 		</div>
 		<div class="project">
 			<div class="edit-recently recently">
@@ -24,23 +19,22 @@
 
 <script lang="ts">
 import { onMounted, reactive, toRefs, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { PlusOutlined } from '@ant-design/icons-vue';
 import { projectsApi } from '@/api';
 import ProjectList from './components/ProjectList.vue';
+import Modal from './components/Modal.vue';
 
 export default {
 	name: 'Projects',
 	components: {
 		ProjectList,
-		PlusOutlined,
+		Modal,
 	},
 	setup() {
 		const state = reactive({});
-		const router = useRouter();
 		let recentProject: Array<Object> = [];
 		const recentEdit = ref([]);
 		const recentPost = ref([]);
+		const isClicked = ref<boolean>(false);
 		onMounted(async () => {
 			const res = await projectsApi.getAllProjects();
 			console.log(res);
@@ -64,10 +58,6 @@ export default {
 					}
 				}
 				value.time = time;
-				// 显示图片，若没有图片则用默认图片代替
-				if (value.index_pic === null) {
-					value.index_pic = 'src/assets/default.png';
-				}
 				if (showValue.share_hash !== '') {
 					recentPost.value.push(value);
 				} else {
@@ -75,31 +65,11 @@ export default {
 				}
 			});
 		});
-		const handleJump = item => {
-			let path = '';
-			if (item.share_hash !== '') {
-				path = '/publish';
-			} else if (item.third_finished === 1) {
-				path = '/publish';
-			} else if (item.second_finished === 1) {
-				path = '/visual';
-			} else if (item.first_finished === 1) {
-				path = '/preprocess';
-			} else {
-				path = '/start';
-			}
-			router.push({ path, query: { id: item.id } });
-		};
-		const handleCreate = async () => {
-			router.push({ path: '/start' });
-		};
-
 		return {
 			...toRefs(state),
 			recentEdit,
 			recentPost,
-			handleJump,
-			handleCreate,
+			isClicked,
 		};
 	},
 };

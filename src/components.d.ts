@@ -11,6 +11,7 @@ declare module 'vue' {
 		ACollapse: typeof import('ant-design-vue/es')['Collapse'];
 		ACollapsePanel: typeof import('ant-design-vue/es')['CollapsePanel'];
 		ADivider: typeof import('ant-design-vue/es')['Divider'];
+		ACard: typeof import('ant-design-vue/es')['Card'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
 		AEmpty: typeof import('ant-design-vue/es')['Empty'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
@@ -55,6 +56,7 @@ declare module 'vue' {
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
 		LegendConfig: typeof import('./pages/visual/components/configs/LegendConfig.vue')['default'];
 		LineConfig: typeof import('./pages/visual/components/configs/charts/LineConfig.vue')['default'];
+		Modal: typeof import('./pages/projects/components/Modal.vue')['default'];
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];
