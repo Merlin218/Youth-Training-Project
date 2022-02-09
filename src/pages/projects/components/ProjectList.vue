@@ -13,6 +13,13 @@
 				</template>
 				<a-button size="small" type="link" class="recently__item__detail">详情</a-button>
 			</a-popover>
+			<a-popover title="删除项目">
+				<template #content>
+					<p>确定要删除项目吗？</p>
+					<a-button danger @click="() => handleDelete(item)">删除</a-button>
+				</template>
+				<a-button size="small" type="link" class="recently__item__delete">删除</a-button>
+			</a-popover>
 			<div v-if="item.index_pic" class="recently__item__picture" :style="{ 'background-image': `url(${item.index_pic})` }"></div>
 			<div v-else class="recently__item__default"></div>
 			<a-tag v-if="item.first_finished === 1" color="orange">开始</a-tag>
@@ -24,9 +31,10 @@
 </template>
 
 <script>
-import { defineComponent, toRefs } from 'vue';
+import { defineComponent, toRefs, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { useProjectStore } from '@/store/project';
+import { projectsApi } from '@/api';
 
 export default defineComponent({
 	name: 'ProjectList',
@@ -38,6 +46,8 @@ export default defineComponent({
 	},
 	setup(props) {
 		const { projectList: recentList } = toRefs(props);
+		const refreshList = inject('refreshList');
+		console.log(inject('refreshList'));
 		const router = useRouter();
 		const projectStore = useProjectStore();
 		const handleJump = item => {
@@ -56,10 +66,14 @@ export default defineComponent({
 			projectStore.updateProjectId(item.project_id);
 			router.push({ path, query: { project_id: item.project_id } });
 		};
-
+		const handleDelete = async item => {
+			await projectsApi.deleteProject({ project_id: item.project_id });
+			refreshList();
+		};
 		return {
 			recentList,
 			handleJump,
+			handleDelete,
 		};
 	},
 });
@@ -106,6 +120,11 @@ export default defineComponent({
 			margin-bottom: 4px;
 		}
 		&__detail {
+			position: absolute;
+			top: 44px;
+			right: 68px;
+		}
+		&__delete {
 			position: absolute;
 			top: 44px;
 			right: 25px;
