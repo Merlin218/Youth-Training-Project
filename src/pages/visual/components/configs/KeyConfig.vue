@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:26:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 11:23:07
+ * @LastEditTime: 2022-02-09 21:32:23
  * @Description: 字段配置
 -->
 <template>
@@ -70,6 +70,12 @@ const getOptions = (filter?: (string | undefined)[], such?: any) => {
 			value: item,
 		};
 	});
+};
+</script>
+
+<script lang="ts">
+export default {
+	name: 'KeyConfig',
 };
 </script>
 

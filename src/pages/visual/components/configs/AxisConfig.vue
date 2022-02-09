@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:46:49
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-07 17:05:39
+ * @LastEditTime: 2022-02-09 21:41:51
  * @Description: 请填写简介
 -->
 <template>
@@ -112,6 +112,12 @@ watch(
 	},
 	{ deep: true }
 );
+</script>
+
+<script lang="ts">
+export default {
+	name: 'AxisConfig',
+};
 </script>
 
 <style scoped>

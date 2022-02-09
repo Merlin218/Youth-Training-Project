@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 11:03:22
+ * @LastEditTime: 2022-02-09 21:40:56
  * @Description: 请填写简介
 -->
 <template>
@@ -205,6 +205,12 @@ const removeAnnotation = () => {
 		updateAnnotationOptions();
 		resetConfig();
 	}
+};
+</script>
+
+<script lang="ts">
+export default {
+	name: 'TextAnnotationConfig',
 };
 </script>
 

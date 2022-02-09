@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 12:50:29
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-07 16:12:14
+ * @LastEditTime: 2022-02-09 21:30:43
  * @Description: 水印配置
 -->
 
@@ -148,6 +148,12 @@ watch(
 		deep: true,
 	}
 );
+</script>
+
+<script lang="ts">
+export default {
+	name: 'WaterMarkConfig',
+};
 </script>
 
 <style scoped>
