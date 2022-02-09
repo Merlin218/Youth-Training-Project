@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 13:46:52
+ * @LastEditTime: 2022-02-09 00:42:09
  * @Description: 请填写简介
 -->
 <template>
@@ -19,7 +19,7 @@
 		<a-button type="primary" @click="toNext">下一步</a-button>
 	</div>
 	<div class="container">
-		<div :style="{ width: '70%' }">
+		<div :style="{ width: '70%' }" class="display__container">
 			<chart-display id="storeChart" :url="store.waterMarkUrl" :name="store.chartType" :options="store.backupChartOptions" :title="store.chartTitle" :use-store="true"></chart-display>
 		</div>
 		<div :style="{ width: '25%', position: 'relative' }">
@@ -48,7 +48,7 @@
 						<a-switch :checked="!!store.waterMarkOptions" @change="handleMarkActive"></a-switch>
 					</template>
 					<!-- 水印配置 -->
-					<water-mark-config ref="mark"></water-mark-config>
+					<water-mark-config></water-mark-config>
 				</a-collapse-panel>
 			</a-collapse>
 		</div>
@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { TooltipOptions } from '@antv/g2plot';
 import { message } from 'ant-design-vue';
@@ -68,7 +68,7 @@ const router = useRouter();
 const store = useVisualStore();
 
 // 当前步骤
-const stepActive = ref('');
+const stepActive = ref('5');
 // 步骤配置
 const stepConfig = ref([
 	{
@@ -137,8 +137,8 @@ const handleMarkActive = (value: any) => {
  * @description: 前往下一个流程
  */
 const toNext = async () => {
-	if (!store.chartType || !store.chartPicId || !store.chartPicId || !store.chartOptions || !store.waterMarkOptions) {
-		message.error('配置不完整');
+	if (!store.chartType || !store.chartPicId || !store.chartTitle || !store.chartOptions || !store.waterMarkOptions) {
+		message.error('参数不完整');
 		return;
 	}
 	await visualApi.updateChartPicConfig({
@@ -149,6 +149,10 @@ const toNext = async () => {
 		watermark_config: JSON.stringify(store.waterMarkOptions),
 	});
 };
+
+onMounted(() => {
+	stepActive.value = '';
+});
 </script>
 
 <style scoped>
@@ -168,6 +172,12 @@ const toNext = async () => {
 	justify-content: space-around;
 }
 
+.display__container {
+	min-height: 60vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 :deep(.ant-collapse-content-active) {
 	overflow: unset;
 }

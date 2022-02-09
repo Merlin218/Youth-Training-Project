@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:26:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 10:50:10
+ * @LastEditTime: 2022-02-09 11:23:07
  * @Description: 字段配置
 -->
 <template>
@@ -26,9 +26,10 @@ import { ChartOptionsType } from '@/types/visual/charts';
 
 const store = useVisualStore();
 
-const options: ComputedRef<ChartOptionsType> = computed(() => store.chartInstance.options);
+const options: ComputedRef<ChartOptionsType | undefined> = computed(() => store.chartInstance?.options);
 
-const canSeries = computed(() => Object.keys(store.chartInstance.options.data[0]).length > 2);
+// eslint-disable-next-line no-nested-ternary
+const canSeries = computed(() => (options.value ? (options.value.data.length > 0 ? Object.keys(options.value.data[0]).length > 2 : false) : false));
 
 const fieldConfig = ref<Mutable<Partial<ChartOptionsType>>>({
 	xField: '',
@@ -48,15 +49,11 @@ watch(
 /**
  * @description: 过滤获取select的options
  * @param {*} filter 过滤项
- * @return {*}
- */
-/**
- * @description: 过滤获取select的options
- * @param {*} filter 过滤项
  * @param {*} such 保留指定类型的示例值，例如保留string类型的key，则传任意一个字符串即可，用于typeof判断
  * @return {*}
  */
 const getOptions = (filter?: (string | undefined)[], such?: any) => {
+	if (!options.value?.data[0]) return [];
 	let data = Object.keys(options.value.data[0]);
 	if (typeof filter !== 'undefined') {
 		filter.forEach(item => {
@@ -66,7 +63,7 @@ const getOptions = (filter?: (string | undefined)[], such?: any) => {
 		});
 	}
 	if (typeof such !== 'undefined') {
-		data = data.filter(x => typeof options.value.data[0][x] === typeof such);
+		data = data.filter(x => typeof options.value?.data[0][x] === typeof such);
 	}
 	return data.map(item => {
 		return {

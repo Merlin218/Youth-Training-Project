@@ -1,3 +1,10 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-02-08 18:23:39
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-09 00:16:20
+ * @Description: 请填写简介
+-->
 <template>
 	<div :id="id" :style="{ height: wrapperHeight, overflow: 'hidden', backgroundColor }">
 		<slot default></slot>
@@ -11,9 +18,9 @@ import MouseWheel from '@better-scroll/mouse-wheel';
 
 const props = withDefaults(
 	defineProps<{
-		id: string; // 包裹滚动区域的div的id
+		id?: string; // 包裹滚动区域的div的id
 		height: string | number; // 包裹滚动区域的div的高度
-		backgroundColor: string; // 包裹滚动区域的div的颜色
+		backgroundColor?: string; // 包裹滚动区域的div的颜色
 	}>(),
 	{
 		id: Date.now().toString(), // id默认取当前时间戳

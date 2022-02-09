@@ -2,20 +2,19 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:43:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-07 19:40:46
+ * @LastEditTime: 2022-02-09 00:00:42
  * @Description: 图表展示
 -->
 <template>
-	<div v-if="initStatus" class="root">
-		<water-mark v-if="!!props.url" class="water__marker" :url="props.url"></water-mark>
+	<div v-if="initStatus" class="root" :style="{ backgroundImage: 'url(' + url + ')' }">
 		<div class="title">{{ title }}</div>
-		<div :id="id"></div>
+		<div :id="id" class="chart"></div>
 	</div>
 	<div v-else class="status__false">图表未定义</div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { G2PlotChartConfig, getChartInstance } from '@/configs/visual';
 import { ChartNameType, ChartOptionsType } from '@/types/visual/charts';
 import { useVisualStore } from '@/store/visual';
@@ -39,8 +38,17 @@ const props = withDefaults(
 		useStore: false,
 		url: '',
 		options: () => {
-			return G2PlotChartConfig.Area.defaultOptions;
+			return G2PlotChartConfig.Area.defaultConfigs;
 		},
+	}
+);
+
+const markLength = ref<number[]>([props.options.width || 400, props.options.height || 400]);
+
+watch(
+	() => [store.chartOptions?.width, store.chartOptions?.height],
+	(value: any) => {
+		markLength.value = value;
 	}
 );
 
@@ -77,6 +85,7 @@ onMounted(() => {
 .root {
 	font-size: 14px;
 	position: relative;
+	padding: 20px;
 }
 .title {
 	text-align: center;
@@ -85,10 +94,14 @@ onMounted(() => {
 	white-space: pre-line;
 }
 
+.chart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .water__marker {
 	position: absolute;
-	width: 100%;
-	height: 100%;
 }
 
 .status__false {
