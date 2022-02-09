@@ -8,11 +8,16 @@ const publishApi = {
 			data,
 		}),
 	getChartPicHtmlString: (params: any) =>
-		createRequest({
-			url: '/cms/getChartPicHtmlString',
-			method: 'get',
-			params,
-		}),
+		createRequest(
+			{
+				url: '/cms/getChartPicHtmlString',
+				method: 'get',
+				params,
+			},
+			{
+				loading: false,
+			}
+		),
 	getChartPicHtmlFile: (data: any) =>
 		createRequest({
 			url: '/cms/getChartPicHtmlFile',
