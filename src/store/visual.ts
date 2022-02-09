@@ -2,14 +2,14 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 17:44:58
+ * @LastEditTime: 2022-02-09 18:28:49
  * @Description: 图表状态管理
  */
 import { defineStore } from 'pinia';
 import { Annotation, StateCondition } from '@antv/g2plot';
 import { ChartNameType, ChartOptionsType, ChartType } from '@/types/visual/charts';
 import { WaterMarkOptionType } from '@/types/visual/config';
-import { ProTable } from '@/pages/preproccess/preproccess/ProTable';
+import { toTable } from '@/utils/preprocess';
 
 export const useVisualStore = defineStore('visual', {
 	state: () => ({
@@ -18,7 +18,7 @@ export const useVisualStore = defineStore('visual', {
 		chartInstance: undefined as ChartType | undefined,
 		chartType: undefined as ChartNameType | undefined,
 		chartTitle: '' as string,
-		tableDate: undefined as ProTable | undefined,
+		tableData: undefined as any,
 		backupChartOptions: undefined as ChartOptionsType | undefined,
 		waterMarkUrl: undefined as string | undefined,
 		waterMarkOptions: false as WaterMarkOptionType | false,
@@ -31,7 +31,9 @@ export const useVisualStore = defineStore('visual', {
 			this.chartPicId = chartPicId;
 			this.chartType = resChartType;
 			this.chartTitle = chartTitle;
-			this.backupChartOptions = JSON.parse(visConfig);
+			const options = JSON.parse(visConfig);
+			this.tableData = toTable(options.data);
+			this.backupChartOptions = options;
 			this.waterMarkOptions = JSON.parse(watermarkConfig);
 		},
 		backupProjectData(data: any) {

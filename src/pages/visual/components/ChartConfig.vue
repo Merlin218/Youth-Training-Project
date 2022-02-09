@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 17:19:23
+ * @LastEditTime: 2022-02-09 19:07:23
  * @Description: 请填写简介
 -->
 <template>
@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { TooltipOptions } from '@antv/g2plot';
 import { message } from 'ant-design-vue';
@@ -89,7 +89,7 @@ import { visualApi } from '@/api';
 const router = useRouter();
 const visualStore = useVisualStore();
 
-const table = computed(() => visualStore.tableDate);
+const table = computed(() => visualStore.tableData);
 /**
  * @description: 更新图表数据
  * @param {*} newTable 新的表格数据
@@ -187,9 +187,6 @@ const toNext = async () => {
 
 onMounted(() => {
 	stepActive.value = '';
-});
-onBeforeUnmount(() => {
-	visualStore.destroy();
 });
 </script>
 

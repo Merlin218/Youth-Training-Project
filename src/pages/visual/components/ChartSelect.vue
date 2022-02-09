@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 17:45:43
+ * @LastEditTime: 2022-02-09 19:03:35
  * @Description: 选择图表
 -->
 <template>
@@ -56,6 +56,7 @@ const handleInit = async (id: string, tableData: { x: string; y: string; data: a
 		yField: tableData.y,
 		data: tableData.data,
 	});
+	console.log(id, tableData, chartOptions);
 	const waterMarkOptions = false;
 	// 同步数据库,返回结果
 	return (await visualApi.updateChartPicConfig({
