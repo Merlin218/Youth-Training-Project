@@ -131,6 +131,5 @@ export default {
 	max-height: calc(calc(100% - 40px));
 	height: calc(calc(100% - 40px));
 	overflow: auto;
-
 }
 </style>
