@@ -28,3 +28,22 @@ export function toTable(data: never[]) {
 	});
 	return table.exportTable(false, false);
 }
+
+export function addRowId(table: ProTable) {
+	let rowId = 0;
+	table.data.forEach(d => {
+		d.rowId = rowId;
+		rowId += 1;
+	});
+}
+
+export function removeSpace(data) {
+	newData = data.map(d => {
+		const dataItem = {};
+		Object.keys(d).forEach(dd => {
+			dataItem[dd.replaceAll(/[ $]/g, '_')] = d[dd];
+		});
+		return dataItem;
+	});
+	return newData;
+}
