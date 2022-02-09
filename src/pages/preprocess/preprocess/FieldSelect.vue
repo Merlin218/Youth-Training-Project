@@ -15,7 +15,15 @@
 					<a-input v-model:value="state.compTitle" />
 				</a-form-item>
 				<a-form-item label="表达式">
-					<a-select v-model:value="state.rawEquation" :options="state.compCols" mode="multiple" placeholder="Please select" style="width: 200px" @change="addColTag" @dropdownVisibleChange="addSelec">
+					<a-select
+						v-model:value="state.rawEquation"
+						:options="state.compCols"
+						mode="multiple"
+						placeholder="Please select"
+						style="width: 200px"
+						@change="addColTag"
+						@dropdown-visible-change="addSelec"
+					>
 					</a-select>
 				</a-form-item>
 			</a-form>

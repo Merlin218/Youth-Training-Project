@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/ .vxe-input--inner {
+:deep(.vxe-input--inner) {
 	background-color: inherit !important;
 	color: inherit !important;
 }

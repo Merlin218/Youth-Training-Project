@@ -11,9 +11,9 @@ import MouseWheel from '@better-scroll/mouse-wheel';
 
 const props = withDefaults(
 	defineProps<{
-		id: string; // 包裹滚动区域的div的id
+		id?: string; // 包裹滚动区域的div的id
 		height: string | number; // 包裹滚动区域的div的高度
-		backgroundColor: string; // 包裹滚动区域的div的颜色
+		backgroundColor?: string; // 包裹滚动区域的div的颜色
 	}>(),
 	{
 		id: Date.now().toString(), // id默认取当前时间戳
@@ -45,6 +45,12 @@ const initScroller = () => {
 onMounted(() => {
 	initScroller();
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'Scroller',
+};
 </script>
 
 <style lang="less" scoped></style>

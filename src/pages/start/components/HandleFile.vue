@@ -14,7 +14,6 @@ export default defineComponent({
 		const projectStore = useProjectStore();
 		const handleContent = strContent => {
 			projectStore.updateStrContent(strContent);
-			console.log(1, strContent);
 		};
 		const readExcel = e => {
 			let strContent = '';
@@ -80,9 +79,13 @@ export default defineComponent({
 	text-indent: 0;
 	line-height: 20px;
 }
+
 .file input {
 	position: absolute;
 	opacity: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
 }
 .file:hover {
 	background: #1890ff;

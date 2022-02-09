@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
-import { ProTable } from '../pages/preproccess/preproccess/ProTable';
+import { ProTable } from '../pages/preprocess/preprocess/ProTable';
+import { data } from '@/data';
 
 export interface IgetTableAPI {
 	code: number;
@@ -13,7 +14,8 @@ export const useTableStore = defineStore({
 	// table: 获取的数据, tableExport用于下一阶段处理的数据
 	state: () => ({
 		table: new ProTable({ getted: false }),
-		tableExport: null as any,
+		// tableExport: null as any,
+		tableExport: data as any,
 	}),
 	actions: {
 		getTable(projectId: string) {
@@ -40,17 +42,17 @@ export const useTableStore = defineStore({
 					return true;
 				},
 				() => {
-					this.table.geted = false;
+					this.table.getted = false;
 					return false;
 				}
 			);
 		},
-		putTable() {
+		putTable(projectId: string) {
 			return createRequest({
 				url: '/updateProjectData',
 				method: 'post',
 				data: {
-					project_id: '32958067-a627-4b64-abaa-43c52734b649',
+					project_id: projectId, // '32958067-a627-4b64-abaa-43c52734b649',
 					data_string: JSON.stringify(this.tableExport),
 				},
 			});

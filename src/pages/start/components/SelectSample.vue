@@ -5,13 +5,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { SelectProps } from 'ant-design-vue/lib/vc-select';
+import type { SelectProps } from 'ant-design-vue';
+import 'default-passive-events';
 
 export default defineComponent({
 	emits: ['selected'],
 	setup(props, context) {
 		const handleChange = (value: string) => {
-			console.log(`selected ${value}`);
 			context.emit('selected', value);
 		};
 

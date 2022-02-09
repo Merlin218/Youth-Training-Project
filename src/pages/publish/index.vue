@@ -1,3 +1,10 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-02-09 12:16:34
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-09 21:53:02
+ * @Description: 请填写简介
+-->
 <template>
 	<h1>在此发布你的作品</h1>
 	<br />
@@ -52,6 +59,12 @@ onMounted(async () => {
 		imgUrl.value = await html2image(document.querySelector('.chartWrapper') as HTMLElement);
 	}, 1000);
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'WaterMarkConfig',
+};
 </script>
 
 <style lang="less" scoped></style>

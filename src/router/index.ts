@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-03 21:26:54
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 21:13:02
+ * @LastEditTime: 2022-02-09 20:39:57
  * @Description: 请填写简介
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
@@ -59,16 +59,16 @@ const routes: RouteRecordRaw[] = [
 				component: () => import('../pages/publish/index.vue'),
 			},
 			{
-				path: '/preproccess',
+				path: '/preprocess',
 				name: '数据预处理',
-				component: () => import('../pages/preproccess/index.vue'),
+				component: () => import('../pages/preprocess/index.vue'),
 			},
 		],
 	},
 ];
 
 const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHistory('/data-to-chart/'),
 	routes,
 });
 

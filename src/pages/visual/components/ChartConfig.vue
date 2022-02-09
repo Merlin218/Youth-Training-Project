@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 13:46:52
+ * @LastEditTime: 2022-02-09 21:39:52
  * @Description: 请填写简介
 -->
 <template>
@@ -20,10 +20,31 @@
 	</div>
 	<div class="container">
 		<div :style="{ width: '70%' }">
-			<chart-display id="storeChart" :url="store.waterMarkUrl" :name="store.chartType" :options="store.backupChartOptions" :title="store.chartTitle" :use-store="true"></chart-display>
+			<a-collapse v-model:activeKey="displayActive">
+				<template #expandIcon="props">
+					<CaretRightOutlined :rotate="props.isActive ? 90 : 0" />
+				</template>
+				<a-collapse-panel key="1" header="图表展示">
+					<div class="chart">
+						<chart-display
+							id="storeChart"
+							:url="visualStore.waterMarkUrl"
+							:name="visualStore.chartType"
+							:options="visualStore.backupChartOptions"
+							:title="visualStore.chartTitle"
+							:use-store="true"
+						></chart-display></div
+				></a-collapse-panel>
+				<a-collapse-panel key="2" header="图表数据">
+					<table-edit :table="table" class="table" @table-data-change="handleTableChange"></table-edit>
+				</a-collapse-panel>
+			</a-collapse>
 		</div>
 		<div :style="{ width: '25%', position: 'relative' }">
 			<a-collapse v-model:activeKey="stepActive" accordion @change="stepActive = $event">
+				<template #expandIcon="props">
+					<CaretRightOutlined :rotate="props.isActive ? 90 : 0" />
+				</template>
 				<a-collapse-panel :key="stepConfig[0].key" :header="stepConfig[0].header">
 					<!-- 配置基本信息 -->
 					<base-config></base-config>
@@ -36,19 +57,19 @@
 					<!-- 标记配置 -->
 					<annotation-config></annotation-config>
 				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[3].key" :header="stepConfig[3].header" :disabled="!store.chartOptions?.tooltip">
+				<a-collapse-panel :key="stepConfig[3].key" :header="stepConfig[3].header" :disabled="!visualStore.chartOptions?.tooltip">
 					<template #extra>
-						<a-switch :checked="!!store.chartOptions?.tooltip" @change="handleTooltipActive"></a-switch>
+						<a-switch :checked="!!visualStore.chartOptions?.tooltip" @change="handleTooltipActive"></a-switch>
 					</template>
 					<!-- 悬浮提示配置 -->
 					<tooltip-config></tooltip-config>
 				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[4].key" :header="stepConfig[4].header" :disabled="!store.waterMarkOptions">
+				<a-collapse-panel :key="stepConfig[4].key" :header="stepConfig[4].header" :disabled="!visualStore.waterMarkOptions">
 					<template #extra>
-						<a-switch :checked="!!store.waterMarkOptions" @change="handleMarkActive"></a-switch>
+						<a-switch :checked="!!visualStore.waterMarkOptions" @change="handleMarkActive"></a-switch>
 					</template>
 					<!-- 水印配置 -->
-					<water-mark-config ref="mark"></water-mark-config>
+					<water-mark-config></water-mark-config>
 				</a-collapse-panel>
 			</a-collapse>
 		</div>
@@ -56,19 +77,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { TooltipOptions } from '@antv/g2plot';
 import { message } from 'ant-design-vue';
+import { CaretRightOutlined } from '@ant-design/icons-vue';
 import { useVisualStore } from '@/store/visual';
 import { defaultWaterMarkOption, defaultWaterMarkUrl } from '@/configs/visual';
 import { visualApi } from '@/api';
+import BaseConfig from './configs/BaseConfig.vue';
+import OtherConfig from './configs/OtherConfig.vue';
+import TooltipConfig from './configs/TooltipConfig.vue';
+import AnnotationConfig from './configs/AnnotationConfig.vue';
+import WaterMarkConfig from './configs/WaterMarkConfig.vue';
+import TableEdit from '@/components/TableEdit.vue';
+import ChartDisplay from './views/ChartDisplay.vue';
 
 const router = useRouter();
-const store = useVisualStore();
+const visualStore = useVisualStore();
+
+const table = computed(() => visualStore.tableData);
+/**
+ * @description: 更新图表数据
+ * @param {*} newTable 新的表格数据
+ */
+const handleTableChange = (newTable: any) => {
+	visualStore.changeData(newTable.data);
+};
+
+// 展示列表
+const displayActive = ref(['1']);
 
 // 当前步骤
-const stepActive = ref('');
+const stepActive = ref('5');
 // 步骤配置
 const stepConfig = ref([
 	{
@@ -110,11 +151,11 @@ let backupTooltipOptions: TooltipOptions | undefined;
  */
 const handleTooltipActive = (value: any) => {
 	if (!value) {
-		backupTooltipOptions = { ...store.chartOptions?.tooltip };
-		store.update({ tooltip: false });
+		backupTooltipOptions = { ...visualStore.chartOptions?.tooltip };
+		visualStore.update({ tooltip: false });
 		stepActive.value = '';
 	} else {
-		store.update({ tooltip: backupTooltipOptions });
+		visualStore.update({ tooltip: backupTooltipOptions });
 	}
 };
 
@@ -125,11 +166,11 @@ let backupWaterMarkUrl: string | undefined;
  */
 const handleMarkActive = (value: any) => {
 	if (!value) {
-		backupWaterMarkUrl = store.waterMarkUrl;
-		store.changeWaterMark(false, undefined);
+		backupWaterMarkUrl = visualStore.waterMarkUrl;
+		visualStore.changeWaterMark(false, undefined);
 		stepActive.value = '';
 	} else {
-		store.changeWaterMark(defaultWaterMarkOption, backupWaterMarkUrl || defaultWaterMarkUrl);
+		visualStore.changeWaterMark(defaultWaterMarkOption, backupWaterMarkUrl || defaultWaterMarkUrl);
 	}
 };
 
@@ -137,17 +178,28 @@ const handleMarkActive = (value: any) => {
  * @description: 前往下一个流程
  */
 const toNext = async () => {
-	if (!store.chartType || !store.chartPicId || !store.chartPicId || !store.chartOptions || !store.waterMarkOptions) {
-		message.error('配置不完整');
+	// console.log(visualStore.chartType, visualStore.chartPicId, visualStore.chartTitle, visualStore.chartOptions, visualStore.waterMarkOptions);
+	if (!visualStore.chartType || !visualStore.chartPicId || !visualStore.chartOptions || !visualStore.waterMarkOptions) {
+		message.error('参数不完整');
 		return;
 	}
 	await visualApi.updateChartPicConfig({
-		chart_title: store.chartTitle,
-		chart_type: store.chartType,
-		chartpic_id: store.chartPicId,
-		vis_config: JSON.stringify(store.chartOptions),
-		watermark_config: JSON.stringify(store.waterMarkOptions),
+		chart_title: visualStore.chartTitle,
+		chart_type: visualStore.chartType,
+		chartpic_id: visualStore.chartPicId,
+		vis_config: JSON.stringify(visualStore.chartOptions),
+		watermark_config: JSON.stringify(visualStore.waterMarkOptions),
 	});
+};
+
+onMounted(() => {
+	stepActive.value = '';
+});
+</script>
+
+<script lang="ts">
+export default {
+	name: 'ChartConfig',
 };
 </script>
 
@@ -168,6 +220,15 @@ const toNext = async () => {
 	justify-content: space-around;
 }
 
+.chart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.table {
+	width: 100%;
+}
 :deep(.ant-collapse-content-active) {
 	overflow: unset;
 }

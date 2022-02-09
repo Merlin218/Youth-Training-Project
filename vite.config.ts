@@ -2,28 +2,29 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 17:06:39
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 18:18:29
+ * @LastEditTime: 2022-02-09 20:55:09
  * @Description: 请填写简介
  */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import styleImport from 'vite-plugin-style-import';
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
-import Components from 'unplugin-vue-components/vite';
+// import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+// import Components from 'unplugin-vue-components/vite';
 import configs from './src/configs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: '/data-to-chart/',
 	plugins: [
 		vue(),
-		Components({
-			dirs: ['src/**/*'],
-			resolvers: [
-				AntDesignVueResolver(), // ant-design-vue
-			],
-			dts: 'src/components.d.ts',
-		}),
+		// Components({
+		// 	dirs: ['src/**/*'],
+		// 	resolvers: [
+		// 		AntDesignVueResolver(), // ant-design-vue
+		// 	],
+		// 	dts: 'src/components.d.ts',
+		// }),
 		styleImport({
 			libs: [
 				{
@@ -71,7 +72,7 @@ export default defineConfig({
 		},
 		// 取消计算文件大小，加快打包速度
 		brotliSize: false,
-		sourcemap: true,
+		// sourcemap: true,
 		// assetsDir: 'static/img',
 		rollupOptions: {
 			output: {
@@ -84,10 +85,8 @@ export default defineConfig({
 	},
 	css: {
 		preprocessorOptions: {
-			scss: {
-				additionalData: '@import "@/assets/styles/main.scss";',
-			},
 			less: {
+				modifyVars: { 'border-radius-base': '10px' },
 				javascriptEnabled: true,
 			},
 		},

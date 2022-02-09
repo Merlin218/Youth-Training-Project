@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 11:05:21
+ * @LastEditTime: 2022-02-09 21:40:56
  * @Description: 请填写简介
 -->
 <template>
@@ -75,9 +75,9 @@ import { TextAnnotationConfigType } from '@/types/visual/config';
 
 const store = useVisualStore();
 
-const data = computed(() => store.chartInstance.options.data);
-const xField = computed(() => store.chartInstance.options.xField || '');
-const yField = computed(() => store.chartInstance.options.yField || '');
+const data = computed(() => store.chartInstance?.options.data);
+const xField = computed(() => store.chartInstance?.options.xField || '');
+const yField = computed(() => store.chartInstance?.options.yField || '');
 
 const props = defineProps<{
 	id?: string; // 标记点id
@@ -123,13 +123,15 @@ const handlePositionChange = (value: string) => {
 watch(
 	() => props.id,
 	value => {
-		const { option }: any = store.chartInstance.chart.annotation();
-		if (option) {
-			const target = option.find((item: any) => item.id === value);
-			tmpPosition.value = target.position.join(',');
-			Object.assign(annotationConfig.value, target);
-			// 按钮文字
-			modifyStatus.value = true;
+		if (store.chartInstance?.chart.annotation) {
+			const { option }: any = store.chartInstance.chart.annotation();
+			if (option) {
+				const target = option.find((item: any) => item.id === value);
+				tmpPosition.value = target.position.join(',');
+				Object.assign(annotationConfig.value, target);
+				// 按钮文字
+				modifyStatus.value = true;
+			}
 		}
 	}
 );
@@ -163,11 +165,13 @@ const resetConfig = () => {
  * @return {*}
  */
 const updateAnnotationOptions = () => {
-	// 从g2实例中获取最新标记列表
-	const { option }: any = store.chartInstance.chart.annotation();
-	// 更新实例配置
-	// g2plot内部实际上是维护了一个g2的图标，上面更改的是g2实例的配置，需要手动修改g2plot配置
-	store.update({ annotations: option });
+	if (store.chartInstance?.chart.annotation) {
+		// 从g2实例中获取最新标记列表
+		const { option }: any = store.chartInstance.chart.annotation();
+		// 更新实例配置
+		// g2plot内部实际上是维护了一个g2的图标，上面更改的是g2实例的配置，需要手动修改g2plot配置
+		store.update({ annotations: option });
+	}
 };
 
 /**
@@ -201,6 +205,12 @@ const removeAnnotation = () => {
 		updateAnnotationOptions();
 		resetConfig();
 	}
+};
+</script>
+
+<script lang="ts">
+export default {
+	name: 'TextAnnotationConfig',
 };
 </script>
 

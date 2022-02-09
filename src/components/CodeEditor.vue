@@ -83,6 +83,12 @@ onMounted(() => {
 });
 </script>
 
+<script lang="ts">
+export default {
+	name: 'CodeEditor',
+};
+</script>
+
 <style lang="less" scoped>
 .editor-wrapper {
 	height: 100%;

@@ -45,10 +45,10 @@ import { onMounted, reactive } from 'vue';
 import { message, notification } from 'ant-design-vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useTableStore } from '../../store/process';
-import TableEditor from './preproccess/TableEditor.vue';
-import FieldSelect from './preproccess/FieldSelect.vue';
-import FieldDefine from './preproccess/FieldDefine.vue';
-import { TableCol } from './preproccess/ProTable';
+import TableEditor from './preprocess/TableEditor.vue';
+import FieldSelect from './preprocess/FieldSelect.vue';
+import FieldDefine from './preprocess/FieldDefine.vue';
+import { TableCol } from './preprocess/ProTable';
 
 const store = useTableStore();
 const { table } = store;
@@ -95,7 +95,7 @@ function nextStep() {
 	}
 	store.tableExport = table.exportTable(state.save1, state.save2);
 	if (state.curType) {
-		store.putTable().then(
+		store.putTable(route.query.project_id).then(
 			d => {
 				if (!d.code) {
 					message.success('保存成功');

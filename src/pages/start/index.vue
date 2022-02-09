@@ -18,9 +18,6 @@
 			</div>
 		</div>
 		<div class="data-area">
-			<div class="data-area__titlearea">
-				<a-input v-model:value="titleContent" placeholder="请输入标题" />
-			</div>
 			<div class="data-area__textarea">
 				<TextArea />
 			</div>
@@ -33,12 +30,13 @@
 
 <script lang="ts">
 import { reactive, toRefs, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import tableData from '../../data/tableData';
 import HandleFile from './components/HandleFile.vue';
 import SelectSample from './components/SelectSample.vue';
 import TextArea from './components/TextArea.vue';
 import { useProjectStore } from '@/store/project';
+import { startApi } from '@/api';
 
 export default {
 	name: 'Start',
@@ -46,17 +44,18 @@ export default {
 	setup() {
 		const state = reactive({});
 		const router = useRouter();
-		const titleContent = ref<string>('');
+		const route = useRoute();
+		const { project_id: projectId } = route.query;
+		console.log(projectId);
 		const projectStore = useProjectStore();
+		const jsonContent = ref<string>('');
 		// str 转为 json，多项情况删除数据 ，少项情况 value 为空
-		// 少项 [{"学号":"10008","姓名":"伍容华","学历":""},{"学号":"20010","姓名":"王向容","学历":"硕士"}]
 		const str2Json = () => {
 			let strArr: Array<string> = projectStore.strContent.split('\n');
 			if (strArr[strArr.length - 1] === '') {
 				strArr = strArr.slice(0, strArr.length - 1);
 			}
 			const objectArr: Array<object> = [];
-			console.log(111, projectStore.strContent);
 			// 表头
 			const header: Array<string> = strArr[0].split('\t');
 			const body = strArr.slice(1);
@@ -70,24 +69,33 @@ export default {
 				});
 				objectArr.push(obj);
 			});
-			const jsonContent = JSON.stringify(objectArr);
-			console.log(jsonContent);
-			projectStore.updateJsonContent(jsonContent);
-		};
-		const handleJump = async () => {
-			str2Json();
-			// 提交文件信息	await submit();
-			router.push({ path: `/preprocess` });
+			jsonContent.value = JSON.stringify(objectArr);
+			projectStore.updateJsonContent(jsonContent.value);
 		};
 		// 加载预选的数据
 		const handleSelectedData = value => {
 			projectStore.updateStrContent(tableData.table[value]);
 		};
+		// 提交信息
+		const handleSubmit = async () => {
+			const res = await startApi.updateProjectData({
+				project_id: projectId,
+				data_string: jsonContent.value,
+			});
+			await startApi.updateProjectStatus({
+				project_id: projectId,
+			});
+			console.log(res);
+		};
+		const handleJump = async () => {
+			str2Json();
+			await handleSubmit();
+			router.push({ path: `/preprocess/`, query: { project_id: projectId } });
+		};
 		return {
 			...toRefs(state),
 			handleJump,
 			handleSelectedData,
-			titleContent,
 		};
 	},
 };
@@ -112,9 +120,6 @@ export default {
 	&__next-step {
 		margin: 20px 0;
 		text-align: right;
-	}
-	&__titlearea {
-		margin-bottom: 10px;
 	}
 }
 </style>

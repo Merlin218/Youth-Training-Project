@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 18:04:02
+ * @LastEditTime: 2022-02-09 21:22:34
  * @Description: 选择图表
 -->
 <template>
@@ -10,7 +10,9 @@
 		<a-divider class="text" orientation="left">请选择您需要的类型</a-divider>
 		<!-- 图表矩阵 -->
 		<chart-grid v-model:name="chartType"></chart-grid>
-		<a-button class="btn" type="primary" :disabled="!componentText" @click="toConfigPage">已选择：{{ componentText || '未选择' }} </a-button>
+		<div class="btn">
+			<a-button type="primary" :disabled="!componentText" @click="toConfigPage">已选择：{{ componentText || '未选择' }} </a-button>
+		</div>
 	</div>
 	<teleport to="#modal">
 		<a-modal title="注意" :visible="showModal" ok-text="确认" cancel-text="取消" @ok="handleExist" @cancel="showModal = false"> <p>您在之前已配置过该图表，是否基于之前的配置修改？</p> </a-modal>>
@@ -27,6 +29,7 @@ import { useVisualStore } from '@/store/visual';
 import { useTableStore } from '@/store/process';
 import { visualApi } from '@/api';
 import { responseType } from '@/types/common';
+import ChartGrid from './views/ChartGrid.vue';
 
 const router = useRouter();
 const visualStore = useVisualStore();
@@ -47,13 +50,14 @@ const handleExist = () => {
  * @param {*} id 项目id
  * @param {*} tableData 图表数据
  */
-const handleInit = async (id: string, tableData: { x: string; y: string; data: [] }) => {
+const handleInit = async (id: string, tableData: { x: string; y: string; data: any[] }) => {
 	// 合并默认配置项
 	const chartOptions = Object.assign(G2PlotChartConfig[chartType.value].defaultConfigs, {
 		xField: tableData.x,
 		yField: tableData.y,
 		data: tableData.data,
 	});
+	console.log(id, tableData, chartOptions);
 	const waterMarkOptions = false;
 	// 同步数据库,返回结果
 	return (await visualApi.updateChartPicConfig({
@@ -70,7 +74,7 @@ const handleInit = async (id: string, tableData: { x: string; y: string; data: [
  */
 const toConfigPage = async () => {
 	try {
-		let tableData;
+		let tableData: { x: string; y: string; data: any[] };
 		// 处理配置项，同步后端
 		if (router.currentRoute.value.query.status === 'back') {
 			const { xField, yField, data } = JSON.parse(visualStore.projectData.vis_config);
@@ -80,16 +84,17 @@ const toConfigPage = async () => {
 				message.error('数据未定义');
 				return;
 			}
-			tableData = tableStore.tableExport;
+			const { x, y, data } = tableStore.tableExport;
+			tableData = { x, y, data };
 		}
 		const res = await handleInit(projectData.value.chartpic_id, tableData);
 		// 同步store
-		visualStore.initChart(res);
+		visualStore.initChart(res.result);
 		// 跳转页面
 		router.push('/visual/config');
 		// eslint-disable-next-line no-empty
 	} catch (err) {
-		console.log(err);
+		// console.log(err);
 	}
 };
 
@@ -116,8 +121,10 @@ onBeforeMount(async () => {
 	margin-bottom: 40px;
 }
 .btn {
-	position: absolute;
-	bottom: 0;
-	right: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 10px;
+	margin-right: 20px;
 }
 </style>

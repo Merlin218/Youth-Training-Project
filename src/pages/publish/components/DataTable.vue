@@ -48,4 +48,10 @@ const data = ref([
 ]);
 </script>
 
+<script lang="ts">
+export default {
+	name: 'DataTable',
+};
+</script>
+
 <style lang="less" scoped></style>
