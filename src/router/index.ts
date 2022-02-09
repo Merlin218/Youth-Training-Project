@@ -2,10 +2,10 @@
  * @Author: Merlin218
  * @Date: 2022-02-03 21:26:54
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 19:51:44
+ * @LastEditTime: 2022-02-09 20:39:57
  * @Description: 请填写简介
  */
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { message } from 'ant-design-vue';
 import docCookies from '@/utils/cookie';
 
@@ -68,7 +68,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-	history: createWebHashHistory(),
+	history: createWebHistory('/data-to-chart/'),
 	routes,
 });
 
