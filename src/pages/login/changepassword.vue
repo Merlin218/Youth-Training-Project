@@ -15,7 +15,6 @@
 
 <script>
 // import { UpdatePassword } from '../../../api/user';
-
 export default {
 	name: 'ChangePassword',
 	data() {
