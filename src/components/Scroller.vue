@@ -1,3 +1,10 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-02-09 18:05:29
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-10 01:45:47
+ * @Description: 请填写简介
+-->
 <template>
 	<div :id="id" :style="{ height: wrapperHeight, overflow: 'hidden', backgroundColor }">
 		<slot default></slot>

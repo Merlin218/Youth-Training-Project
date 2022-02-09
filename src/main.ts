@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-03 21:26:54
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:12:28
+ * @LastEditTime: 2022-02-10 01:12:15
  * @Description: 请填写简介
  */
 import 'xe-utils';
@@ -15,7 +15,6 @@ import Antd from 'ant-design-vue';
 import App from './App.vue';
 import router from './router';
 import 'default-passive-events';
-import 'ant-design-vue/dist/antd.css';
 
 const store = createPinia();
 store.use(piniaPluginPersist);

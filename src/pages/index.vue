@@ -31,7 +31,7 @@
 		</a-layout-header>
 		<a-layout-content class="content">
 			<Scroller :height="contentHeight" background-color="#fff">
-				<div :style="{ padding: '40px 20px' }">
+				<div :style="{ padding: '40px 20px', position: 'relative' }">
 					<router-view v-slot="{ Component }">
 						<component :is="Component"></component>
 					</router-view>
