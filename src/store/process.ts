@@ -45,12 +45,12 @@ export const useTableStore = defineStore({
 				}
 			);
 		},
-		putTable() {
+		putTable(projectId) {
 			return createRequest({
 				url: '/updateProjectData',
 				method: 'post',
 				data: {
-					project_id: '32958067-a627-4b64-abaa-43c52734b649',
+					project_id: projectId, // '32958067-a627-4b64-abaa-43c52734b649',
 					data_string: JSON.stringify(this.tableExport),
 				},
 			});
