@@ -15,6 +15,7 @@ import configs from './src/configs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: '/data-to-chart/',
 	plugins: [
 		vue(),
 		Components({
