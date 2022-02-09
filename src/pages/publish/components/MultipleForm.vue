@@ -28,4 +28,9 @@ const onChange = (type: zipType) => {
 };
 </script>
 
+<script lang="ts">
+export default {
+	name: 'MultipleForm',
+};
+</script>
 <style lang="less" scoped></style>

@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:41:56
+ * @LastEditTime: 2022-02-09 21:56:41
  * @Description: 基本配置
 -->
 <template>
@@ -32,7 +32,7 @@
 import { computed, ComputedRef, ref, watch } from 'vue';
 import { useVisualStore } from '@/store/visual';
 import { ChartOptionsType } from '@/types/visual/charts';
-import KeyConfig from './configs/KeyConfig.vue';
+import KeyConfig from './KeyConfig.vue';
 import AxisConfig from './AxisConfig.vue';
 import LegendConfig from './LegendConfig.vue';
 

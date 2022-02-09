@@ -58,6 +58,12 @@ const codeChange = (val: string) => {
 };
 </script>
 
+<script lang="ts">
+export default {
+	name: 'ExportGroupByType',
+};
+</script>
+
 <style lang="less" scoped>
 .card-wrapper {
 	position: relative;
