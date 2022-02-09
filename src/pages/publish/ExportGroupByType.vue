@@ -2,6 +2,7 @@
 	<div class="card-wrapper">
 		<a-card style="width: 100%" :tab-list="tabListNoTitle" :active-tab-key="activeKeys" @tab-change="key => onTabChange(key)">
 			<div class="content">
+				{{ image.value.exportType.value }}
 				<template v-if="activeKeys === 'image'">
 					<Image ref="image"></Image>
 				</template>

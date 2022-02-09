@@ -22,7 +22,7 @@ const getImgUrl = inject('getImgUrl') as Function;
 
 const imgUrl = computed(() => getImgUrl());
 
-const exportType = ref<'jpeg' | 'png'>('png');
+const exportType = ref<'jpg' | 'png'>('png');
 
 defineExpose({
 	exportType,

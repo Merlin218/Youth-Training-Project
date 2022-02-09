@@ -14,6 +14,7 @@ const routes: RouteRecordRaw[] = [
 		path: '/',
 		name: '首页',
 		component: () => import('../pages/index.vue'),
+		redirect: '/projects',
 		children: [
 			{
 				path: '/login',
