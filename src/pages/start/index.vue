@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+		<div class="bg"></div>
 		<div class="select-area">
 			<h2>您想如何上传数据？</h2>
 			<div class="select-area__item select-area__upload">
@@ -29,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, ref } from 'vue';
+import { reactive, toRefs, ref, defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import tableData from '../../data/tableData';
 import HandleFile from './components/HandleFile.vue';
@@ -39,7 +40,7 @@ import { useProjectStore } from '@/store/project';
 import { startApi } from '@/api';
 import { getProjectId } from './components/GetProjectId';
 
-export default {
+export default defineComponent({
 	name: 'Start',
 	components: { HandleFile, SelectSample, TextArea },
 	setup() {
@@ -85,10 +86,10 @@ export default {
 				project_id: projectId,
 				data_string: jsonContent.value,
 			});
+			console.log(res);
 			await startApi.updateProjectStatus({
 				project_id: projectId,
 			});
-			console.log(res);
 		};
 		const handleJump = async () => {
 			str2Json();
@@ -101,15 +102,29 @@ export default {
 			handleSelectedData,
 		};
 	},
-};
+});
 </script>
 <style lang="scss" scoped>
 .container {
+	min-height: 780px;
 	display: flex;
+	position: relative;
 	.select-area,
 	.data-area {
 		flex: 1;
 		padding: 40px;
+		z-index: 1;
+	}
+
+	.bg {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 500px;
+		height: 300px;
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-image: url('https://cdn.jsdelivr.net/gh/Merlin218/image-storage@master/picX/city.4yghw7h3ti0w.webp');
 	}
 }
 

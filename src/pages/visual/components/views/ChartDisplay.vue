@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:43:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:30:01
+ * @LastEditTime: 2022-02-10 03:25:26
  * @Description: 图表展示
 -->
 <template>
@@ -24,7 +24,7 @@ const store = useVisualStore();
 // 从props中获取类名
 const props = withDefaults(
 	defineProps<{
-		id: string; // 图表id
+		id?: string; // 图表id
 		name: ChartNameType; // 图标组件名称
 		title?: string; // 图表标题
 		url?: string | false;
