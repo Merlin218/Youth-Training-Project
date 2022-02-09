@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 19:07:23
+ * @LastEditTime: 2022-02-09 21:39:52
  * @Description: 请填写简介
 -->
 <template>
@@ -85,6 +85,13 @@ import { CaretRightOutlined } from '@ant-design/icons-vue';
 import { useVisualStore } from '@/store/visual';
 import { defaultWaterMarkOption, defaultWaterMarkUrl } from '@/configs/visual';
 import { visualApi } from '@/api';
+import BaseConfig from './configs/BaseConfig.vue';
+import OtherConfig from './configs/OtherConfig.vue';
+import TooltipConfig from './configs/TooltipConfig.vue';
+import AnnotationConfig from './configs/AnnotationConfig.vue';
+import WaterMarkConfig from './configs/WaterMarkConfig.vue';
+import TableEdit from '@/components/TableEdit.vue';
+import ChartDisplay from './views/ChartDisplay.vue';
 
 const router = useRouter();
 const visualStore = useVisualStore();
@@ -188,6 +195,12 @@ const toNext = async () => {
 onMounted(() => {
 	stepActive.value = '';
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'ChartConfig',
+};
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:43:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 00:00:42
+ * @LastEditTime: 2022-02-09 21:30:01
  * @Description: 图表展示
 -->
 <template>
@@ -79,6 +79,12 @@ const initChart = () => {
 onMounted(() => {
 	initChart();
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'ChartDisplay',
+};
 </script>
 
 <style scoped>

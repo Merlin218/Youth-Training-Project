@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-07 16:47:59
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 11:05:19
+ * @LastEditTime: 2022-02-09 21:31:48
  * @Description: 悬浮提示配置
 -->
 <template>
@@ -48,6 +48,12 @@ watch(
 		deep: true,
 	}
 );
+</script>
+
+<script lang="ts">
+export default {
+	name: 'TooltipConfig',
+};
 </script>
 
 <style scoped></style>
