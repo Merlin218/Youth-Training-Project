@@ -15,9 +15,9 @@ declare module 'vue' {
 		CodeEditor: typeof import('./components/CodeEditor.vue')['default'];
 		DataTable: typeof import('./pages/publish/components/DataTable.vue')['default'];
 		ExportGroupByType: typeof import('./pages/publish/ExportGroupByType.vue')['default'];
-		FieldDefine: typeof import('./pages/preproccess/preproccess/FieldDefine.vue')['default'];
-		FieldSelect: typeof import('./pages/preproccess/preproccess/FieldSelect.vue')['default'];
-		FieldSift: typeof import('./pages/preproccess/preproccess/FieldSift.vue')['default'];
+		FieldDefine: typeof import('./pages/preprocess/preprocess/FieldDefine.vue')['default'];
+		FieldSelect: typeof import('./pages/preprocess/preprocess/FieldSelect.vue')['default'];
+		FieldSift: typeof import('./pages/preprocess/preprocess/FieldSift.vue')['default'];
 		HandleFile: typeof import('./pages/start/components/HandleFile.vue')['default'];
 		Image: typeof import('./pages/publish/components/Image.vue')['default'];
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
@@ -31,7 +31,7 @@ declare module 'vue' {
 		Scroller: typeof import('./components/Scroller.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];
 		TableEdit: typeof import('./components/TableEdit.vue')['default'];
-		TableEditor: typeof import('./pages/preproccess/preproccess/TableEditor.vue')['default'];
+		TableEditor: typeof import('./pages/preprocess/preprocess/TableEditor.vue')['default'];
 		TextAnnotationConfig: typeof import('./pages/visual/components/configs/annotation/TextAnnotationConfig.vue')['default'];
 		TextArea: typeof import('./pages/start/components/TextArea.vue')['default'];
 		TooltipConfig: typeof import('./pages/visual/components/configs/TooltipConfig.vue')['default'];

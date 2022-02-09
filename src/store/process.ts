@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
-import { ProTable } from '../pages/preproccess/preproccess/ProTable';
+import { ProTable } from '../pages/preprocess/preprocess/ProTable';
 import { data } from '@/data';
 
 export interface IgetTableAPI {

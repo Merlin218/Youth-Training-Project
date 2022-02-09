@@ -1,4 +1,4 @@
-import { ProTable } from '@/pages/preproccess/preproccess/ProTable';
+import { ProTable } from '@/pages/preprocess/preprocess/ProTable';
 
 export function toTable(data: never[]) {
 	const cols: any = [];

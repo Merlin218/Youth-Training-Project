@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue';
-import { ProTable } from '../pages/preproccess/preproccess/ProTable';
+import { ProTable } from '../pages/preprocess/preprocess/ProTable';
 
 const props = defineProps<{
 	table: ProTable;
