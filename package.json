@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"dev": "pnpm prettier && pnpm lint:development && vite --host --mode development",
-		"build": "pnpm prettier && pnpm lint:production && vue-tsc --noEmit && vite build --mode production",
+		"build": "pnpm prettier && pnpm lint:production && vite build --mode production",
 		"preview": "vite preview",
 		"lint:development": "cross-env NODE_ENV=development eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
 		"lint:production": "cross-env NODE_ENV=production eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
