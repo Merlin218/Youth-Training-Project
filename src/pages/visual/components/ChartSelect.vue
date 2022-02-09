@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 19:16:56
+ * @LastEditTime: 2022-02-09 19:03:35
  * @Description: 选择图表
 -->
 <template>
@@ -49,13 +49,14 @@ const handleExist = () => {
  * @param {*} id 项目id
  * @param {*} tableData 图表数据
  */
-const handleInit = async (id: string, tableData: { x: string; y: string; data: [] }) => {
+const handleInit = async (id: string, tableData: { x: string; y: string; data: any[] }) => {
 	// 合并默认配置项
 	const chartOptions = Object.assign(G2PlotChartConfig[chartType.value].defaultConfigs, {
 		xField: tableData.x,
 		yField: tableData.y,
 		data: tableData.data,
 	});
+	console.log(id, tableData, chartOptions);
 	const waterMarkOptions = false;
 	// 同步数据库,返回结果
 	return (await visualApi.updateChartPicConfig({
@@ -72,7 +73,7 @@ const handleInit = async (id: string, tableData: { x: string; y: string; data: [
  */
 const toConfigPage = async () => {
 	try {
-		let tableData;
+		let tableData: { x: string; y: string; data: any[] };
 		// 处理配置项，同步后端
 		if (router.currentRoute.value.query.status === 'back') {
 			const { xField, yField, data } = JSON.parse(visualStore.projectData.vis_config);
@@ -82,16 +83,17 @@ const toConfigPage = async () => {
 				message.error('数据未定义');
 				return;
 			}
-			tableData = tableStore.tableExport;
+			const { x, y, data } = tableStore.tableExport;
+			tableData = { x, y, data };
 		}
 		const res = await handleInit(projectData.value.chartpic_id, tableData);
 		// 同步store
-		visualStore.initChart(res);
+		visualStore.initChart(res.result);
 		// 跳转页面
 		router.push('/visual/config');
 		// eslint-disable-next-line no-empty
 	} catch (err) {
-		console.log(err);
+		// console.log(err);
 	}
 };
 

@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
 import { ProTable } from '../pages/preproccess/preproccess/ProTable';
+import { data } from '@/data';
 
 export interface IgetTableAPI {
 	code: number;
@@ -13,7 +14,8 @@ export const useTableStore = defineStore({
 	// table: 获取的数据, tableExport用于下一阶段处理的数据
 	state: () => ({
 		table: new ProTable({ getted: false }),
-		tableExport: null as any,
+		// tableExport: null as any,
+		tableExport: data as any,
 	}),
 	actions: {
 		getTable(projectId: string) {
@@ -45,7 +47,7 @@ export const useTableStore = defineStore({
 				}
 			);
 		},
-		putTable(projectId) {
+		putTable(projectId: string) {
 			return createRequest({
 				url: '/updateProjectData',
 				method: 'post',

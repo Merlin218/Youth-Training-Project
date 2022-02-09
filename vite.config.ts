@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 17:06:39
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 18:18:29
+ * @LastEditTime: 2022-02-09 19:14:39
  * @Description: 请填写简介
  */
 import { defineConfig } from 'vite';
@@ -85,10 +85,8 @@ export default defineConfig({
 	},
 	css: {
 		preprocessorOptions: {
-			scss: {
-				additionalData: '@import "@/assets/styles/main.scss";',
-			},
 			less: {
+				modifyVars: { 'border-radius-base': '10px' },
 				javascriptEnabled: true,
 			},
 		},
