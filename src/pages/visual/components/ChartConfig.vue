@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 03:31:17
+ * @LastEditTime: 2022-02-10 04:10:19
  * @Description: 请填写简介
 -->
 <template>
@@ -225,7 +225,7 @@ onBeforeMount(async () => {
 			visualStore.initChart(first);
 		}
 	} else {
-		message.error('项目不存在', 1);
+		message.warn('请先选择一个项目', 1);
 		message.loading('正在返回首页', 1, () => {
 			router.replace('/projects');
 		});

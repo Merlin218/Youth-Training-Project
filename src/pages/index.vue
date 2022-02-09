@@ -58,7 +58,7 @@ const scroller = ref();
 
 const selectedKeys = ref<Array<string>>([route.path]);
 
-const contentHeight = window.innerHeight - 171;
+const contentHeight = window.innerHeight - 141;
 
 const handleMenuChange = ({ key }: { key: string }) => {
 	if (key.includes(selectedKeys.value[0])) return;
@@ -110,7 +110,7 @@ onMounted(() => {});
 }
 .content {
 	padding: 0 50px;
-	margin-top: 100px;
+	margin-top: 70px;
 }
 .footer {
 	text-align: center;
@@ -142,5 +142,12 @@ onMounted(() => {});
 
 :deep(.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover) {
 	background-color: rgb(255, 255, 255);
+}
+:deep(.ant-menu-item-selected:hover .ant-menu-title-content) {
+	color: rgb(108, 108, 108);
+}
+
+:deep(.ant-message-notice-content) {
+	border-radius: 16px !important;
 }
 </style>

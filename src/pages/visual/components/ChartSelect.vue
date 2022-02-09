@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 03:33:03
+ * @LastEditTime: 2022-02-10 04:10:12
  * @Description: 选择图表
 -->
 <template>
@@ -118,7 +118,7 @@ onMounted(async () => {
 				showModal.value = true;
 			}
 		} else {
-			message.error('项目不存在', 1);
+			message.warn('请先选择一个项目', 1);
 			message.loading('正在返回首页', 1, () => {
 				router.replace('/projects');
 			});
