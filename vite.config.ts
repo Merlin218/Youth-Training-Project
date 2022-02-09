@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 17:06:39
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 20:55:09
+ * @LastEditTime: 2022-02-09 22:16:32
  * @Description: 请填写简介
  */
 import { defineConfig } from 'vite';
@@ -15,7 +15,7 @@ import configs from './src/configs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/data-to-chart/',
+	// base: '/data-to-chart/',
 	plugins: [
 		vue(),
 		// Components({

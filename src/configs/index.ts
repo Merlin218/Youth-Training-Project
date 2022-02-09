@@ -1,5 +1,6 @@
 const configs = {
-	baseUrl: '/api',
+	baseUrl: '/api', // dev
+	// baseUrl: 'https://datavis.all1024.com', // production
 	proxyUrl: 'https://datavis.all1024.com',
 };
 

@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:22:34
+ * @LastEditTime: 2022-02-10 00:11:39
  * @Description: 选择图表
 -->
 <template>
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
 import { G2PlotChartConfig } from '@/configs/visual';
@@ -30,10 +30,12 @@ import { useTableStore } from '@/store/process';
 import { visualApi } from '@/api';
 import { responseType } from '@/types/common';
 import ChartGrid from './views/ChartGrid.vue';
+import { useProjectStore } from '@/store/project';
 
 const router = useRouter();
 const visualStore = useVisualStore();
 const tableStore = useTableStore();
+const projectStore = useProjectStore();
 const chartType = ref<ChartNameType>('Area');
 
 const componentText = computed(() => G2PlotChartConfig[chartType.value].text);
@@ -98,18 +100,27 @@ const toConfigPage = async () => {
 	}
 };
 
-onBeforeMount(async () => {
+onMounted(async () => {
 	if (router.currentRoute.value.query.status !== 'back') {
-		// 第一次进入，获取项目信息，拿到chart信息
-		const {
-			result: {
-				data: [first],
-			},
-		} = (await visualApi.getAllChartPic('32958067-a627-4b64-abaa-43c52734b649')) as responseType;
-		// 默认获取第一个图表,保存到store
-		visualStore.backupProjectData(first);
-		if (first.chart_type !== null) {
-			showModal.value = true;
+		// 从store中获取project_id
+		const { project_id: id }: any = projectStore;
+		if (id !== '' && id) {
+			// 第一次进入，获取项目信息，拿到chart信息
+			const {
+				result: {
+					data: [first],
+				},
+			} = (await visualApi.getAllChartPic(id)) as responseType;
+			// 默认获取第一个图表,保存到store
+			visualStore.backupProjectData(first);
+			if (first.chart_type !== null) {
+				showModal.value = true;
+			}
+		} else {
+			message.error('项目不存在', 1);
+			message.loading('正在返回首页', 1, () => {
+				router.replace('/projects');
+			});
 		}
 	}
 });

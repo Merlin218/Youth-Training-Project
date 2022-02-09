@@ -2,49 +2,56 @@
  * @Author: Merlin218
  * @Date: 2022-02-03 21:26:54
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 20:39:57
+ * @LastEditTime: 2022-02-09 23:23:53
  * @Description: 请填写简介
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { message } from 'ant-design-vue';
 import docCookies from '@/utils/cookie';
+import Index from '../pages/index.vue';
+import Login from '../pages/login/index.vue';
+import Register from '../pages/login/register.vue';
+import Start from '@/pages/start/index.vue';
+import Visual from '../pages/visual/visual.vue';
+import ChartSelect from '../pages/visual/components/ChartSelect.vue';
+import ChartConfig from '../pages/visual/components/ChartConfig.vue';
 
 const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
 		name: '首页',
-		component: () => import('../pages/index.vue'),
+		component: Index,
 		children: [
 			{
 				path: '/login',
 				name: '登录',
-				component: () => import('../pages/login/index.vue'),
+				component: Login,
 			},
 			{
 				path: '/register',
 				name: '注册',
-				component: () => import('../pages/login/register.vue'),
+				component: Register,
 			},
 			{
 				path: '/start',
 				name: '开始',
-				component: () => import('../pages/start/index.vue'),
+				component: Start,
 			},
 			{
 				path: '/visual',
 				name: '可视化',
-				component: () => import('../pages/visual/visual.vue'),
+				component: Visual,
 				redirect: '/visual/select',
 				children: [
 					{
 						path: '/visual/select',
 						name: '选择图表',
-						component: () => import('../pages/visual/components/ChartSelect.vue'),
+						component: ChartSelect,
 					},
 					{
 						path: '/visual/config',
 						name: '配置图表',
-						component: () => import('../pages/visual/components/ChartConfig.vue'),
+						component: ChartConfig,
 					},
 				],
 			},
@@ -68,7 +75,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-	history: createWebHistory('/data-to-chart/'),
+	history: createWebHistory(),
 	routes,
 });
 

@@ -1,7 +1,15 @@
+/*
+ * @Author: Merlin218
+ * @Date: 2022-02-09 18:03:09
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-09 23:58:46
+ * @Description: 请填写简介
+ */
 import { defineStore } from 'pinia';
 
 export const useProjectStore = defineStore('project', {
 	state: () => ({
+		project_id: '' as string,
 		title: '' as string, // 项目标题
 		jsonContent: '' as string, // json 内容
 		strContent: '' as string, // textarea 显示的内容
