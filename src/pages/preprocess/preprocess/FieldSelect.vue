@@ -3,11 +3,13 @@
 		<h3>选择您需要的数据</h3>
 		<a-button type="primary" ghost @click="toggleCompModal"><PlusOutlined />计算属性</a-button>
 	</div>
-	<a-table :row-key="(record:any) => record.cid" :pagination="false" :row-selection="rowSelection" :columns="colName" :data-source="colData">
-		<template #name="{ text }">
-			<a>{{ text }}</a>
-		</template>
-	</a-table>
+	<div class="table">
+		<a-table  :row-key="(record:any) => record.cid" :pagination="false" :row-selection="rowSelection" :columns="colName" :data-source="colData">
+			<template #name="{ text }">
+				<a>{{ text }}</a>
+			</template>
+		</a-table>
+	</div>
 	<div>
 		<a-modal v-model:visible="state.showCompModal" title="定义计算属性列" @ok="submitComp">
 			<a-form :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
@@ -242,6 +244,12 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	height: 40px;
+}
+.table {
+	max-height: calc(100% - 40px);
+	height: calc(100% - 40px);
+	overflow: auto;
 }
 </style>
 
