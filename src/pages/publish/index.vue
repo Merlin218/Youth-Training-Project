@@ -11,15 +11,15 @@
 	<a-row>
 		<a-col :span="8">
 			<div style="height: 300px; width: 400px; border: 1px solid rgba(0, 0, 0, 0.2)">
-				<chart-display
+				<ChartDisplay
 					id="publishChart"
 					class="chartWrapper"
-					:url="visualStore.waterMarkUrl"
+					:url="visualStore.waterMarkOptions.url"
 					:name="visualStore.chartType"
 					:options="visualStore.backupChartOptions"
 					:title="visualStore.chartTitle"
 					:use-store="true"
-				></chart-display>
+				></ChartDisplay>
 			</div>
 		</a-col>
 		<a-col :span="1"></a-col>
@@ -31,6 +31,7 @@
 
 <script lang="ts" setup>
 import { ref, provide, onMounted } from 'vue';
+import ChartDisplay from '../visual/components/views/ChartDisplay.vue';
 import ExportGroupByType from './ExportGroupByType.vue';
 import { useVisualStore } from '@/store/visual';
 import { useProjectStore } from '@/store/project';
@@ -59,12 +60,6 @@ onMounted(async () => {
 		imgUrl.value = await html2image(document.querySelector('.chartWrapper') as HTMLElement);
 	}, 1000);
 });
-</script>
-
-<script lang="ts">
-export default {
-	name: 'WaterMarkConfig',
-};
 </script>
 
 <style lang="less" scoped></style>

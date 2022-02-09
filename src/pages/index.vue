@@ -93,8 +93,9 @@ onMounted(() => {});
 <style lang="scss" scoped>
 .layout .logo {
 	width: 120px;
-	height: 31px;
-	background: rgba(255, 255, 255, 0.2);
+	height: 47px;
+	background-image: url(../assets/logo.png);
+	background-size: cover;
 	margin: 16px 24px 16px 0;
 }
 .header {
