@@ -68,7 +68,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHistory('/data-to-chart/'),
 	routes,
 });
 
