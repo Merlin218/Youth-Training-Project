@@ -102,9 +102,10 @@ export class TableCol {
 	// 定义每一个属性的: 属性名, 判断是否是该属性函数, 重载<=, 可比较类型?
 	static colType = [
 		{
-			typeName: 'date',
-			checkType: v => !Number.isNaN(new Date(v).getTime()),
-			isLeq: (a, b) => a <= b,
+			typeName: 'number',
+			checkType: v => !Number.isNaN(+v),
+			isLeq: (a, b) => +a <= +b,
+			parase: v => +v,
 			compareable: true,
 		},
 		{
@@ -115,21 +116,39 @@ export class TableCol {
 				return false;
 			},
 			isLeq: (a, b) => (a.trim().toLowerCase() !== 'false' && !!a) <= (b.trim().toLowerCase() !== 'false' && !!b),
-			compareable: true,
-		},
-		{
-			typeName: 'number',
-			checkType: v => !Number.isNaN(+v),
-			isLeq: (a, b) => +a <= +b,
+			parase: v => !!v,
 			compareable: true,
 		},
 		{
 			typeName: 'string',
 			checkType: () => true,
 			isLeq: () => true,
+			parase: v => String(v),
 			compareable: false,
 		},
+		{
+			typeName: 'date',
+			checkType: v => !Number.isNaN(new Date(v).getTime()),
+			isLeq: (a, b) => a <= b,
+			parase: v => new Date(v),
+			compareable: true,
+		},
 	];
+
+	tryType() {
+		const type = TableCol.colType.find(d => {
+			const invIdx = this.data.findIndex(dd => !d.checkType(dd[this.cKey]));
+			return invIdx === -1;
+		});
+		return type;
+	}
+
+	formatType() {
+		const type = TableCol.colType.find(d => d.typeName === this.type);
+		this.data.forEach(d => {
+			d[this.cKey] = type.parase(d[this.cKey]);
+		});
+	}
 
 	// 获取这一列的类型对象与本列数据(v), 行ID(rowId)
 	getColTypeData() {
