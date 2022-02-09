@@ -52,7 +52,6 @@ export default {
 		const jsonContent = ref<string>('');
 		let res: object = {}; // 请求返回的结果
 		// str 转为 json，多项情况删除数据 ，少项情况 value 为空
-		// 少项 [{"学号":"10008","姓名":"伍容华","学历":""},{"学号":"20010","姓名":"王向容","学历":"硕士"}]
 		const str2Json = () => {
 			let strArr: Array<string> = projectStore.strContent.split('\n');
 			if (strArr[strArr.length - 1] === '') {
@@ -89,7 +88,8 @@ export default {
 		const handleJump = async () => {
 			str2Json();
 			await handleSubmit();
-			router.push({ path: `/preprocess/${res.result.data.id}` });
+			projectStore.updateId(res.result.data.id);
+			router.push({ path: `/preprocess/`, query: { id: res.result.data.id } });
 		};
 		return {
 			...toRefs(state),

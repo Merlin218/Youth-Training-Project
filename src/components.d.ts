@@ -6,21 +6,29 @@ declare module 'vue' {
 	export interface GlobalComponents {
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
+		ACol: typeof import('ant-design-vue/es')['Col'];
+		ADivider: typeof import('ant-design-vue/es')['Divider'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
+		AEmpty: typeof import('ant-design-vue/es')['Empty'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
 		AFormItem: typeof import('ant-design-vue/es')['FormItem'];
 		AInput: typeof import('ant-design-vue/es')['Input'];
-		AInputPassword: typeof import('ant-design-vue/es')['InputPassword'];
 		ALayout: typeof import('ant-design-vue/es')['Layout'];
 		ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent'];
 		ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter'];
 		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
 		AMenu: typeof import('ant-design-vue/es')['Menu'];
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
+		ARadio: typeof import('ant-design-vue/es')['Radio'];
+		ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup'];
+		ARow: typeof import('ant-design-vue/es')['Row'];
 		ASelect: typeof import('ant-design-vue/es')['Select'];
 		ASpace: typeof import('ant-design-vue/es')['Space'];
+		ASwitch: typeof import('ant-design-vue/es')['Switch'];
+		ATable: typeof import('ant-design-vue/es')['Table'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
 		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
@@ -43,6 +51,7 @@ declare module 'vue' {
 		LineConfig: typeof import('./pages/visual/components/configs/charts/LineConfig.vue')['default'];
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
+		ProjectList: typeof import('./pages/projects/components/ProjectList.vue')['default'];
 		Register: typeof import('./pages/login/register.vue')['default'];
 		Scroller: typeof import('./components/Scroller.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];
