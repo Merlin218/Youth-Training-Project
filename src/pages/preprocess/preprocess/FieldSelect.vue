@@ -3,7 +3,7 @@
 		<h3>选择您需要的数据</h3>
 		<a-button type="primary" ghost @click="toggleCompModal"><PlusOutlined />计算属性</a-button>
 	</div>
-	<a-table :row-key="record => record.cid" :pagination="false" :row-selection="rowSelection" :columns="colName" :data-source="colData">
+	<a-table :row-key="(record:any) => record.cid" :pagination="false" :row-selection="rowSelection" :columns="colName" :data-source="colData">
 		<template #name="{ text }">
 			<a>{{ text }}</a>
 		</template>

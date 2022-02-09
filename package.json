@@ -20,17 +20,19 @@
 		"@types/codemirror": "^5.60.5",
 		"ant-design-vue": "^2.2.8",
 		"axios": "^0.25.0",
+		"clipboard": "^2.0.10",
 		"codemirror": "^5.65.1",
+		"html2canvas": "^1.4.1",
 		"mathjs": "^10.1.1",
 		"pinia": "^2.0.0-rc.10",
 		"pinia-plugin-persist": "^0.0.93",
 		"vue": "^3.2.25",
 		"vue-color-kit": "^1.0.5",
 		"vue-router": "4",
-		"xlsx": "^0.17.5",
 		"vxe-table": "^4.1.20",
 		"webpack-env": "^0.8.0",
-		"xe-utils": "^3.5.4"
+		"xe-utils": "^3.5.4",
+		"xlsx": "^0.17.5"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^16.0.3",

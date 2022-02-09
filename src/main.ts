@@ -14,7 +14,6 @@ import piniaPluginPersist from 'pinia-plugin-persist';
 import Antd from 'ant-design-vue';
 import App from './App.vue';
 import router from './router';
-// import 'default-passive-events';
 import 'ant-design-vue/dist/antd.css';
 
 const store = createPinia();
