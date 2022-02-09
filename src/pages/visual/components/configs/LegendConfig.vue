@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 18:19:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-07 12:21:54
+ * @LastEditTime: 2022-02-09 21:42:35
  * @Description: 图例配置
 -->
 <template>
@@ -71,6 +71,12 @@ const configOptions = ref<{
 		{ value: 'vertical', text: '垂直' },
 	],
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'LegendConfig',
+};
 </script>
 
 <style scoped></style>

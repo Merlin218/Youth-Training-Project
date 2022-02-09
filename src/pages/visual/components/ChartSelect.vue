@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 19:03:35
+ * @LastEditTime: 2022-02-09 21:22:34
  * @Description: 选择图表
 -->
 <template>
@@ -29,6 +29,7 @@ import { useVisualStore } from '@/store/visual';
 import { useTableStore } from '@/store/process';
 import { visualApi } from '@/api';
 import { responseType } from '@/types/common';
+import ChartGrid from './views/ChartGrid.vue';
 
 const router = useRouter();
 const visualStore = useVisualStore();

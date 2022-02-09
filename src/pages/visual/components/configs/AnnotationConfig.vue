@@ -2,18 +2,17 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 22:43:26
+ * @LastEditTime: 2022-02-09 21:40:24
  * @Description: 标注配置
 -->
 <template>
-	<div>
-		<text-annotation-config :id="selectId"></text-annotation-config>
-	</div>
+	<text-annotation-config :id="selectId"></text-annotation-config>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useVisualStore } from '@/store/visual';
+import TextAnnotationConfig from './annotation/TextAnnotationConfig.vue';
 
 const store = useVisualStore();
 
@@ -30,6 +29,12 @@ onUnmounted(() => {
 		// console.log('取消监听')
 	});
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'AnnotationConfig',
+};
 </script>
 
 <style scoped></style>

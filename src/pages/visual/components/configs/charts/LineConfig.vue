@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-07 17:02:29
+ * @LastEditTime: 2022-02-09 21:43:20
  * @Description: 折线图配置
 -->
 <template>
@@ -36,4 +36,9 @@ watch(
 );
 </script>
 
+<script lang="ts">
+export default {
+	name: 'LineConfig',
+};
+</script>
 <style></style>
