@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 #!/bin/sh
-=======
-#!/bin/sh
->>>>>>> 4e41c99d03421f7636088151921a0643a9f0a017
 npx --no-install commitlint --edit $1

@@ -13,7 +13,7 @@
       "name": "pnpm",
       "message": "vite-template-vue3-ts@0.0.0 dev: `pnpm prettier && pnpm lint:development && vite --host --mode development`\nExit status 1",
       "code": "ELIFECYCLE",
-      "stack": "pnpm: vite-template-vue3-ts@0.0.0 dev: `pnpm prettier && pnpm lint:development && vite --host --mode development`\nExit status 1\n    at EventEmitter.<anonymous> (/usr/pnpm-global/5/node_modules/.pnpm/pnpm@6.29.1/node_modules/pnpm/dist/pnpm.cjs:105646:20)\n    at EventEmitter.emit (node:events:390:28)\n    at ChildProcess.<anonymous> (/usr/pnpm-global/5/node_modules/.pnpm/pnpm@6.29.1/node_modules/pnpm/dist/pnpm.cjs:92194:18)\n    at ChildProcess.emit (node:events:390:28)\n    at maybeClose (node:internal/child_process:1062:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)"
+      "stack": "pnpm: vite-template-vue3-ts@0.0.0 dev: `pnpm prettier && pnpm lint:development && vite --host --mode development`\nExit status 1\n    at EventEmitter.<anonymous> (C:\\Users\\tzy\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:105392:20)\n    at EventEmitter.emit (events.js:400:28)\n    at ChildProcess.<anonymous> (C:\\Users\\tzy\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:91979:18)\n    at ChildProcess.emit (events.js:400:28)\n    at maybeClose (internal/child_process.js:1055:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:288:5)"
     }
   },
   "2 warn pnpm:global": " Local package.json exists, but node_modules missing, did you mean to install?"
