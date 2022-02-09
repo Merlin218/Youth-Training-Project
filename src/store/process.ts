@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
 import { ProTable } from '../pages/preprocess/preprocess/ProTable';
 import { data } from '@/data';
-import { toTable } from '@/utils/preprocess';
+import { removeSpace, toTable } from '@/utils/preprocess';
 
 export interface IgetTableAPI {
 	code: number;
@@ -34,7 +34,8 @@ export const useTableStore = defineStore({
 						let tableData = JSON.parse(d.result.data);
 						const isTable = tableData.cols;
 						if (!isTable) {
-							tableData = toTable(tableData);
+							tableData = toTable(removeSpace(tableData));
+							console.log(tableData);
 						}
 						this.table.bind({
 							title: tableData.title || '未命名表格',
