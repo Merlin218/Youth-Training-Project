@@ -21,14 +21,18 @@ const emit = defineEmits<{
 	(e: 'tableDataChange', tableData: ProTable): void;
 }>();
 
-const tableData = reactive(props.table);
+const tableData = reactive(JSON.parse(JSON.stringify(props.table)));
 function handleUpdate() {
-	tableData.data.forEach(d => {
+	const TableExport = JSON.parse(JSON.stringify(tableData));
+	TableExport.data.forEach(d => {
 		Object.keys(d).forEach(k => {
 			if (!Object.is(+d[k], NaN)) d[k] = +d[k];
 		});
+		// eslint-disable-next-line
+		delete d._X_ID;
+		delete d.rowId;
 	});
-	emit('tableDataChange', tableData);
+	emit('tableDataChange', TableExport);
 }
 </script>
 
