@@ -1,11 +1,23 @@
 import createRequest from '../axios';
 
 const publishApi = {
-	updateCurrentChartPicExport: (params: any) =>
+	updateCurrentChartPicExport: (data: any) =>
 		createRequest({
 			url: '/cms/updateCurrentChartPicExport',
 			method: 'post',
+			data,
+		}),
+	getChartPicHtmlString: (params: any) =>
+		createRequest({
+			url: '/cms/getChartPicHtmlString',
+			method: 'get',
 			params,
+		}),
+	getChartPicHtmlFile: (data: any) =>
+		createRequest({
+			url: '/cms/getChartPicHtmlFile',
+			method: 'post',
+			data,
 		}),
 };
 

@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import type { SelectProps } from 'ant-design-vue';
+import { SelectProps } from 'ant-design-vue/lib/vc-select';
 
 export default defineComponent({
 	emits: ['selected'],
