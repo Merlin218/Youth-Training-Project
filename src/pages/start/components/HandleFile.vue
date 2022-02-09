@@ -14,7 +14,6 @@ export default defineComponent({
 		const projectStore = useProjectStore();
 		const handleContent = strContent => {
 			projectStore.updateStrContent(strContent);
-			console.log(1, strContent);
 		};
 		const readExcel = e => {
 			let strContent = '';

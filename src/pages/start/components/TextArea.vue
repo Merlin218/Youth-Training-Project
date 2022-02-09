@@ -11,11 +11,9 @@ export default defineComponent({
 		const projectStore = useProjectStore();
 		watch(projectStore, newValue => {
 			value.value = newValue.strContent;
-			console.log(122111, newValue.strContent);
 		});
 		watch(value, newValue => {
 			projectStore.updateStrContent(newValue);
-			console.log(123, value.value);
 		});
 		// 阻止 tab 默认行为，可以在文本框中输入 tab
 		const handleTab = () => {
