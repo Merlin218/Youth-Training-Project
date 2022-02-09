@@ -1,18 +1,21 @@
 <template>
 	<div class="card-wrapper">
 		<a-card style="width: 100%" :tab-list="tabListNoTitle" :active-tab-key="activeKeys" @tab-change="key => onTabChange(key)">
-			<template v-if="activeKeys === 'image'">
-				<Image></Image>
-			</template>
-			<template v-else-if="activeKeys === 'dataTable'">
-				<DataTable></DataTable>
-			</template>
-			<template v-else-if="activeKeys === 'code'">
-				<CodeEditor v-model="code" @input="codeChange"></CodeEditor>
-			</template>
-			<template v-else-if="activeKeys === 'multiple'">
-				<MultipleForm></MultipleForm>
-			</template>
+			<div class="content">
+				<template v-if="activeKeys === 'image'">
+					<Image></Image>
+				</template>
+				<template v-else-if="activeKeys === 'dataTable'">
+					<DataTable></DataTable>
+				</template>
+				<template v-else-if="activeKeys === 'code'">
+					<CodeEditor v-model="code" :readonly="true" @input="codeChange"></CodeEditor>
+				</template>
+				<template v-else-if="activeKeys === 'multiple'">
+					<MultipleForm></MultipleForm>
+				</template>
+			</div>
+			<a-button type="primary" style="float: right">导出</a-button>
 		</a-card>
 	</div>
 </template>
@@ -48,7 +51,7 @@ const onTabChange = (key: string) => {
 	activeKeys.value = key;
 };
 
-const code = ref('');
+const code = ref('function myScript(){return 100;}\n');
 
 const codeChange = (val: string) => {
 	console.log(code.value, val);
@@ -62,5 +65,8 @@ const codeChange = (val: string) => {
 }
 :deep(.ant-card-body) {
 	height: 420px;
+}
+.content {
+	height: 90%;
 }
 </style>

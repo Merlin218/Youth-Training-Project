@@ -1,15 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { message } from 'ant-design-vue';
 import { MessageType } from 'ant-design-vue/lib/message';
-import { CustomConfig } from '../../types/common';
+import { CustomConfig, responseType } from '../../types/common';
 import cancel from '../../api/axios/cancel';
+import configs from '@/configs';
 
 let hideGlobalMessage: MessageType;
 
 const request = (AxiosConfig: AxiosRequestConfig, customConfig: CustomConfig) => {
 	// 设置请求头和请求路径
 	const instance = axios.create({
-		baseURL: '/api',
+		baseURL: configs.baseUrl,
 		timeout: 10000,
 	});
 
@@ -48,33 +49,45 @@ const request = (AxiosConfig: AxiosRequestConfig, customConfig: CustomConfig) =>
 
 	// 响应拦截
 	instance.interceptors.response.use(
-		(res: AxiosResponse) => {
+		(res: AxiosResponse<responseType, any>) => {
 			customConfigs.repeatRequestCancel && cancel.removePendingRequest(res.config); // 从pendingRequest对象中移除请求
-			console.log(res);
-
+			customConfigs.loading && hideGlobalMessage();
 			if (res.data.code === 401) {
 				sessionStorage.setItem('token', '');
 				// token过期操作
+			} else if (res.data.code === 1) {
+				// 更新loading
+				customConfigs.loading &&
+					message.error({
+						content: customConfigs.useMsgFromEnd && res.data.message ? res.data.message : customConfigs.successTitle,
+						duration: 2,
+					});
+			} else if (typeof res.data === 'string') {
+				customConfigs.loading && hideGlobalMessage();
+				return customConfigs.dataFormat ? res.data : res;
+			} else if (res.data.code === 0) {
+				// 更新loading
+				customConfigs.loading &&
+					message.success({
+						content: customConfigs.useMsgFromEnd && res.data.message ? res.data.message : customConfigs.successTitle,
+						duration: 2,
+					});
+				return customConfigs.dataFormat ? res.data : res;
 			}
-			// 更新loading
-			customConfigs.loading && hideGlobalMessage();
-			message.success({
-				content: customConfigs.useMsgFromEnd && res.data.msg ? res.data.msg : customConfigs.successTitle,
-				duration: 2,
-			});
-			return customConfigs.dataFormat ? res.data : res;
+			return Promise.reject(res);
 		},
 		err => {
 			customConfigs.repeatRequestCancel && cancel.removePendingRequest(err.config || {}); // 从pendingRequest对象中移除请求
 			if (axios.isCancel(err)) {
-				console.log(`已取消的重复请求:${err.message}`);
+				console.warn(`已取消的重复请求:${err.message}`);
 			} else {
 				// 更新loading
 				customConfigs.loading && hideGlobalMessage();
-				message.error({
-					content: customConfigs.useMsgFromEnd && err.data.msg ? err.data.msg : customConfigs.errorTitle,
-					duration: 2,
-				});
+				customConfigs.loading &&
+					message.error({
+						content: customConfigs.useMsgFromEnd && err.data.msg ? err.data.msg : customConfigs.errorTitle,
+						duration: 2,
+					});
 			}
 			return Promise.reject(err);
 		}

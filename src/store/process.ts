@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
 import { ProTable } from '../pages/preproccess/preproccess/ProTable';
@@ -12,10 +13,10 @@ export const useTableStore = defineStore({
 	// table: 获取的数据, tableExport用于下一阶段处理的数据
 	state: () => ({
 		table: new ProTable({ getted: false }),
-		tableExport: null,
+		tableExport: null as any,
 	}),
 	actions: {
-		getTable(projectId) {
+		getTable(projectId: string) {
 			return createRequest({
 				url: '/getProjectData',
 				method: 'get',

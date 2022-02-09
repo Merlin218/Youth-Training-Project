@@ -6,6 +6,8 @@
  * @Description: 请填写简介
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { message } from 'ant-design-vue';
+import docCookies from '@/utils/cookie';
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -17,6 +19,11 @@ const routes: RouteRecordRaw[] = [
 				path: '/login',
 				name: '登录',
 				component: () => import('../pages/login/index.vue'),
+			},
+			{
+				path: '/register',
+				name: '注册',
+				component: () => import('../pages/login/register.vue'),
 			},
 			{
 				path: '/start',
@@ -63,6 +70,21 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
+});
+
+router.beforeEach((to, from, next) => {
+	if (to.path === '/login') {
+		if (!docCookies.getItem('user')) {
+			next();
+		} else {
+			router.push('/projects');
+		}
+	} else if (docCookies.getItem('user')) {
+		next();
+	} else {
+		message.info('未登录，请先登录');
+		router.push('/login');
+	}
 });
 
 export default router;

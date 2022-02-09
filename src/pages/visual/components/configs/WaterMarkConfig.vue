@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 12:50:29
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 12:17:33
+ * @LastEditTime: 2022-02-07 16:12:14
  * @Description: 水印配置
 -->
 
@@ -47,6 +47,7 @@ const store = useVisualStore();
 
 const waterMarkOptions = ref<WaterMarkOptionType>({
 	...defaultWaterMarkOption,
+	...(store.waterMarkOptions ? store.waterMarkOptions : {}),
 });
 
 let oldOptions = { ...waterMarkOptions.value };
@@ -61,23 +62,31 @@ const changeColor = ({ rgba: { r, g, b, a } }: any) => {
 const canvas = ref<HTMLCanvasElement | null>(null);
 // canvas上下文
 const ctx = computed(() => canvas.value?.getContext('2d'));
-// canvas生成图片链接
-const base64Url = ref<string>();
 
+/**
+ * @description: 生成图片链接
+ */
 const toDataUrl = () => {
 	if (canvas.value && ctx.value) {
-		base64Url.value = canvas.value.toDataURL('image/png');
-		store.changeWaterMark(base64Url.value);
+		const base64Url = canvas.value.toDataURL('image/png');
+		store.changeWaterMark(waterMarkOptions.value, base64Url);
 	}
 };
 
-const clearCanvas = (oldValue: WaterMarkOptionType) => {
+/**
+ * @description: 清除画布
+ */
+const clearCanvas = (value: WaterMarkOptionType) => {
 	if (ctx.value) {
-		ctx.value.clearRect(0, 0, oldValue.width, oldValue.height);
+		ctx.value.clearRect(0, 0, value.width, value.height);
 	}
 };
 
-// canvas初始化
+/**
+ * @description: 画布初始化
+ * @param {*} options
+ * @return {*}
+ */
 const drawInit = (options: WaterMarkOptionType) => {
 	if (ctx.value) {
 		ctx.value.font = `${options.fontSize}px normal`;
@@ -91,6 +100,12 @@ const drawInit = (options: WaterMarkOptionType) => {
 	}
 };
 
+/**
+ * @description: 重新设置画布
+ * @param {*} v 新的配置
+ * @param {*} ov 旧的配置
+ * @return {*}
+ */
 const resetCanvas = (v: WaterMarkOptionType, ov: WaterMarkOptionType) => {
 	if (canvas.value && ctx.value) {
 		if (v.width !== ov.width) {
@@ -120,6 +135,7 @@ onMounted(() => {
 	drawInit(waterMarkOptions.value);
 });
 
+// 监听配置变化
 watch(
 	() => waterMarkOptions.value,
 	(value: WaterMarkOptionType) => {

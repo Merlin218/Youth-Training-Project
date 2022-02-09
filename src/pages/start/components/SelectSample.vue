@@ -11,7 +11,6 @@ export default defineComponent({
 	emits: ['selected'],
 	setup(props, context) {
 		const handleChange = (value: string) => {
-			console.log(`selected ${value}`);
 			context.emit('selected', value);
 		};
 

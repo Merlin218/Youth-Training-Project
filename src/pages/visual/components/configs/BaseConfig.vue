@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-06 12:39:25
+ * @LastEditTime: 2022-02-08 11:17:46
  * @Description: 基本配置
 -->
 <template>
@@ -13,9 +13,9 @@
 		<a-collapse v-model:activeKey="activeKey" accordion>
 			<a-collapse-panel key="key" header="数据字段"> <key-config></key-config></a-collapse-panel>
 			<a-collapse-panel key="axis" header="坐标轴"> <axis-config></axis-config></a-collapse-panel>
-			<a-collapse-panel key="legend" header="图例" :disabled="!options?.legend">
+			<a-collapse-panel key="legend" header="图例" :disabled="!hasSeriesField">
 				<template #extra>
-					<a-switch :checked="!!options?.legend" @change="handleLegendActive"></a-switch>
+					<a-switch :checked="!!options?.legend && hasSeriesField" :disabled="!hasSeriesField" @change="handleLegendActive"></a-switch>
 				</template>
 				<legend-config></legend-config> </a-collapse-panel
 		></a-collapse>
@@ -31,7 +31,9 @@ const store = useVisualStore();
 
 const options: ComputedRef<ChartOptionsType | undefined> = computed(() => store.chartInstance?.options);
 
-const activeKey = ref<string>('');
+const activeKey = ref<string>();
+
+const hasSeriesField = computed(() => store.chartInstance?.options.seriesField !== '' && store.chartInstance?.options.seriesField !== undefined);
 
 /**
  * @description:
@@ -50,11 +52,11 @@ const handleLegendActive = (checked: any) => {
 				maxRow: '1',
 			},
 		});
+		activeKey.value = '';
 	} else {
 		store.update({
 			legend: false,
 		});
-		activeKey.value = '';
 	}
 };
 </script>

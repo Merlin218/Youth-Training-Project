@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 18:19:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-01 19:34:27
+ * @LastEditTime: 2022-02-07 12:21:54
  * @Description: 图例配置
 -->
 <template>
@@ -17,7 +17,7 @@
 		</a-form-item>
 		<a-form-item label="是否分页">
 			<a-switch v-model:checked="legendConfig.flipPage" style="margin-right: 10px"></a-switch>
-			<div v-show="legendConfig.flipPage">每页 <a-input-number v-model:value="legendConfig.maxRow" :min="1" :max="8"></a-input-number> 行</div>
+			<div v-show="legendConfig.flipPage && legendConfig.layout === 'horizontal'">每页 <a-input-number v-model:value="legendConfig.maxRow" :min="1" :max="8"></a-input-number> 行</div>
 		</a-form-item>
 	</a-form>
 </template>
@@ -29,7 +29,7 @@ import { useVisualStore } from '@/store/visual';
 
 const store = useVisualStore();
 
-const options = computed(() => store.chartInstance.options);
+const options = computed(() => store.chartInstance?.options);
 
 const legendConfig = ref<Exclude<Legend, false>>({
 	position: 'top',
@@ -38,7 +38,7 @@ const legendConfig = ref<Exclude<Legend, false>>({
 	flipPage: false,
 	layout: 'horizontal',
 	maxRow: '1',
-	...options.value.legend,
+	...(options.value ? options.value.legend : {}),
 });
 
 watch(
