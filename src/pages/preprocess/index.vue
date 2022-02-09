@@ -1,25 +1,27 @@
 <template>
-	<header>
-		<a-row>
-			<a-col :span="3"> 选定数据源 </a-col>
-			<a-col :span="9"> {{ table.title }} </a-col>
-		</a-row>
-	</header>
-	<section id="tableSelects">
-		<div id="TableEditor">
-			<TableEditor></TableEditor>
-		</div>
-		<div id="FieldSelect">
-			<FieldSelect></FieldSelect>
-		</div>
-	</section>
-	<section id="FiledDefs">
-		<FieldDefine></FieldDefine>
-	</section>
-	<section id="tableSubmit">
-		<a-button type="primary" @click="showModal(0)">下一步</a-button>
-		<a-button type="primary" @click="showModal(1)">保存表格</a-button>
-	</section>
+	<div class="wapper">
+		<header>
+			<a-row>
+				<a-col :span="3"> 选定数据源 </a-col>
+				<a-col :span="9"> {{ table.title }} </a-col>
+			</a-row>
+		</header>
+		<section id="tableSelects">
+			<div id="TableEditor">
+				<TableEditor></TableEditor>
+			</div>
+			<div id="FieldSelect">
+				<FieldSelect></FieldSelect>
+			</div>
+		</section>
+		<section id="FiledDefs">
+			<FieldDefine></FieldDefine>
+		</section>
+		<section id="tableSubmit">
+			<a-button type="primary" @click="showModal(0)">下一步</a-button>
+			<a-button type="primary" @click="showModal(1)">保存表格</a-button>
+		</section>
+	</div>
 	<div>
 		<a-modal v-model:visible="state.expVis" title="使用哪些数据?" @ok="nextStep">
 			<a-form>
@@ -128,19 +130,27 @@ function nextStep() {
 	box-sizing: border-box;
 }
 
+.wapper {
+	height: calc(100vh - 240px);
+	width: 100%;
+	overflow: hidden;
+}
+
 header {
-	height: 10%;
+	height: 40px;
 }
 
 #tableSelects {
-	max-height: 50%;
+	height: calc(60% - 40px);
 	display: flex;
 	#TableEditor {
+		height: 100%;
 		padding: 3vh 2vw;
 		width: 70%;
 		overflow: auto;
 	}
 	#FieldSelect {
+		height: 100%;
 		padding: 3vh 2vw;
 		width: 30%;
 		overflow: auto;
@@ -148,12 +158,14 @@ header {
 }
 
 #FiledDefs {
-	height: 30%;
+	overflow: auto;
+	height: calc(40% - 40px);
 	padding: 3vh 2vw;
 }
 
 #tableSubmit {
-	height: 10%;
+	overflow: auto;
+	height: 40px;
 	display: flex;
 	flex-direction: row-reverse;
 }
