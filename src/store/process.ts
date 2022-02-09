@@ -3,10 +3,12 @@ import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
 import { ProTable } from '../pages/preprocess/preprocess/ProTable';
 import { data } from '@/data';
+import { toTable } from '@/utils/preprocess';
 
 export interface IgetTableAPI {
 	code: number;
 	data: ProTable;
+	project_id: null;
 }
 
 export const useTableStore = defineStore({
@@ -20,7 +22,7 @@ export const useTableStore = defineStore({
 	actions: {
 		getTable(projectId: string) {
 			return createRequest({
-				url: '/getProjectData',
+				url: '/cms/getProjectData',
 				method: 'get',
 				params: {
 					t: Date.now(),
@@ -29,12 +31,20 @@ export const useTableStore = defineStore({
 			}).then(
 				(d: IgetTableAPI | any) => {
 					if (!d.code) {
-						const tableData = JSON.parse(d.result.data);
+						let tableData = JSON.parse(d.result.data);
+						const isTable = tableData.cols;
+						if (!isTable) {
+							tableData = toTable(tableData);
+						}
 						this.table.bind({
-							title: tableData.title,
+							title: tableData.title || '未命名表格',
 							data: tableData.data || [],
 							cols: tableData.cols,
 						});
+						if (!isTable) {
+							this.tableExport = this.table.exportTable(false, false);
+							this.putTable(this.project_id);
+						}
 					} else {
 						this.table.getted = false;
 						return false;
@@ -49,7 +59,7 @@ export const useTableStore = defineStore({
 		},
 		putTable(projectId: string) {
 			return createRequest({
-				url: '/updateProjectData',
+				url: '/cms/updateProjectData',
 				method: 'post',
 				data: {
 					project_id: projectId, // '32958067-a627-4b64-abaa-43c52734b649',

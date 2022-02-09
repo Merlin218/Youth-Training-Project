@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { reactive, toRefs, ref, defineComponent } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import tableData from '../../data/tableData';
 import HandleFile from './components/HandleFile.vue';
 import SelectSample from './components/SelectSample.vue';
@@ -39,6 +39,7 @@ import TextArea from './components/TextArea.vue';
 import { useProjectStore } from '@/store/project';
 import { startApi } from '@/api';
 import { getPicUrl } from '@/utils';
+import { getProjectId } from './components/GetProjectId';
 
 export default defineComponent({
 	name: 'Start',
@@ -46,10 +47,8 @@ export default defineComponent({
 	setup() {
 		const state = reactive({});
 		const router = useRouter();
-		const route = useRoute();
-		const { project_id: projectId } = route.query;
-		console.log(projectId);
 		const projectStore = useProjectStore();
+		const projectId = getProjectId();
 		const jsonContent = ref<string>('');
 		// str 转为 json，多项情况删除数据 ，少项情况 value 为空
 		const str2Json = () => {
@@ -92,7 +91,7 @@ export default defineComponent({
 		const handleJump = async () => {
 			str2Json();
 			await handleSubmit();
-			router.push({ path: `/preprocess/`, query: { project_id: projectId } });
+			router.push({ path: `/preprocess`, query: { project_id: projectId } });
 		};
 		return {
 			...toRefs(state),

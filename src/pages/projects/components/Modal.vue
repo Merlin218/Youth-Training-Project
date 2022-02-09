@@ -15,6 +15,7 @@ import { ref, defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { PlusOutlined } from '@ant-design/icons-vue';
 import { projectsApi } from '@/api';
+import { useProjectStore } from '@/store/project';
 
 export default defineComponent({
 	components: {
@@ -22,6 +23,7 @@ export default defineComponent({
 	},
 	setup() {
 		const router = useRouter();
+		const projectStore = useProjectStore();
 		const visible = ref<boolean>(false);
 		const confirmLoading = ref<boolean>(false);
 		const value = ref<string>('');
@@ -34,6 +36,7 @@ export default defineComponent({
 			visible.value = false;
 			confirmLoading.value = false;
 			const { project_id: projectId } = res.result.data;
+			projectStore.updateProjectId(projectId);
 			router.push({ path: '/start', query: { project_id: projectId } });
 		};
 

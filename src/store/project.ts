@@ -2,14 +2,16 @@
  * @Author: Merlin218
  * @Date: 2022-02-09 18:03:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 23:58:46
+ * @LastEditTime: 2022-02-10 02:23:41
  * @Description: 请填写简介
  */
 import { defineStore } from 'pinia';
+import { ChartData } from '@/types/project/index';
 
 export const useProjectStore = defineStore('project', {
 	state: () => ({
-		project_id: '' as string,
+		project_id: '' as string, // 当前项目 id（新建项目或从项目页点入会更新），可以在进入页面时没有 params 的时候使用
+		chartData: {} as ChartData, // 项目图表信息
 		title: '' as string, // 项目标题
 		jsonContent: '' as string, // json 内容
 		strContent: '' as string, // textarea 显示的内容
@@ -23,6 +25,12 @@ export const useProjectStore = defineStore('project', {
 		},
 		updateTitle(title: string) {
 			this.title = title;
+		},
+		updateChartData(chartData: ChartData) {
+			this.chartData = chartData;
+		},
+		updateProjectId(projectId: string) {
+			this.project_id = projectId;
 		},
 	},
 });
