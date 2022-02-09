@@ -30,8 +30,8 @@
 			</template>
 		</a-layout-header>
 		<a-layout-content class="content">
-			<Scroller :height="contentHeight" background-color="#fff">
-				<div :style="{ padding: '40px 20px' }">
+			<Scroller ref="scroller" :height="contentHeight" background-color="#fff">
+				<div class="scrollContent" :style="{ padding: '40px 20px' }">
 					<router-view v-slot="{ Component }">
 						<component :is="Component"></component>
 					</router-view>
@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
 import docCookies from '@/utils/cookie';
@@ -54,6 +54,7 @@ import Scroller from '@/components/Scroller.vue';
 const router = useRouter();
 const route = useRoute();
 const store = useMainStore();
+const scroller = ref();
 
 const selectedKeys = ref<Array<string>>([route.path]);
 
@@ -63,6 +64,9 @@ const handleMenuChange = ({ key }: { key: string }) => {
 	if (key.includes(selectedKeys.value[0])) return;
 	selectedKeys.value = [key];
 	router.push(key);
+	nextTick(() => {
+		scroller.value.scrollToTop(0);
+	});
 };
 
 const toLogin = () => {

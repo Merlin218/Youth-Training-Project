@@ -1,11 +1,13 @@
 <template>
 	<div :id="id" :style="{ height: wrapperHeight, overflow: 'hidden', backgroundColor }">
-		<slot default></slot>
+		<div id="scrollContent">
+			<slot default></slot>
+		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import BetterScroll from '@better-scroll/core';
 import MouseWheel from '@better-scroll/mouse-wheel';
 
@@ -42,8 +44,40 @@ const initScroller = () => {
 	});
 };
 
+const scrollToTop = (time = 300) => {
+	betterScroll.scrollTo(0, 0, time);
+};
+
+let observer = null;
+let timer = null;
+
+const initResizeListener = () => {
+	const element = document.getElementById('scrollContent');
+	const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+	observer = new MutationObserver(mutationList => {
+		if (timer) clearTimeout(timer);
+		timer = setTimeout(() => {
+			betterScroll.refresh();
+		}, 300);
+	});
+	observer.observe(element, { attributes: true, attributeFilter: ['style'], attributeOldValue: true });
+};
+
+onUnmounted(() => {
+	if (observer) {
+		observer.disconnect();
+		observer.takeRecords();
+		observer = null;
+	}
+});
+
 onMounted(() => {
 	initScroller();
+	initResizeListener();
+});
+
+defineExpose({
+	scrollToTop,
 });
 </script>
 
