@@ -38,7 +38,7 @@ export function addRowId(table: ProTable) {
 }
 
 export function removeSpace(data) {
-	newData = data.map(d => {
+	const newData = data.map(d => {
 		const dataItem = {};
 		Object.keys(d).forEach(dd => {
 			dataItem[dd.replaceAll(/[ $]/g, '_')] = d[dd];
