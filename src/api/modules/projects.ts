@@ -21,6 +21,16 @@ const projectsApi = {
 			url: '/login/logout',
 			method: 'post',
 		}),
+	addProject: (data: any) =>
+		createRequest({
+			url: '/cms/addProject',
+			method: 'post',
+			data: {
+				user_name: docCookies.getItem('user'),
+				data_string: '',
+				...data,
+			},
+		}),
 };
 
 export default projectsApi;

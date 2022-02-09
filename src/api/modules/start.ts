@@ -1,13 +1,20 @@
 import createRequest from '../axios';
-import docCookies from '@/utils/cookie';
 
 const startApi = {
-	addProject: (data: any) =>
+	updateProjectData: (data: any) =>
 		createRequest({
-			url: '/cms/addProject',
+			url: '/cms/updateProjectData',
+			method: 'post',
+			data,
+		}),
+	updateProjectStatus: (data: any) =>
+		createRequest({
+			url: '/cms/updateProjectStatus',
 			method: 'post',
 			data: {
-				user_name: docCookies.getItem('user'),
+				first_finished: 1,
+				second_finished: -1,
+				third_finished: -1,
 				...data,
 			},
 		}),

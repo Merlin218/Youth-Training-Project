@@ -6,8 +6,8 @@ declare module 'vue' {
 	export interface GlobalComponents {
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
+		ACard: typeof import('ant-design-vue/es')['Card'];
 		ACol: typeof import('ant-design-vue/es')['Col'];
-		ADivider: typeof import('ant-design-vue/es')['Divider'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
 		AEmpty: typeof import('ant-design-vue/es')['Empty'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
@@ -22,8 +22,6 @@ declare module 'vue' {
 		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
-		ARadio: typeof import('ant-design-vue/es')['Radio'];
-		ARadioGroup: typeof import('ant-design-vue/es')['RadioGroup'];
 		ARow: typeof import('ant-design-vue/es')['Row'];
 		ASelect: typeof import('ant-design-vue/es')['Select'];
 		ASpace: typeof import('ant-design-vue/es')['Space'];
@@ -49,6 +47,7 @@ declare module 'vue' {
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
 		LegendConfig: typeof import('./pages/visual/components/configs/LegendConfig.vue')['default'];
 		LineConfig: typeof import('./pages/visual/components/configs/charts/LineConfig.vue')['default'];
+		Modal: typeof import('./pages/projects/components/Modal.vue')['default'];
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
 		ProjectList: typeof import('./pages/projects/components/ProjectList.vue')['default'];
