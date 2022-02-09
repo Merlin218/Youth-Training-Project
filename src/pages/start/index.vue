@@ -56,7 +56,9 @@ export default {
 			}
 			const objectArr: Array<object> = [];
 			// 表头
-			const header: Array<string> = strArr[0].split('\t');
+			// const header: Array<string> = strArr[0].split('\t');
+			// 空格替换为下划线
+			const header: Array<string> = strArr[0].split('\t').map(item => item.replaceAll(' ', '_'));
 			const body = strArr.slice(1);
 			body.forEach((value: string) => {
 				const obj: Object = {};
@@ -64,7 +66,9 @@ export default {
 					if (index >= header.length) {
 						return;
 					}
-					obj[header[index]] = innerValue;
+					// obj[header[index]] = innerValue;
+					// 空格替换为下划线
+					obj[header[index]] = innerValue.replaceAll(' ', '_');
 				});
 				objectArr.push(obj);
 			});
