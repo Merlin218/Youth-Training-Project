@@ -10,8 +10,16 @@
 	<br />
 	<a-row>
 		<a-col :span="8">
-			<div style="height: 300px; width: 400px">
-				<chart-display id="publishChart" :url="store.waterMark" :name="store.chartName" :options="store.backupChartOptions" :title="store.chartTitle" :use-store="true"></chart-display>
+			<div style="height: 300px; width: 400px; border: 1px solid rgba(0, 0, 0, 0.2)">
+				<chart-display
+					id="publishChart"
+					class="chartWrapper"
+					:url="visualStore.waterMarkUrl"
+					:name="visualStore.chartType"
+					:options="visualStore.backupChartOptions"
+					:title="visualStore.chartTitle"
+					:use-store="true"
+				></chart-display>
 			</div>
 		</a-col>
 		<a-col :span="1"></a-col>
@@ -22,10 +30,35 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, provide, onMounted } from 'vue';
 import ExportGroupByType from './ExportGroupByType.vue';
 import { useVisualStore } from '@/store/visual';
+import { useProjectStore } from '@/store/project';
+import { publishApi } from '@/api';
+import { html2image } from '@/utils/html2image';
 
-const store = useVisualStore();
+const visualStore = useVisualStore();
+const projectStore = useProjectStore();
+
+const imgUrl = ref('');
+
+provide('getImgUrl', () => imgUrl.value);
+
+provide('updateProjectImage', async () => {
+	imgUrl.value = await html2image(document.getElementById('publishChart') as HTMLElement);
+	const res = await publishApi.updateCurrentChartPicExport({
+		project_id: projectStore.id || '32958067-a627-4b64-abaa-43c52734b649',
+		chartpic_id: visualStore.chartPicId || '902004e8-51df-4380-811a-e983dbe136fc',
+		export_img: imgUrl.value,
+	});
+	console.log(res);
+});
+
+onMounted(async () => {
+	setTimeout(async () => {
+		imgUrl.value = await html2image(document.querySelector('.chartWrapper') as HTMLElement);
+	}, 1000);
+});
 </script>
 
 <script lang="ts">
