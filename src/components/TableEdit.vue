@@ -14,16 +14,6 @@
 import { reactive } from 'vue';
 import { ProTable } from '../pages/preproccess/preproccess/ProTable';
 
-/**
- * 如需限制字段不得编辑, 请在列定义中额外加入 editable: false, 例如
- * {
- * 	"cid": 2,
- * 	"cKey": "age",
- * 	"cname": "年龄",
- * 	"type": "number"
- * 	"editable": "false"
- * },
- */
 const props = defineProps<{
 	table: ProTable;
 }>();
@@ -33,6 +23,11 @@ const emit = defineEmits<{
 
 const tableData = reactive(props.table);
 function handleUpdate() {
+	tableData.data.forEach(d => {
+		Object.keys(d).forEach(k => {
+			if (!Object.is(+d[k], NaN)) d[k] = +d[k];
+		});
+	});
 	emit('tableDataChange', tableData);
 }
 </script>
