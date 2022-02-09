@@ -7,12 +7,18 @@
 		</div>
 		<div class="project">
 			<div class="edit-recently recently">
-				<h2>最近编辑</h2>
+				<h2 class="title">
+					最近编辑
+					<a-button class="sort" @click="handleReverseEditList"><FilterOutlined />{{ reverseEditList === false ? '最早创建' : '最近创建' }}</a-button>
+				</h2>
 				<ProjectList :project-list="recentEdit" />
 			</div>
 			<div class="divider" />
 			<div class="post-recently recently">
-				<h2>最近发布</h2>
+				<h2 class="title">
+					最近发布
+					<a-button class="sort" @click="handleReversePostList"><FilterOutlined />{{ reversePostList === false ? '最早创建' : '最近创建' }}</a-button>
+				</h2>
 				<ProjectList :project-list="recentPost" />
 			</div>
 		</div>
@@ -21,6 +27,7 @@
 
 <script lang="ts">
 import { onMounted, reactive, toRefs, ref, defineComponent, provide, computed } from 'vue';
+import { FilterOutlined } from '@ant-design/icons-vue';
 import { projectsApi } from '@/api';
 import ProjectList from './components/ProjectList.vue';
 import Modal from './components/Modal.vue';
@@ -31,6 +38,7 @@ export default defineComponent({
 	components: {
 		ProjectList,
 		Modal,
+		FilterOutlined,
 	},
 	setup() {
 		const store = useMainStore();
@@ -39,6 +47,8 @@ export default defineComponent({
 		let recentProject: Array<Object> = [];
 		const recentEdit = ref([]);
 		const recentPost = ref([]);
+		const reverseEditList = ref(false);
+		const reversePostList = ref(false);
 		const loadList = async () => {
 			const res = await projectsApi.getAllProjects();
 			console.log(res);
@@ -72,6 +82,14 @@ export default defineComponent({
 			});
 			console.log(recentEdit.value);
 		};
+		const handleReverseEditList = () => {
+			reverseEditList.value = !reverseEditList.value;
+			recentEdit.value.reverse();
+		};
+		const handleReversePostList = () => {
+			reversePostList.value = !reversePostList.value;
+			recentPost.value.reverse();
+		};
 		const refreshList = () => {
 			loadList();
 		};
@@ -84,6 +102,10 @@ export default defineComponent({
 			recentEdit,
 			recentPost,
 			username,
+			reverseEditList,
+			handleReverseEditList,
+			reversePostList,
+			handleReversePostList,
 		};
 	},
 });
@@ -139,5 +161,14 @@ h2 {
 	flex: 1;
 	padding-left: 40px;
 	border-left: 2px dashed #eee;
+}
+
+.title {
+	position: relative;
+	.sort {
+		position: absolute;
+		left: 100px;
+		top: 2px;
+	}
 }
 </style>
