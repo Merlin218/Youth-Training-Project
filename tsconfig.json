@@ -9,7 +9,7 @@
 		"sourceMap": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
-		"types": ["@antv/g2plot"],
+		"types": ["@antv/g2plot", "node"],
 		"lib": ["esnext", "dom", "dom.iterable"],
 		"allowJs": true,
 

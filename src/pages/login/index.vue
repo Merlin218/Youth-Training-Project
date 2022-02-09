@@ -64,6 +64,7 @@ export default {
 			document.cookie = `captcha_client=${e.target.value}`;
 		},
 		async refreshImg() {
+			console.log(1);
 			this.refreshNum();
 			const svgWrapper = document.getElementById('svgWrapper');
 			svgWrapper.innerHTML = '';
@@ -80,17 +81,20 @@ export default {
 				user_name: 'alexzhli',
 				password: '123456',
 			};
-			const res = await loginApi.login(form || fakeUser);
+			let res = null;
+			try {
+				res = await loginApi.login(form || fakeUser);
+			} catch (e) {
+				//
+			}
 			store.updateStatus();
-			switch (res.code) {
+			switch (res?.code) {
 				case 0:
 					message.success('登录成功,即将跳转到主页');
 					setTimeout(() => this.$router.push({ path: `/projects` }), 3000);
 					break;
-				case 1:
-					message.error(res.message);
-					break;
 				default:
+					this.refreshImg();
 					break;
 			}
 		},

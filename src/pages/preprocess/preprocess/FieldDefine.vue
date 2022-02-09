@@ -2,7 +2,7 @@
 	<div class="title">
 		<h3>定义您的数据</h3>
 	</div>
-	<a-table :row-key="record => record.cid" :pagination="false" :columns="colName" :data-source="colData">
+	<a-table :row-key="(record:any) => record.cid" :pagination="false" :columns="colName" :data-source="colData">
 		<template #defineType="{ record }">
 			<a-select ref="select" v-model:value="record.type" :options="colType" @change="typeChange(record)"> </a-select>
 		</template>
