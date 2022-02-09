@@ -12,6 +12,7 @@ declare module 'vue' {
 		ACollapsePanel: typeof import('ant-design-vue/es')['CollapsePanel'];
 		ADivider: typeof import('ant-design-vue/es')['Divider'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
+		AEmpty: typeof import('ant-design-vue/es')['Empty'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
 		AFormItem: typeof import('ant-design-vue/es')['FormItem'];
 		AInput: typeof import('ant-design-vue/es')['Input'];
@@ -31,6 +32,7 @@ declare module 'vue' {
 		ARow: typeof import('ant-design-vue/es')['Row'];
 		ASelect: typeof import('ant-design-vue/es')['Select'];
 		ASelectOption: typeof import('ant-design-vue/es')['SelectOption'];
+		ASpace: typeof import('ant-design-vue/es')['Space'];
 		ASwitch: typeof import('ant-design-vue/es')['Switch'];
 		ATable: typeof import('ant-design-vue/es')['Table'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
@@ -55,6 +57,7 @@ declare module 'vue' {
 		LineConfig: typeof import('./pages/visual/components/configs/charts/LineConfig.vue')['default'];
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
+		ProjectList: typeof import('./pages/projects/components/ProjectList.vue')['default'];
 		Register: typeof import('./pages/login/register.vue')['default'];
 		Scroller: typeof import('./components/Scroller.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];

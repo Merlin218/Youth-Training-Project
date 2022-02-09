@@ -39,6 +39,7 @@ import HandleFile from './components/HandleFile.vue';
 import SelectSample from './components/SelectSample.vue';
 import TextArea from './components/TextArea.vue';
 import { useProjectStore } from '@/store/project';
+import { startApi } from '@/api';
 
 export default {
 	name: 'Start',
@@ -48,15 +49,15 @@ export default {
 		const router = useRouter();
 		const titleContent = ref<string>('');
 		const projectStore = useProjectStore();
+		const jsonContent = ref<string>('');
+		let res: object = {}; // 请求返回的结果
 		// str 转为 json，多项情况删除数据 ，少项情况 value 为空
-		// 少项 [{"学号":"10008","姓名":"伍容华","学历":""},{"学号":"20010","姓名":"王向容","学历":"硕士"}]
 		const str2Json = () => {
 			let strArr: Array<string> = projectStore.strContent.split('\n');
 			if (strArr[strArr.length - 1] === '') {
 				strArr = strArr.slice(0, strArr.length - 1);
 			}
 			const objectArr: Array<object> = [];
-			console.log(111, projectStore.strContent);
 			// 表头
 			const header: Array<string> = strArr[0].split('\t');
 			const body = strArr.slice(1);
@@ -70,18 +71,25 @@ export default {
 				});
 				objectArr.push(obj);
 			});
-			const jsonContent = JSON.stringify(objectArr);
-			console.log(jsonContent);
-			projectStore.updateJsonContent(jsonContent);
-		};
-		const handleJump = async () => {
-			str2Json();
-			// 提交文件信息	await submit();
-			router.push({ path: `/preprocess` });
+			jsonContent.value = JSON.stringify(objectArr);
+			projectStore.updateJsonContent(jsonContent.value);
 		};
 		// 加载预选的数据
 		const handleSelectedData = value => {
 			projectStore.updateStrContent(tableData.table[value]);
+		};
+		// 提交信息
+		const handleSubmit = async () => {
+			res = await startApi.addProject({
+				project_name: titleContent.value,
+				data_string: jsonContent.value,
+			});
+		};
+		const handleJump = async () => {
+			str2Json();
+			await handleSubmit();
+			projectStore.updateId(res.result.data.id);
+			router.push({ path: `/preprocess/`, query: { id: res.result.data.id } });
 		};
 		return {
 			...toRefs(state),
