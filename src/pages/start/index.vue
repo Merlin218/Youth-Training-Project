@@ -85,10 +85,10 @@ export default {
 				project_id: projectId,
 				data_string: jsonContent.value,
 			});
+			console.log(res);
 			await startApi.updateProjectStatus({
 				project_id: projectId,
 			});
-			console.log(res);
 		};
 		const handleJump = async () => {
 			str2Json();
