@@ -2,66 +2,73 @@
  * @Author: Merlin218
  * @Date: 2022-02-03 21:26:54
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 20:39:57
+ * @LastEditTime: 2022-02-10 02:15:17
  * @Description: 请填写简介
  */
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { message } from 'ant-design-vue';
 import docCookies from '@/utils/cookie';
+import Index from '../pages/index.vue';
+import Login from '../pages/login/index.vue';
+import Register from '../pages/login/register.vue';
+import Start from '@/pages/start/index.vue';
+import Visual from '../pages/visual/visual.vue';
+import ChartSelect from '../pages/visual/components/ChartSelect.vue';
+import ChartConfig from '../pages/visual/components/ChartConfig.vue';
 
 const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
 		name: '首页',
-		component: () => import('../pages/index.vue'),
+		component: Index,
 		redirect: '/projects',
 		children: [
 			{
 				path: '/login',
-				name: '登录',
-				component: () => import('../pages/login/index.vue'),
+				name: 'login',
+				component: Login,
 			},
 			{
 				path: '/register',
-				name: '注册',
-				component: () => import('../pages/login/register.vue'),
+				name: 'register',
+				component: Register,
 			},
 			{
 				path: '/start',
-				name: '开始',
-				component: () => import('../pages/start/index.vue'),
+				name: 'start',
+				component: Start,
 			},
 			{
 				path: '/visual',
-				name: '可视化',
-				component: () => import('../pages/visual/visual.vue'),
+				name: 'visual',
+				component: Visual,
 				redirect: '/visual/select',
 				children: [
 					{
 						path: '/visual/select',
-						name: '选择图表',
-						component: () => import('../pages/visual/components/ChartSelect.vue'),
+						name: 'visual_select',
+						component: ChartSelect,
 					},
 					{
 						path: '/visual/config',
-						name: '配置图表',
-						component: () => import('../pages/visual/components/ChartConfig.vue'),
+						name: 'visual_config',
+						component: ChartConfig,
 					},
 				],
 			},
 			{
 				path: '/projects',
-				name: '项目',
+				name: 'projects',
 				component: () => import('../pages/projects/index.vue'),
 			},
 			{
 				path: '/publish',
-				name: '发布',
+				name: 'publish',
 				component: () => import('../pages/publish/index.vue'),
 			},
 			{
 				path: '/preprocess',
-				name: '数据预处理',
+				name: 'preprocess',
 				component: () => import('../pages/preprocess/index.vue'),
 			},
 		],
@@ -69,7 +76,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-	history: createWebHistory('/data-to-chart/'),
+	history: createWebHashHistory(),
 	routes,
 });
 

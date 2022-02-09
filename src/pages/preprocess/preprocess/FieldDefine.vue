@@ -2,22 +2,24 @@
 	<div class="title">
 		<h3>定义您的数据</h3>
 	</div>
-	<a-table :row-key="(record:any) => record.cid" :pagination="false" :columns="colName" :data-source="colData">
-		<template #defineType="{ record }">
-			<a-select ref="select" v-model:value="record.type" :options="colType" @change="typeChange(record)"> </a-select>
-		</template>
-		<template #defineRange="{ record }">
-			<a-button type="primary" @click="toggleOnEdit(record.cid, 'dataDef')">点击定义</a-button>
-			<FieldSift :col-id="record.cid" modal-type="dataDef"></FieldSift>
-		</template>
-		<template #defineSift="{ record }">
-			<a-button type="primary" @click="toggleOnEdit(record.cid, 'dataSift')">点击筛选</a-button>
-			<FieldSift :col-id="record.cid" modal-type="dataSift"> </FieldSift>
-		</template>
-		<template #errors="{ record }">
-			{{ errInfo(record) }}
-		</template>
-	</a-table>
+	<div class="table">
+		<a-table :row-key="(record:any) => record.cid" :pagination="false" :columns="colName" :data-source="colData">
+			<template #defineType="{ record }">
+				<a-select ref="select" v-model:value="record.type" :options="colType" @change="typeChange(record)"> </a-select>
+			</template>
+			<template #defineRange="{ record }">
+				<a-button type="primary" @click="toggleOnEdit(record.cid, 'dataDef')">点击定义</a-button>
+				<FieldSift :col-id="record.cid" modal-type="dataDef"></FieldSift>
+			</template>
+			<template #defineSift="{ record }">
+				<a-button type="primary" @click="toggleOnEdit(record.cid, 'dataSift')">点击筛选</a-button>
+				<FieldSift :col-id="record.cid" modal-type="dataSift"> </FieldSift>
+			</template>
+			<template #errors="{ record }">
+				{{ errInfo(record) }}
+			</template>
+		</a-table>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -123,5 +125,11 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	height: 40px;
+}
+.table {
+	max-height: calc(calc(100% - 40px));
+	height: calc(calc(100% - 40px));
+	overflow: auto;
 }
 </style>
