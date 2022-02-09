@@ -15,4 +15,10 @@
 // })
 </script>
 
+<script lang="ts">
+export default {
+	name: 'Image',
+};
+</script>
+
 <style lang="less" scoped></style>

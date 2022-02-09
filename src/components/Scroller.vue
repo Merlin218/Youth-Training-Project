@@ -1,10 +1,3 @@
-<!--
- * @Author: Merlin218
- * @Date: 2022-02-08 18:23:39
- * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 00:16:20
- * @Description: 请填写简介
--->
 <template>
 	<div :id="id" :style="{ height: wrapperHeight, overflow: 'hidden', backgroundColor }">
 		<slot default></slot>
@@ -52,6 +45,12 @@ const initScroller = () => {
 onMounted(() => {
 	initScroller();
 });
+</script>
+
+<script lang="ts">
+export default {
+	name: 'Scroller',
+};
 </script>
 
 <style lang="less" scoped></style>

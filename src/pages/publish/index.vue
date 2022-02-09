@@ -1,3 +1,10 @@
+<!--
+ * @Author: Merlin218
+ * @Date: 2022-02-09 12:16:34
+ * @LastEditors: Merlin218
+ * @LastEditTime: 2022-02-09 21:53:02
+ * @Description: 请填写简介
+-->
 <template>
 	<h1>在此发布你的作品</h1>
 	<br />
@@ -19,6 +26,12 @@ import ExportGroupByType from './ExportGroupByType.vue';
 import { useVisualStore } from '@/store/visual';
 
 const store = useVisualStore();
+</script>
+
+<script lang="ts">
+export default {
+	name: 'WaterMarkConfig',
+};
 </script>
 
 <style lang="less" scoped></style>

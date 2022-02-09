@@ -49,6 +49,7 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
 import docCookies from '@/utils/cookie';
 import { useMainStore } from '@/store/user';
 import { loginApi } from '@/api';
+import Scroller from '@/components/Scroller.vue';
 
 const router = useRouter();
 const route = useRoute();

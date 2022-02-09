@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:31:24
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:22:48
+ * @LastEditTime: 2022-02-09 21:55:02
  * @Description: 图表矩阵
 -->
 <template>
@@ -18,6 +18,7 @@
 import { ref } from 'vue';
 import { G2PlotChartConfig } from '@/configs/visual';
 import { ChartNameType } from '@/types/visual/charts';
+import ChartDisplay from './ChartDisplay.vue';
 
 const emit = defineEmits(['update:name']);
 const props = defineProps<{
