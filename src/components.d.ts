@@ -4,13 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AAvatar: typeof import('ant-design-vue/es')['Avatar']
-    ALayout: typeof import('ant-design-vue/es')['Layout']
-    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
-    ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
-    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
-    AMenu: typeof import('ant-design-vue/es')['Menu']
-    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default']
     AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default']
     BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default']
