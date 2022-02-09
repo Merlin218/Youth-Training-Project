@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:39:52
+ * @LastEditTime: 2022-02-10 03:31:17
  * @Description: 请填写简介
 -->
 <template>
@@ -27,7 +27,6 @@
 				<a-collapse-panel key="1" header="图表展示">
 					<div class="chart">
 						<chart-display
-							id="storeChart"
 							:url="visualStore.waterMarkUrl"
 							:name="visualStore.chartType"
 							:options="visualStore.backupChartOptions"
@@ -77,14 +76,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { TooltipOptions } from '@antv/g2plot';
 import { message } from 'ant-design-vue';
 import { CaretRightOutlined } from '@ant-design/icons-vue';
 import { useVisualStore } from '@/store/visual';
-import { defaultWaterMarkOption, defaultWaterMarkUrl } from '@/configs/visual';
-import { visualApi } from '@/api';
+import { defaultWaterMarkOption, defaultWaterMarkUrl, G2PlotChartConfig } from '@/configs/visual';
+import { startApi, visualApi } from '@/api';
 import BaseConfig from './configs/BaseConfig.vue';
 import OtherConfig from './configs/OtherConfig.vue';
 import TooltipConfig from './configs/TooltipConfig.vue';
@@ -92,6 +91,8 @@ import AnnotationConfig from './configs/AnnotationConfig.vue';
 import WaterMarkConfig from './configs/WaterMarkConfig.vue';
 import TableEdit from '@/components/TableEdit.vue';
 import ChartDisplay from './views/ChartDisplay.vue';
+import { useProjectStore } from '@/store/project';
+import { responseType } from '@/types/common';
 
 const router = useRouter();
 const visualStore = useVisualStore();
@@ -179,21 +180,56 @@ const handleMarkActive = (value: any) => {
  */
 const toNext = async () => {
 	// console.log(visualStore.chartType, visualStore.chartPicId, visualStore.chartTitle, visualStore.chartOptions, visualStore.waterMarkOptions);
-	if (!visualStore.chartType || !visualStore.chartPicId || !visualStore.chartOptions || !visualStore.waterMarkOptions) {
+	if (!visualStore.chartType || !visualStore.chartPicId || !visualStore.chartOptions) {
 		message.error('参数不完整');
 		return;
 	}
-	await visualApi.updateChartPicConfig({
-		chart_title: visualStore.chartTitle,
-		chart_type: visualStore.chartType,
-		chartpic_id: visualStore.chartPicId,
-		vis_config: JSON.stringify(visualStore.chartOptions),
-		watermark_config: JSON.stringify(visualStore.waterMarkOptions),
-	});
+	try {
+		// 更新配置
+		await visualApi.updateChartPicConfig({
+			chart_title: visualStore.chartTitle,
+			chart_type: visualStore.chartType,
+			chartpic_id: visualStore.chartPicId,
+			vis_config: JSON.stringify(visualStore.chartOptions),
+			watermark_config: visualStore.waterMarkOptions === false ? 'false' : JSON.stringify({ ...visualStore.waterMarkOptions, url: visualStore.waterMarkUrl }),
+		});
+		// 更新状态
+		await startApi.updateProjectStatus({
+			project_id: visualStore.chartPicId,
+			third_finished: 1,
+		});
+		router.push('/publish');
+		// eslint-disable-next-line no-empty
+	} catch (err) {}
 };
 
 onMounted(() => {
 	stepActive.value = '';
+});
+
+const projectStore = useProjectStore();
+
+onBeforeMount(async () => {
+	// 从store中获取project_id
+	const { project_id: id }: any = projectStore;
+	if (id !== '' && id) {
+		// 第一次进入，获取项目信息，拿到chart信息
+		const {
+			result: {
+				data: [first],
+			},
+		} = (await visualApi.getAllChartPic(id)) as responseType;
+		// 默认获取第一个图表,保存到store
+		visualStore.backupProjectData(first);
+		if (first.chart_type !== null && Object.keys(G2PlotChartConfig).includes(first.chart_type)) {
+			visualStore.initChart(first);
+		}
+	} else {
+		message.error('项目不存在', 1);
+		message.loading('正在返回首页', 1, () => {
+			router.replace('/projects');
+		});
+	}
 });
 </script>
 

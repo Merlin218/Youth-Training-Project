@@ -1,4 +1,5 @@
 <template>
+
 	<div class="wapper">
 		<header>
 			<a-row>
@@ -168,5 +169,6 @@ header {
 	height: 40px;
 	display: flex;
 	flex-direction: row-reverse;
+	margin-right: 20px;
 }
 </style>

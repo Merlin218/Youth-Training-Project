@@ -30,7 +30,7 @@
 			</template>
 		</a-layout-header>
 		<a-layout-content class="content">
-			<Scroller ref="scroller" :height="contentHeight" background-color="#fff">
+			<Scroller ref="scroller" :height="contentHeight" background-color="#fff" style="border-radius: 16px">
 				<div class="scrollContent" :style="{ padding: '40px 20px' }">
 					<router-view v-slot="{ Component }">
 						<component :is="Component"></component>
@@ -106,6 +106,7 @@ onMounted(() => {});
 	top: 0;
 	left: 0;
 	right: 0;
+	background-color: transparent;
 }
 .content {
 	padding: 0 50px;
@@ -116,5 +117,30 @@ onMounted(() => {});
 	position: relative;
 	left: 0;
 	right: 0;
+}
+:deep(.ant-menu-item) {
+	border-radius: 16px;
+	line-height: 35px;
+}
+
+:deep(.ant-menu-overflow, .ant-menu, .ant-menu-root, .ant-menu-horizontal, .ant-menu-dark) {
+	background-color: transparent;
+}
+:deep(.ant-menu) {
+	width: 400px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+:deep(.ant-menu-title-content) {
+	color: rgb(108, 108, 108);
+}
+
+:deep(.ant-menu-item-selected .ant-menu-title-content) {
+	color: white;
+}
+
+:deep(.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover) {
+	background-color: rgb(255, 255, 255);
 }
 </style>
