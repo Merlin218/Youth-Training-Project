@@ -95,7 +95,7 @@ function nextStep() {
 	}
 	store.tableExport = table.exportTable(state.save1, state.save2);
 	if (state.curType) {
-		store.putTable().then(
+		store.putTable(route.query.project_id).then(
 			d => {
 				if (!d.code) {
 					message.success('保存成功');
