@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, reactive, toRefs, ref } from 'vue';
+import { onMounted, reactive, toRefs, ref, provide } from 'vue';
 import { projectsApi } from '@/api';
 import ProjectList from './components/ProjectList.vue';
 import Modal from './components/Modal.vue';
@@ -34,10 +34,11 @@ export default {
 		let recentProject: Array<Object> = [];
 		const recentEdit = ref([]);
 		const recentPost = ref([]);
-		const isClicked = ref<boolean>(false);
-		onMounted(async () => {
+		const loadList = async () => {
 			const res = await projectsApi.getAllProjects();
 			console.log(res);
+			recentEdit.value = [];
+			recentPost.value = [];
 			recentProject = res.result.data;
 			recentProject.forEach(value => {
 				const showValue = value;
@@ -64,12 +65,19 @@ export default {
 					recentEdit.value.push(value);
 				}
 			});
+			console.log(recentEdit.value);
+		};
+		const refreshList = () => {
+			loadList();
+		};
+		provide('refreshList', refreshList);
+		onMounted(() => {
+			loadList();
 		});
 		return {
 			...toRefs(state),
 			recentEdit,
 			recentPost,
-			isClicked,
 		};
 	},
 };
