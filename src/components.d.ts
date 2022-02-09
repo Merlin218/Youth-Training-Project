@@ -4,7 +4,31 @@
 
 declare module 'vue' {
 	export interface GlobalComponents {
+		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
+		AButton: typeof import('ant-design-vue/es')['Button'];
+		ACard: typeof import('ant-design-vue/es')['Card'];
+		ACol: typeof import('ant-design-vue/es')['Col'];
+		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
+		AEmpty: typeof import('ant-design-vue/es')['Empty'];
+		AForm: typeof import('ant-design-vue/es')['Form'];
+		AFormItem: typeof import('ant-design-vue/es')['FormItem'];
+		AInput: typeof import('ant-design-vue/es')['Input'];
+		ALayout: typeof import('ant-design-vue/es')['Layout'];
+		ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent'];
+		ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter'];
+		ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader'];
+		AMenu: typeof import('ant-design-vue/es')['Menu'];
+		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
+		AModal: typeof import('ant-design-vue/es')['Modal'];
 		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
+		APopover: typeof import('ant-design-vue/es')['Popover'];
+		ARow: typeof import('ant-design-vue/es')['Row'];
+		ASelect: typeof import('ant-design-vue/es')['Select'];
+		ASpace: typeof import('ant-design-vue/es')['Space'];
+		ASwitch: typeof import('ant-design-vue/es')['Switch'];
+		ATable: typeof import('ant-design-vue/es')['Table'];
+		ATag: typeof import('ant-design-vue/es')['Tag'];
+		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];
 		ChartConfig: typeof import('./pages/visual/components/ChartConfig.vue')['default'];
@@ -23,6 +47,7 @@ declare module 'vue' {
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
 		LegendConfig: typeof import('./pages/visual/components/configs/LegendConfig.vue')['default'];
 		LineConfig: typeof import('./pages/visual/components/configs/charts/LineConfig.vue')['default'];
+		Modal: typeof import('./pages/projects/components/Modal.vue')['default'];
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];

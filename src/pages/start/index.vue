@@ -18,9 +18,6 @@
 			</div>
 		</div>
 		<div class="data-area">
-			<div class="data-area__titlearea">
-				<a-input v-model:value="titleContent" placeholder="请输入标题" />
-			</div>
 			<div class="data-area__textarea">
 				<TextArea />
 			</div>
@@ -33,7 +30,7 @@
 
 <script lang="ts">
 import { reactive, toRefs, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import tableData from '../../data/tableData';
 import HandleFile from './components/HandleFile.vue';
 import SelectSample from './components/SelectSample.vue';
@@ -47,10 +44,11 @@ export default {
 	setup() {
 		const state = reactive({});
 		const router = useRouter();
-		const titleContent = ref<string>('');
+		const route = useRoute();
+		const { project_id: projectId } = route.query;
+		console.log(projectId);
 		const projectStore = useProjectStore();
 		const jsonContent = ref<string>('');
-		let res: object = {}; // 请求返回的结果
 		// str 转为 json，多项情况删除数据 ，少项情况 value 为空
 		const str2Json = () => {
 			let strArr: Array<string> = projectStore.strContent.split('\n');
@@ -80,22 +78,24 @@ export default {
 		};
 		// 提交信息
 		const handleSubmit = async () => {
-			res = await startApi.addProject({
-				project_name: titleContent.value,
+			const res = await startApi.updateProjectData({
+				project_id: projectId,
 				data_string: jsonContent.value,
 			});
+			await startApi.updateProjectStatus({
+				project_id: projectId,
+			});
+			console.log(res);
 		};
 		const handleJump = async () => {
 			str2Json();
 			await handleSubmit();
-			projectStore.updateId(res.result.data.id);
-			router.push({ path: `/preprocess/`, query: { id: res.result.data.id } });
+			router.push({ path: `/preprocess/`, query: { project_id: projectId } });
 		};
 		return {
 			...toRefs(state),
 			handleJump,
 			handleSelectedData,
-			titleContent,
 		};
 	},
 };
@@ -120,9 +120,6 @@ export default {
 	&__next-step {
 		margin: 20px 0;
 		text-align: right;
-	}
-	&__titlearea {
-		margin-bottom: 10px;
 	}
 }
 </style>
