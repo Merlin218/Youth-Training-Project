@@ -21,7 +21,6 @@
 		"ant-design-vue": "^2.2.8",
 		"axios": "^0.25.0",
 		"codemirror": "^5.65.1",
-		"default-passive-events": "^2.0.0",
 		"mathjs": "^10.1.1",
 		"pinia": "^2.0.0-rc.10",
 		"pinia-plugin-persist": "^0.0.93",

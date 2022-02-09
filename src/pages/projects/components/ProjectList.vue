@@ -26,6 +26,7 @@
 <script>
 import { defineComponent, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
+import { useProjectStore } from '@/store/project';
 
 export default defineComponent({
 	name: 'ProjectList',
@@ -36,9 +37,9 @@ export default defineComponent({
 		},
 	},
 	setup(props) {
-		// eslint 规范
 		const { projectList: recentList } = toRefs(props);
 		const router = useRouter();
+		const projectStore = useProjectStore();
 		const handleJump = item => {
 			let path = '';
 			if (item.share_hash !== '') {
@@ -52,6 +53,7 @@ export default defineComponent({
 			} else {
 				path = '/start';
 			}
+			projectStore.updateProjectId(item.project_id);
 			router.push({ path, query: { project_id: item.project_id } });
 		};
 
@@ -77,6 +79,7 @@ export default defineComponent({
 		padding: 14px 25px;
 		border-radius: 8px;
 		border: 2px solid #eee;
+		background-color: #fff;
 		&__picture {
 			height: 190px;
 			width: 250px;
