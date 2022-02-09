@@ -40,7 +40,7 @@ export const useTableStore = defineStore({
 					return true;
 				},
 				() => {
-					this.table.geted = false;
+					this.table.getted = false;
 					return false;
 				}
 			);
