@@ -5,6 +5,7 @@ export const useProjectStore = defineStore('project', {
 		title: '' as string, // 项目标题
 		jsonContent: '' as string, // json 内容
 		strContent: '' as string, // textarea 显示的内容
+		project_id: '' as string,
 	}),
 	actions: {
 		updateJsonContent(jsonContent: string) {
@@ -15,6 +16,9 @@ export const useProjectStore = defineStore('project', {
 		},
 		updateTitle(title: string) {
 			this.title = title;
+		},
+		updateProjectId(projectId: string) {
+			this.project_id = projectId;
 		},
 	},
 });
