@@ -31,6 +31,12 @@ const projectsApi = {
 				...data,
 			},
 		}),
+	deleteProject: (data: any) =>
+		createRequest({
+			url: '/cms/deleteProject',
+			method: 'post',
+			data,
+		}),
 };
 
 export default projectsApi;

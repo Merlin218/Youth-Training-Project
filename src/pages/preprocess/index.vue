@@ -43,22 +43,25 @@
 <script lang="ts" setup>
 import { onMounted, reactive } from 'vue';
 import { message, notification } from 'ant-design-vue';
-import { useRoute, useRouter } from 'vue-router';
+import { /* useRoute, */ useRouter } from 'vue-router';
 import { useTableStore } from '../../store/process';
 import TableEditor from './preprocess/TableEditor.vue';
 import FieldSelect from './preprocess/FieldSelect.vue';
 import FieldDefine from './preprocess/FieldDefine.vue';
 import { TableCol } from './preprocess/ProTable';
+import { getProjectId } from '../start/components/GetProjectId';
 
 const store = useTableStore();
 const { table } = store;
 const router = useRouter();
-const route = useRoute();
+// const route = useRoute();
+const projectId = getProjectId();
 
 // 请求表格
 onMounted(async () => {
-	// if (!route.query.project_id) return;
-	if (!(await store.getTable(route.query.project_id))) {
+	// projectStore.updateProjectId(projectStore.project_id || route.query.project_id);
+	store.project_id = projectId;
+	if (!(await store.getTable(store.project_id))) {
 		notification.open({
 			message: '网络错误',
 			description: '请求数据失败, 请检查你的网络.',
@@ -95,7 +98,7 @@ function nextStep() {
 	}
 	store.tableExport = table.exportTable(state.save1, state.save2);
 	if (state.curType) {
-		store.putTable(route.query.project_id).then(
+		store.putTable(store.project_id).then(
 			d => {
 				if (!d.code) {
 					message.success('保存成功');
