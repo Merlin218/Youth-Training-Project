@@ -2,13 +2,14 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:11
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 14:04:18
+ * @LastEditTime: 2022-02-09 17:44:58
  * @Description: 图表状态管理
  */
 import { defineStore } from 'pinia';
 import { Annotation, StateCondition } from '@antv/g2plot';
 import { ChartNameType, ChartOptionsType, ChartType } from '@/types/visual/charts';
 import { WaterMarkOptionType } from '@/types/visual/config';
+import { ProTable } from '@/pages/preproccess/preproccess/ProTable';
 
 export const useVisualStore = defineStore('visual', {
 	state: () => ({
@@ -17,6 +18,7 @@ export const useVisualStore = defineStore('visual', {
 		chartInstance: undefined as ChartType | undefined,
 		chartType: undefined as ChartNameType | undefined,
 		chartTitle: '' as string,
+		tableDate: undefined as ProTable | undefined,
 		backupChartOptions: undefined as ChartOptionsType | undefined,
 		waterMarkUrl: undefined as string | undefined,
 		waterMarkOptions: false as WaterMarkOptionType | false,

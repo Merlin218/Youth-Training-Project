@@ -6,12 +6,12 @@ declare module 'vue' {
 	export interface GlobalComponents {
 		AAvatar: typeof import('ant-design-vue/es')['Avatar'];
 		AButton: typeof import('ant-design-vue/es')['Button'];
+		ACard: typeof import('ant-design-vue/es')['Card'];
 		ACheckboxGroup: typeof import('ant-design-vue/es')['CheckboxGroup'];
 		ACol: typeof import('ant-design-vue/es')['Col'];
 		ACollapse: typeof import('ant-design-vue/es')['Collapse'];
 		ACollapsePanel: typeof import('ant-design-vue/es')['CollapsePanel'];
 		ADivider: typeof import('ant-design-vue/es')['Divider'];
-		ACard: typeof import('ant-design-vue/es')['Card'];
 		ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
 		AEmpty: typeof import('ant-design-vue/es')['Empty'];
 		AForm: typeof import('ant-design-vue/es')['Form'];
@@ -25,6 +25,7 @@ declare module 'vue' {
 		AMenu: typeof import('ant-design-vue/es')['Menu'];
 		AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
 		AModal: typeof import('ant-design-vue/es')['Modal'];
+		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		APopconfirm: typeof import('ant-design-vue/es')['Popconfirm'];
 		APopover: typeof import('ant-design-vue/es')['Popover'];
 		ARadio: typeof import('ant-design-vue/es')['Radio'];
@@ -37,9 +38,9 @@ declare module 'vue' {
 		ATable: typeof import('ant-design-vue/es')['Table'];
 		ATag: typeof import('ant-design-vue/es')['Tag'];
 		ATextarea: typeof import('ant-design-vue/es')['Textarea'];
-		AnnotationConfig: typeof import('./pages/visual/components/configs/AnnotationConfig.vue')['default'];
 		AxisConfig: typeof import('./pages/visual/components/configs/AxisConfig.vue')['default'];
 		BaseConfig: typeof import('./pages/visual/components/configs/BaseConfig.vue')['default'];
+		Changepassword: typeof import('./pages/login/changepassword.vue')['default'];
 		ChartConfig: typeof import('./pages/visual/components/ChartConfig.vue')['default'];
 		ChartDisplay: typeof import('./pages/visual/components/views/ChartDisplay.vue')['default'];
 		ChartGrid: typeof import('./pages/visual/components/views/ChartGrid.vue')['default'];
@@ -51,7 +52,6 @@ declare module 'vue' {
 		FieldSelect: typeof import('./pages/preproccess/preproccess/FieldSelect.vue')['default'];
 		FieldSift: typeof import('./pages/preproccess/preproccess/FieldSift.vue')['default'];
 		HandleFile: typeof import('./pages/start/components/HandleFile.vue')['default'];
-		HelloWorld: typeof import('./components/HelloWorld.vue')['default'];
 		Image: typeof import('./pages/publish/components/Image.vue')['default'];
 		KeyConfig: typeof import('./pages/visual/components/configs/KeyConfig.vue')['default'];
 		LegendConfig: typeof import('./pages/visual/components/configs/LegendConfig.vue')['default'];
@@ -59,11 +59,15 @@ declare module 'vue' {
 		Modal: typeof import('./pages/projects/components/Modal.vue')['default'];
 		MultipleForm: typeof import('./pages/publish/components/MultipleForm.vue')['default'];
 		OtherConfig: typeof import('./pages/visual/components/configs/OtherConfig.vue')['default'];
+		ProjectList: typeof import('./pages/projects/components/ProjectList.vue')['default'];
+		Register: typeof import('./pages/login/register.vue')['default'];
+		Scroller: typeof import('./components/Scroller.vue')['default'];
 		SelectSample: typeof import('./pages/start/components/SelectSample.vue')['default'];
 		TableEdit: typeof import('./components/TableEdit.vue')['default'];
 		TableEditor: typeof import('./pages/preproccess/preproccess/TableEditor.vue')['default'];
 		TextAnnotationConfig: typeof import('./pages/visual/components/configs/annotation/TextAnnotationConfig.vue')['default'];
 		TextArea: typeof import('./pages/start/components/TextArea.vue')['default'];
+		TooltipConfig: typeof import('./pages/visual/components/configs/TooltipConfig.vue')['default'];
 		Undefined: typeof import('./pages/index.vue')['default'];
 		Visual: typeof import('./pages/visual/visual.vue')['default'];
 		WaterMarkConfig: typeof import('./pages/visual/components/configs/WaterMarkConfig.vue')['default'];
