@@ -4,7 +4,7 @@
 		<a-button type="primary" ghost @click="toggleCompModal"><PlusOutlined />计算属性</a-button>
 	</div>
 	<div class="table">
-		<a-table  :row-key="(record:any) => record.cid" :pagination="false" :row-selection="rowSelection" :columns="colName" :data-source="colData">
+		<a-table :row-key="(record:any) => record.cid" :pagination="false" :row-selection="rowSelection" :columns="colName" :data-source="colData">
 			<template #name="{ text }">
 				<a>{{ text }}</a>
 			</template>

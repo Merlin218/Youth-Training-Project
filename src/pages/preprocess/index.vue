@@ -19,7 +19,7 @@
 			<FieldDefine></FieldDefine>
 		</section>
 		<section id="tableSubmit">
-			<a-button type="primary" @click="showModal(0)">下一步</a-button>
+			<a-button type="primary" style="margin-left: 10px" @click="showModal(0)">下一步</a-button>
 			<a-button type="primary" @click="showModal(1)">保存表格</a-button>
 		</section>
 	</div>
