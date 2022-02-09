@@ -6,7 +6,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import type { SelectProps } from 'ant-design-vue';
-import 'default-passive-events';
 
 export default defineComponent({
 	emits: ['selected'],

@@ -21,7 +21,6 @@ specifiers:
   conventional-changelog-cli: ^2.2.2
   cross-env: ^7.0.2
   dart-sass: ^1.25.0
-  default-passive-events: ^2.0.0
   eslint: ^8.7.0
   eslint-config-airbnb-base: ^15.0.0
   eslint-config-prettier: ^8.3.0
@@ -62,7 +61,6 @@ dependencies:
   axios: registry.npmmirror.com/axios/0.25.0
   clipboard: registry.npmmirror.com/clipboard/2.0.10
   codemirror: registry.npmmirror.com/codemirror/5.65.1
-  default-passive-events: 2.0.0
   html2canvas: registry.npmmirror.com/html2canvas/1.4.1
   mathjs: 10.1.1
   pinia: registry.npmmirror.com/pinia/2.0.0-rc.10_typescript@4.5.4+vue@3.2.27
@@ -438,10 +436,6 @@ packages:
   /decode-uri-component/0.2.0:
     resolution: { integrity: sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU= }
     engines: { node: '>=0.10' }
-    dev: false
-
-  /default-passive-events/2.0.0:
-    resolution: { integrity: sha512-eMtt76GpDVngZQ3ocgvRcNCklUMwID1PaNbCNxfpDXuiOXttSh0HzBbda1HU9SIUsDc02vb7g9+3I5tlqe/qMQ== }
     dev: false
 
   /define-property/0.2.5:
