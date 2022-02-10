@@ -76,6 +76,7 @@ const getOptions = (filter?: (string | undefined)[], such?: any) => {
 // 	() => fieldConfig.value.xField,
 // 	v => {
 // 		sortKeys(store.tableData, v);
+// 		console.log(store.tableData)
 // 	}
 // );
 </script>

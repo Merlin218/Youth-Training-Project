@@ -115,11 +115,12 @@ function nextStep() {
 		);
 	} else {
 		const compCols = store.tableExport.cols.filter(d => TableCol.colType.find(dd => dd.typeName === d.type)?.compareable);
+		const uncompCols = store.tableExport.cols.filter(d => !TableCol.colType.find(dd => dd.typeName === d.type)?.compareable);
 		if (!compCols.length) {
 			message.error('可计算字段数少于1');
 			return;
 		}
-		store.tableExport.x = compCols.slice(0).shift().cKey;
+		store.tableExport.x = uncompCols.slice(0).shift().cKey || compCols.slice(0).shift().cKey;
 		store.tableExport.y = compCols.slice(0).pop().cKey;
 		router.push('visual');
 	}
