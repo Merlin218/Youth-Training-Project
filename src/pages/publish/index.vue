@@ -47,11 +47,11 @@ provide('getImgUrl', () => imgUrl.value);
 provide('updateProjectImage', async () => {
 	imgUrl.value = await html2image(document.getElementById('publishChart') as HTMLElement);
 	const res = await publishApi.updateCurrentChartPicExport({
-		project_id: projectStore.project_id || '32958067-a627-4b64-abaa-43c52734b649',
-		chartpic_id: visualStore.chartPicId || '902004e8-51df-4380-811a-e983dbe136fc',
+		project_id: projectStore.project_id,
+		chartpic_id: visualStore.chartPicId || projectStore.chartData.chartpic_id,
 		export_img: imgUrl.value,
 	});
-	console.log(res);
+	console.log(visualStore.chartPicId, res);
 });
 
 onMounted(async () => {

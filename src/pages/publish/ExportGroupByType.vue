@@ -69,6 +69,12 @@ const code = ref<string>('');
 const tableData = ref(visualStore.backupChartOptions?.data);
 const getImgUrl = inject('getImgUrl') as () => string;
 
+const getTableData = async () => {
+	const res = await publishApi.getProjectsData({ project_id: projectStore.project_id });
+	tableData.value = JSON.parse(res.result.data).data;
+	console.log(tableData.value);
+};
+
 const exportFunctions = {
 	image: () => {
 		downloadFile(getImgUrl(), `${projectStore.title || 'chart'}.${image.value.exportType}`);
@@ -106,8 +112,9 @@ const exportResult = () => {
 };
 
 onMounted(async () => {
+	getTableData();
 	const { result } = (await publishApi.getChartPicHtmlString({
-		chartpic_id: visualStore.chartPicId,
+		chartpic_id: visualStore.chartPicId || projectStore.chartData.chartpic_id,
 	})) as { result: { data: string } };
 	code.value = result.data;
 });
