@@ -5,7 +5,7 @@
 		</template>
 		新建项目
 	</a-button>
-	<a-modal v-model:visible="visible" title="新建项目" :confirm-loading="confirmLoading" @ok="handleOk">
+	<a-modal v-model:visible="visible" title="新建项目" @ok="handleOk">
 		<p>为你的新项目起一个名字</p>
 		<a-input v-model:value="value" placeholder="项目名称" />
 	</a-modal>
@@ -25,16 +25,13 @@ export default defineComponent({
 		const router = useRouter();
 		const projectStore = useProjectStore();
 		const visible = ref<boolean>(false);
-		const confirmLoading = ref<boolean>(false);
 		const value = ref<string>('');
 		const handleOk = async () => {
-			confirmLoading.value = true;
 			const res = await projectsApi.addProject({
 				project_name: value.value,
 			});
 			console.log(res);
 			visible.value = false;
-			confirmLoading.value = false;
 			const { project_id: projectId } = res.result.data;
 			projectStore.updateProjectId(projectId);
 			router.push({ path: '/start', query: { project_id: projectId } });
@@ -46,7 +43,6 @@ export default defineComponent({
 
 		return {
 			visible,
-			confirmLoading,
 			handleOk,
 			handleCreate,
 			value,

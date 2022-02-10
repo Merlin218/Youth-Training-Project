@@ -5,10 +5,10 @@
 			<template v-if="route.path !== '/login'">
 				<a-menu theme="dark" :selected-keys="selectedKeys" :inline-collapsed="false" mode="horizontal" @select="handleMenuChange">
 					<a-menu-item key="/projects"> 项目 </a-menu-item>
-					<a-menu-item key="/start"> 开始 </a-menu-item>
+					<!-- <a-menu-item key="/start"> 开始 </a-menu-item>
 					<a-menu-item key="/preprocess"> 预处理 </a-menu-item>
 					<a-menu-item key="/visual"> 可视化 </a-menu-item>
-					<a-menu-item key="/publish"> 发布 </a-menu-item>
+					<a-menu-item key="/publish"> 发布 </a-menu-item> -->
 				</a-menu>
 				<template v-if="store.username">
 					<a-dropdown trigger="click">
@@ -65,6 +65,7 @@ const handleMenuChange = ({ key }: { key: string }) => {
 	selectedKeys.value = [key];
 	router.push(key);
 	nextTick(() => {
+		scroller.value.refreshScroll();
 		scroller.value.scrollToTop(0);
 	});
 };
@@ -87,7 +88,9 @@ watch(
 	}
 );
 
-onMounted(() => {});
+onMounted(() => {
+	scroller.value.refreshScroll();
+});
 </script>
 
 <style lang="scss" scoped>
