@@ -10,7 +10,7 @@
 					<a-menu-item key="/visual"> 可视化 </a-menu-item>
 					<a-menu-item key="/publish"> 发布 </a-menu-item> -->
 				</a-menu>
-				<template v-if="store.username">
+				<template v-if="isLogin">
 					<a-dropdown trigger="click">
 						<a-avatar size="large" style="cursor: pointer">
 							<UserOutlined />
@@ -66,6 +66,7 @@ const scroller = ref();
 
 const selectedKeys = ref<Array<string>>([route.path]);
 const stepStatus = ref(0);
+const isLogin = ref<boolean>(!!docCookies.getItem('user'));
 
 const isShowSteps = computed(() => route.path !== '/projects' && route.path !== '/login');
 
@@ -101,6 +102,7 @@ const logout = async () => {
 watch(
 	() => route.path,
 	newPath => {
+		isLogin.value = !!docCookies.getItem('user');
 		handleMenuChange({ key: newPath });
 	}
 );
