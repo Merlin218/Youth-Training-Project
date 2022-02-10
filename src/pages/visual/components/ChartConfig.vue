@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 11:12:39
+ * @LastEditTime: 2022-02-10 13:59:21
  * @Description: 请填写简介
 -->
 <template>
@@ -139,6 +139,7 @@ const stepConfig = ref([
 
 // 返回
 const handleBack = () => {
+	visualStore.destroy();
 	router.push({
 		path: '/visual/select',
 		query: {
