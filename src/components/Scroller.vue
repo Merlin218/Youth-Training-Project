@@ -31,7 +31,7 @@ const props = withDefaults(
 );
 
 // eslint-disable-next-line no-unused-vars
-let betterScroll = null;
+let betterScroll: any = null;
 
 const wrapperHeight = computed(() => (Number.isNaN(Number(props.height)) ? props.height : `${props.height}px`));
 
@@ -51,12 +51,19 @@ const initScroller = () => {
 	});
 };
 
+const refreshScroll = () => {
+	setTimeout(() => {
+		console.log('fresh');
+		betterScroll.refresh();
+	}, 2000);
+};
+
 const scrollToTop = (time = 300) => {
 	betterScroll.scrollTo(0, 0, time);
 };
 
-let observer = null;
-let timer = null;
+let observer: any = null;
+let timer: any = null;
 
 const initResizeListener = () => {
 	const element = document.getElementById('scrollContent');
@@ -84,6 +91,7 @@ onMounted(() => {
 });
 
 defineExpose({
+	refreshScroll,
 	scrollToTop,
 });
 </script>
