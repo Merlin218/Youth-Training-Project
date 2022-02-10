@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject, onMounted, computed } from 'vue';
 import * as XLSX from 'xlsx';
 import { useRouter } from 'vue-router';
 import Image from './components/Image.vue';
@@ -66,22 +66,23 @@ const onTabChange = (key: exportTypes) => {
 };
 
 const code = ref<string>('');
-const tableData = ref(visualStore.backupChartOptions?.data);
+const tableData = ref();
 const getImgUrl = inject('getImgUrl') as () => string;
+const chartpicId = computed(() => visualStore.chartPicId || projectStore.chartData[0].chartpic_id);
+const fileTitle = computed(() => projectStore.title || projectStore.chartData[0].chart_title || 'chart');
 
 const getTableData = async () => {
 	const res = await publishApi.getProjectsData({ project_id: projectStore.project_id });
-	tableData.value = JSON.parse(res.result.data).data;
-	console.log(tableData.value);
+	tableData.value = visualStore.backupChartOptions?.data || JSON.parse(res.result.data).data;
 };
 
 const exportFunctions = {
 	image: () => {
-		downloadFile(getImgUrl(), `${projectStore.title || 'chart'}.${image.value.exportType}`);
+		downloadFile(getImgUrl(), `${fileTitle.value}.${image.value.exportType}`);
 	},
 	dataTable: () => {
 		const workbook = XLSX.utils.book_new();
-		const worksheet = XLSX.utils.json_to_sheet(visualStore.backupChartOptions?.data || []);
+		const worksheet = XLSX.utils.json_to_sheet(tableData.value || []);
 		XLSX.utils.book_append_sheet(workbook, worksheet, 'sheet1');
 		const workbookOut = XLSX.write(workbook, {
 			bookType: 'xlsx',
@@ -96,14 +97,14 @@ const exportFunctions = {
 			view[i] = workbookOut.charCodeAt(i) & 0xff;
 		}
 		const url = URL.createObjectURL(new Blob([buf], { type: 'application/octet-stream' }));
-		downloadFile(url, `${projectStore.title || 'chart'}.xlsx`);
+		downloadFile(url, `${fileTitle.value}.xlsx`);
 	},
 	code: async () => {
 		const res = await publishApi.getChartPicHtmlFile({
-			chartpic_id: visualStore.chartPicId,
+			chartpic_id: chartpicId.value,
 		});
 		const content = new Blob([res as string]);
-		downloadFile(URL.createObjectURL(content), `${projectStore.title || 'chart'}.html`);
+		downloadFile(URL.createObjectURL(content), `${fileTitle.value}.html`);
 	},
 };
 
@@ -114,7 +115,7 @@ const exportResult = () => {
 onMounted(async () => {
 	getTableData();
 	const { result } = (await publishApi.getChartPicHtmlString({
-		chartpic_id: visualStore.chartPicId || projectStore.chartData.chartpic_id,
+		chartpic_id: chartpicId.value,
 	})) as { result: { data: string } };
 	code.value = result.data;
 });
