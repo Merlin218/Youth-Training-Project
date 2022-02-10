@@ -52,6 +52,7 @@ import FieldSelect from './preprocess/FieldSelect.vue';
 import FieldDefine from './preprocess/FieldDefine.vue';
 import { TableCol } from './preprocess/ProTable';
 import { getProjectId } from '../start/components/GetProjectId';
+import { startApi } from '@/api';
 
 const store = useTableStore();
 const { table } = store;
@@ -87,7 +88,7 @@ function showModal(type: number) {
 }
 
 // 下一步与保存数据按钮
-function nextStep() {
+async function nextStep() {
 	if (!table.geted) {
 		message.error('表格获取失败');
 		state.expVis = false;
@@ -115,12 +116,17 @@ function nextStep() {
 		);
 	} else {
 		const compCols = store.tableExport.cols.filter(d => TableCol.colType.find(dd => dd.typeName === d.type)?.compareable);
+		const uncompCols = store.tableExport.cols.filter(d => !TableCol.colType.find(dd => dd.typeName === d.type)?.compareable);
 		if (!compCols.length) {
 			message.error('可计算字段数少于1');
 			return;
 		}
-		store.tableExport.x = compCols.slice(0).shift().cKey;
+		store.tableExport.x = uncompCols.slice(0).shift().cKey || compCols.slice(0).shift().cKey;
 		store.tableExport.y = compCols.slice(0).pop().cKey;
+		await startApi.updateProjectStatus({
+			project_id: store.project_id,
+			second_finished: 1,
+		});
 		router.push('visual');
 	}
 }
@@ -141,7 +147,7 @@ header {
 }
 
 #tableSelects {
-	height: calc(60% - 40px);
+	height: calc(55% - 40px);
 	display: flex;
 	#TableEditor {
 		height: 100%;
@@ -159,8 +165,8 @@ header {
 
 #FiledDefs {
 	overflow: auto;
-	height: calc(40% - 40px);
-	padding: 3vh 2vw;
+	height: calc(45% - 40px);
+	padding: 1vh 2vw;
 }
 
 #tableSubmit {
