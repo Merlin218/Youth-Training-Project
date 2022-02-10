@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 10:11:49
+ * @LastEditTime: 2022-02-10 11:12:39
  * @Description: 请填写简介
 -->
 <template>
@@ -110,7 +110,7 @@ const handleTableChange = (newTable: any) => {
 const displayActive = ref(['1']);
 
 // 当前步骤
-const stepActive = ref('5');
+const stepActive = ref('');
 // 步骤配置
 const stepConfig = ref([
 	{
@@ -202,6 +202,12 @@ const toNext = async () => {
 		// eslint-disable-next-line no-empty
 	} catch (err) {}
 };
+
+onBeforeMount(() => {
+	if (visualStore.waterMarkOptions !== false) {
+		stepActive.value = '5';
+	}
+});
 
 onMounted(() => {
 	stepActive.value = '';

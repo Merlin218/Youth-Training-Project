@@ -4,7 +4,7 @@
 			<div class="logo" />
 			<template v-if="route.path !== '/login'">
 				<a-menu theme="dark" :selected-keys="selectedKeys" :inline-collapsed="false" mode="horizontal" @select="handleMenuChange">
-					<a-menu-item key="/projects"> 项目 </a-menu-item>
+					<a-menu-item key="/projects"> 我的项目 </a-menu-item>
 					<!-- <a-menu-item key="/start"> 开始 </a-menu-item>
 					<a-menu-item key="/preprocess"> 预处理 </a-menu-item>
 					<a-menu-item key="/visual"> 可视化 </a-menu-item>

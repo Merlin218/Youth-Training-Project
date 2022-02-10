@@ -85,7 +85,7 @@ const request = (AxiosConfig: AxiosRequestConfig, customConfig: CustomConfig) =>
 				customConfigs.loading && hideGlobalMessage();
 				customConfigs.loading &&
 					message.error({
-						content: customConfigs.useMsgFromEnd && err.data.msg ? err.data.msg : customConfigs.errorTitle,
+						content: customConfigs.useMsgFromEnd && err.data.message ? err.data.message : customConfigs.errorTitle,
 						duration: 2,
 					});
 			}
