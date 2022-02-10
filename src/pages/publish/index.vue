@@ -22,7 +22,7 @@
 			</div>
 		</a-col>
 		<a-col :span="15">
-			<ExportGroupByType></ExportGroupByType>
+			<ExportGroupByType :chart-data="chartData"></ExportGroupByType>
 		</a-col>
 	</a-row>
 </template>

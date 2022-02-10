@@ -74,6 +74,11 @@ const contentHeight = computed(() => window.innerHeight - (isShowSteps.value ? 2
 const handleMenuChange = ({ key }: { key: string }) => {
 	if (key.includes(selectedKeys.value[0])) return;
 	selectedKeys.value = [key];
+	['/start', '/preprocess', '/visual', '/publish'].forEach((item, index) => {
+		if (route.path.includes(item)) {
+			stepStatus.value = index;
+		}
+	});
 	router.push(key);
 	nextTick(() => {
 		scroller.value.refreshScroll();
