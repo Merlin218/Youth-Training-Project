@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 04:10:12
+ * @LastEditTime: 2022-02-10 15:00:26
  * @Description: 选择图表
 -->
 <template>
@@ -31,6 +31,7 @@ import { visualApi } from '@/api';
 import { responseType } from '@/types/common';
 import ChartGrid from './views/ChartGrid.vue';
 import { useProjectStore } from '@/store/project';
+import { deepClone } from '@/utils';
 
 const router = useRouter();
 const visualStore = useVisualStore();
@@ -54,7 +55,7 @@ const handleExist = () => {
  */
 const handleInit = async (id: string, tableData: { x: string; y: string; data: any[] }) => {
 	// 合并默认配置项
-	const chartOptions = Object.assign(G2PlotChartConfig[chartType.value].defaultConfigs, {
+	const chartOptions = Object.assign(deepClone(G2PlotChartConfig[chartType.value].defaultConfigs), {
 		xField: tableData.x,
 		yField: tableData.y,
 		data: tableData.data,
@@ -86,6 +87,8 @@ const toConfigPage = async () => {
 				message.error('数据未定义');
 				return;
 			}
+			// const { result } = (await visualApi.getProjectData(projectStore.project_id)) as responseType;
+			// console.log(JSON.parse(result));
 			const { x, y, data } = tableStore.tableExport;
 			tableData = { x, y, data };
 		}
@@ -113,7 +116,7 @@ onMounted(async () => {
 			} = (await visualApi.getAllChartPic(id)) as responseType;
 			// 默认获取第一个图表,保存到store
 			visualStore.backupProjectData(first);
-			// console.log(first);
+			console.log(first);
 			if (first.chart_type !== null && Object.keys(G2PlotChartConfig).includes(first.chart_type)) {
 				showModal.value = true;
 			}

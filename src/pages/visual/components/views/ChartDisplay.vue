@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:43:17
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 03:25:26
+ * @LastEditTime: 2022-02-10 14:59:09
  * @Description: 图表展示
 -->
 <template>
@@ -18,6 +18,7 @@ import { onMounted, ref, watch } from 'vue';
 import { G2PlotChartConfig, getChartInstance } from '@/configs/visual';
 import { ChartNameType, ChartOptionsType } from '@/types/visual/charts';
 import { useVisualStore } from '@/store/visual';
+import { deepClone } from '@/utils';
 
 const store = useVisualStore();
 
@@ -32,13 +33,13 @@ const props = withDefaults(
 		useStore?: boolean; // 是否将实例绑定到store
 	}>(),
 	{
-		id: Date.now().toString(),
+		id: `${Date.now()}`,
 		title: '',
 		name: 'Area',
 		useStore: false,
 		url: '',
 		options: () => {
-			return G2PlotChartConfig.Area.defaultConfigs;
+			return deepClone(G2PlotChartConfig.Area.defaultConfigs);
 		},
 	}
 );
