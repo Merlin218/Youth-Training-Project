@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 13:59:21
+ * @LastEditTime: 2022-02-10 15:26:00
  * @Description: 请填写简介
 -->
 <template>
@@ -48,10 +48,9 @@
 					<!-- 配置基本信息 -->
 					<base-config></base-config>
 				</a-collapse-panel>
-				<a-collapse-panel :key="stepConfig[1].key" :header="stepConfig[1].header">
-					<!-- 配置图表特有信息 -->
-					<other-config></other-config>
-				</a-collapse-panel>
+				<!--		<a-collapse-panel :key="stepConfig[1].key" :header="stepConfig[1].header">
+
+				</a-collapse-panel> -->
 				<a-collapse-panel :key="stepConfig[2].key" :header="stepConfig[2].header">
 					<!-- 标记配置 -->
 					<annotation-config></annotation-config>
@@ -85,7 +84,6 @@ import { useVisualStore } from '@/store/visual';
 import { defaultWaterMarkOption, defaultWaterMarkUrl, G2PlotChartConfig } from '@/configs/visual';
 import { startApi, visualApi } from '@/api';
 import BaseConfig from './configs/BaseConfig.vue';
-import OtherConfig from './configs/OtherConfig.vue';
 import TooltipConfig from './configs/TooltipConfig.vue';
 import AnnotationConfig from './configs/AnnotationConfig.vue';
 import WaterMarkConfig from './configs/WaterMarkConfig.vue';
