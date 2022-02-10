@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:09
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:56:41
+ * @LastEditTime: 2022-02-10 15:10:51
  * @Description: 基本配置
 -->
 <template>
@@ -16,6 +16,8 @@
 		<a-form-item label="图表高度">
 			<a-input-number v-model:value.lazy="baseConfig.height"></a-input-number>
 		</a-form-item>
+		<!-- 配置图表特有信息 -->
+		<other-config></other-config>
 		<a-collapse v-model:activeKey="activeKey" accordion>
 			<a-collapse-panel key="key" header="数据字段"> <key-config></key-config></a-collapse-panel>
 			<a-collapse-panel key="axis" header="坐标轴"> <axis-config></axis-config></a-collapse-panel>
@@ -35,6 +37,7 @@ import { ChartOptionsType } from '@/types/visual/charts';
 import KeyConfig from './KeyConfig.vue';
 import AxisConfig from './AxisConfig.vue';
 import LegendConfig from './LegendConfig.vue';
+import OtherConfig from './OtherConfig.vue';
 
 const store = useVisualStore();
 
