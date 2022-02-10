@@ -23,12 +23,20 @@ export default defineComponent({
 				label: '表格',
 				options: [
 					{
+						value: 'medal',
+						label: '2022 Winter Olympics medal table',
+					},
+					{
+						value: 'gdp',
+						label: 'Historical GDP of China(2005 - 2021)',
+					},
+					{
 						value: 'car',
-						label: 'Electric cars 2018',
+						label: 'Electric cars 2021',
 					},
 					{
 						value: 'museum',
-						label: 'The most visited art museums 2018',
+						label: 'The most visited art museums 2021',
 					},
 				],
 			},
