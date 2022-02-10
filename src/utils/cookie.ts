@@ -49,7 +49,7 @@ const docCookies = {
 		document.cookie = `${encodeURIComponent(sKey)}=${encodeURIComponent(sValue)}${sExpires}${sDomain ? `; domain=${sDomain}` : ''}${sPath ? `; path=${sPath}` : ''}${bSecure ? '; secure' : ''}`;
 		return true;
 	},
-	removeItem(sKey: string, sPath: string, sDomain: string) {
+	removeItem(sKey: string, sPath: string, sDomain: string = '') {
 		if (!sKey || !this.hasItem(sKey)) {
 			return false;
 		}
