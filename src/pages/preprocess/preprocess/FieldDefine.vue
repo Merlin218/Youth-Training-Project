@@ -8,11 +8,11 @@
 				<a-select ref="select" v-model:value="record.type" :options="colType" @change="typeChange(record)"> </a-select>
 			</template>
 			<template #defineRange="{ record }">
-				<a-button type="primary" @click="toggleOnEdit(record.cid, 'dataDef')">点击定义</a-button>
+				<a-button type="primary" :disabled="record?.errors?.typeErr" @click="toggleOnEdit(record.cid, 'dataDef')">点击定义</a-button>
 				<FieldSift :col-id="record.cid" modal-type="dataDef"></FieldSift>
 			</template>
 			<template #defineSift="{ record }">
-				<a-button type="primary" @click="toggleOnEdit(record.cid, 'dataSift')">点击筛选</a-button>
+				<a-button type="primary" :disabled="record?.errors?.typeErr" @click="toggleOnEdit(record.cid, 'dataSift')">点击筛选</a-button>
 				<FieldSift :col-id="record.cid" modal-type="dataSift"> </FieldSift>
 			</template>
 			<template #errors="{ record }">
@@ -81,7 +81,7 @@ function typeChange(record: any) {
 	record.initColDefine();
 	record.initColSift();
 	record.errors.typeErr = record.checkType();
-	record.errors.haveError = record.errors.haveError || record.errors.typeErr;
+	record.errors.haveError = record.errors?.maxErr?.size || record.errors?.minErr?.size || record.errors?.nnErr?.size || record.errors.typeErr;
 }
 
 // 生成错误信息
