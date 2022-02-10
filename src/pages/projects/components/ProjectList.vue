@@ -34,7 +34,7 @@
 import { defineComponent, toRefs, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { useProjectStore } from '@/store/project';
-import { projectsApi } from '@/api';
+import { projectsApi, visualApi } from '@/api';
 
 export default defineComponent({
 	name: 'ProjectList',
@@ -50,7 +50,7 @@ export default defineComponent({
 		console.log(inject('refreshList'));
 		const router = useRouter();
 		const projectStore = useProjectStore();
-		const handleJump = item => {
+		const handleJump = async item => {
 			let path = '';
 			if (item.index_pic !== null || item.third_finished === 1) {
 				path = '/publish';
@@ -62,6 +62,9 @@ export default defineComponent({
 				path = '/start';
 			}
 			projectStore.updateProjectId(item.project_id);
+			const res = await visualApi.getAllChartPic(item.project_id);
+			projectStore.updateChartData(res.result.data);
+			console.log(11212, projectStore.chartData);
 			router.push({ path, query: { project_id: item.project_id } });
 		};
 		const handleDelete = async item => {
