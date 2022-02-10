@@ -23,6 +23,7 @@ import { ComputedRef, computed, ref, watch } from 'vue';
 import { useVisualStore } from '@/store/visual';
 import { Mutable } from '@/types/common';
 import { ChartOptionsType } from '@/types/visual/charts';
+// import { sortKeys } from '@/utils/preprocess';
 
 const store = useVisualStore();
 
@@ -71,6 +72,13 @@ const getOptions = (filter?: (string | undefined)[], such?: any) => {
 		};
 	});
 };
+// watch(
+// 	() => fieldConfig.value.xField,
+// 	v => {
+// 		sortKeys(store.tableData, v);
+// 		console.log(store.tableData)
+// 	}
+// );
 </script>
 
 <script lang="ts">

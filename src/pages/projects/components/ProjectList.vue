@@ -85,8 +85,12 @@ export default defineComponent({
 		grid-template-rows: repeat(auto-fill, 300px);
 		grid-gap: 20px;
 	}
+	&__item:hover {
+		box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+	}
 	&__item {
 		position: relative;
+		transition: box-shadow 0.3s;
 		height: 300px;
 		padding: 14px 25px;
 		border-radius: 16px;

@@ -47,3 +47,16 @@ export function removeSpace(data) {
 	});
 	return newData;
 }
+
+export function sortKeys(table, key) {
+	const tab = new ProTable({
+		title: table.title,
+		data: table.data,
+		cols: table.cols,
+	});
+	const col = tab.cols.find(d => d.cKey === key || d.cname === key);
+	if (!col) return;
+	const { typeObj } = col.getColTypeData();
+	tab.data.sort((a, b) => 0.5 - typeObj.isLeq(a[key], b[key]));
+	table.data = tab.data;
+}
