@@ -23,7 +23,7 @@ import { ComputedRef, computed, ref, watch } from 'vue';
 import { useVisualStore } from '@/store/visual';
 import { Mutable } from '@/types/common';
 import { ChartOptionsType } from '@/types/visual/charts';
-import { sortKeys } from '@/utils/preprocess';
+// import { sortKeys } from '@/utils/preprocess';
 
 const store = useVisualStore();
 

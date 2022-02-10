@@ -142,7 +142,7 @@ header {
 }
 
 #tableSelects {
-	height: calc(60% - 40px);
+	height: calc(55% - 40px);
 	display: flex;
 	#TableEditor {
 		height: 100%;
@@ -160,8 +160,8 @@ header {
 
 #FiledDefs {
 	overflow: auto;
-	height: calc(40% - 40px);
-	padding: 3vh 2vw;
+	height: calc(45% - 40px);
+	padding: 1vh 2vw;
 }
 
 #tableSubmit {
