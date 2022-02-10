@@ -1,6 +1,6 @@
 // 表单数据
 export interface ChartData {
-	id: 12;
+	id: number;
 	chartpic_id: string; // 图表id
 	project_id: string; // 项目id
 	chart_type: string; // 图表类型
