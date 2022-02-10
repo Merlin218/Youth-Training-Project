@@ -15,6 +15,7 @@
 					<MultipleForm></MultipleForm>
 				</template>
 			</div>
+			<a-button type="primary" style="float: right; margin: 16px 10px" @click="toProjects">返回首页</a-button>
 			<a-button type="primary" style="float: right; margin: 16px 10px" @click="exportResult">导出</a-button>
 		</a-card>
 	</div>
@@ -23,6 +24,7 @@
 <script lang="ts" setup>
 import { ref, inject, onMounted } from 'vue';
 import * as XLSX from 'xlsx';
+import { useRouter } from 'vue-router';
 import Image from './components/Image.vue';
 import DataTable from './components/DataTable.vue';
 import CodeEditor from '@/components/CodeEditor.vue';
@@ -109,6 +111,12 @@ onMounted(async () => {
 	})) as { result: { data: string } };
 	code.value = result.data;
 });
+
+const router = useRouter();
+
+const toProjects = () => {
+	router.push('/projects');
+};
 </script>
 
 <script lang="ts">

@@ -2,6 +2,7 @@
 	<div class="container">
 		<div class="bg"></div>
 		<div class="new-project">
+			<h1 class="username">您好，{{ username }}</h1>
 			<Modal />
 		</div>
 		<div class="project">
@@ -25,11 +26,12 @@
 </template>
 
 <script lang="ts">
-import { onMounted, reactive, toRefs, ref, defineComponent, provide } from 'vue';
+import { onMounted, reactive, toRefs, ref, defineComponent, provide, computed } from 'vue';
 import { FilterOutlined } from '@ant-design/icons-vue';
 import { projectsApi } from '@/api';
 import ProjectList from './components/ProjectList.vue';
 import Modal from './components/Modal.vue';
+import { useMainStore } from '@/store/user';
 
 export default defineComponent({
 	name: 'Projects',
@@ -39,6 +41,8 @@ export default defineComponent({
 		FilterOutlined,
 	},
 	setup() {
+		const store = useMainStore();
+		const username = computed(() => store.username);
 		const state = reactive({});
 		let recentProject: Array<Object> = [];
 		const recentEdit = ref([]);
@@ -97,6 +101,7 @@ export default defineComponent({
 			...toRefs(state),
 			recentEdit,
 			recentPost,
+			username,
 			reverseEditList,
 			handleReverseEditList,
 			reversePostList,
@@ -113,6 +118,17 @@ h2 {
 .container {
 	margin: 0 40px 60px 40px;
 	position: relative;
+	.new-project {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.username {
+			font-size: 34px;
+			line-height: 34px;
+			height: 34px;
+			margin: 0;
+		}
+	}
 	.new-project,
 	.project {
 		z-index: 1;

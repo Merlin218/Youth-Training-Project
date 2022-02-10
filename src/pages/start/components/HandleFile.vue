@@ -70,14 +70,15 @@ export default defineComponent({
 .file {
 	position: relative;
 	display: inline-block;
-	background: #1890ff;
-	border-radius: 2px;
+	background: #536dfe;
+	border-radius: 16px;
 	padding: 6px 18px;
 	overflow: hidden;
 	color: #fff;
 	text-decoration: none;
 	text-indent: 0;
 	line-height: 20px;
+	transition: box-shadow 0.3s;
 }
 
 .file input {
@@ -88,8 +89,9 @@ export default defineComponent({
 	bottom: 0;
 }
 .file:hover {
-	background: #1890ff;
+	background: #536dfe;
 	color: #fff;
 	text-decoration: none;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 </style>

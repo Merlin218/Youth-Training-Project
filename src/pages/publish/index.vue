@@ -2,15 +2,15 @@
  * @Author: Merlin218
  * @Date: 2022-02-09 12:16:34
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:53:02
+ * @LastEditTime: 2022-02-10 11:39:33
  * @Description: 请填写简介
 -->
 <template>
 	<h1>在此发布你的作品</h1>
 	<br />
-	<a-row>
+	<a-row type="flex" justify="center" align="top">
 		<a-col :span="8">
-			<div style="height: 300px; width: 400px; border: 1px solid rgba(0, 0, 0, 0.2)">
+			<div class="display">
 				<ChartDisplay
 					id="publishChart"
 					class="chartWrapper"
@@ -22,7 +22,6 @@
 				></ChartDisplay>
 			</div>
 		</a-col>
-		<a-col :span="1"></a-col>
 		<a-col :span="15">
 			<ExportGroupByType></ExportGroupByType>
 		</a-col>
@@ -62,4 +61,14 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.display {
+	height: 300px;
+	width: 400px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
