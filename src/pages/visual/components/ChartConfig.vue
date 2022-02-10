@@ -93,9 +93,11 @@ import TableEdit from '@/components/TableEdit.vue';
 import ChartDisplay from './views/ChartDisplay.vue';
 import { useProjectStore } from '@/store/project';
 import { responseType } from '@/types/common';
+import { getProjectId } from '../../start/components/GetProjectId';
 
 const router = useRouter();
 const visualStore = useVisualStore();
+const projectId = getProjectId();
 
 const table = computed(() => visualStore.tableData);
 /**
@@ -195,7 +197,9 @@ const toNext = async () => {
 		});
 		// 更新状态
 		await startApi.updateProjectStatus({
-			project_id: projectStore.project_id,
+			project_id: projectId,
+			first_finished: 1,
+			second_finished: 1,
 			third_finished: 1,
 		});
 		router.push('/publish');
