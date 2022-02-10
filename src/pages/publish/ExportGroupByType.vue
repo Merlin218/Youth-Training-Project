@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, inject, onMounted, computed } from 'vue';
+import { ref, inject, onMounted, watch, computed } from 'vue';
 import * as XLSX from 'xlsx';
 import { useRouter } from 'vue-router';
 import Image from './components/Image.vue';
@@ -35,6 +35,10 @@ import { useVisualStore } from '@/store/visual';
 import { useProjectStore } from '@/store/project';
 
 type exportTypes = 'image' | 'dataTable' | 'code';
+
+const props = defineProps<{
+	chartData: any;
+}>();
 
 const visualStore = useVisualStore();
 const projectStore = useProjectStore();
@@ -71,9 +75,16 @@ const getImgUrl = inject('getImgUrl') as () => string;
 const chartpicId = computed(() => visualStore.chartPicId || projectStore.chartData[0].chartpic_id);
 const fileTitle = computed(() => projectStore.title || projectStore.chartData[0].chart_title || 'chart');
 
+watch(
+	() => props.chartData,
+	() => {
+		getTableData();
+	}
+);
+
 const getTableData = async () => {
 	const res = await publishApi.getProjectsData({ project_id: projectStore.project_id });
-	tableData.value = visualStore.backupChartOptions?.data || JSON.parse(res.result.data).data;
+	tableData.value = props.chartData.visConfig.data || JSON.parse(res.result.data).data;
 };
 
 const exportFunctions = {
@@ -113,7 +124,6 @@ const exportResult = () => {
 };
 
 onMounted(async () => {
-	getTableData();
 	const { result } = (await publishApi.getChartPicHtmlString({
 		chartpic_id: chartpicId.value,
 	})) as { result: { data: string } };
