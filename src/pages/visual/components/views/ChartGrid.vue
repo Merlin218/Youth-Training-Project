@@ -2,13 +2,13 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:31:24
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 23:07:12
+ * @LastEditTime: 2022-02-10 14:27:32
  * @Description: 图表矩阵
 -->
 <template>
-	<div class="component__grid">
+	<div v-if="router.currentRoute.value.path === '/visual/select'" class="component__grid">
 		<div v-for="(component, index) in componentList" :key="index" :class="activeIdx === index ? 'component__item active' : 'component__item'" @click="changeActiveIdx(index)">
-			<chart-display :id="index + new Date().toString()" :url="false" :name="index" :options="component.defaultConfigs" :water-mark-options="false" :use-store="false"></chart-display>
+			<chart-display :id="index + new Date().toString()" :url="false" :name="index" :options="deepClone(component.defaultConfigs)" :water-mark-options="false" :use-store="false"></chart-display>
 			<p class="component__text">{{ component.text }}</p>
 		</div>
 	</div>
@@ -16,9 +16,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { G2PlotChartConfig } from '@/configs/visual';
 import { ChartNameType } from '@/types/visual/charts';
 import ChartDisplay from './ChartDisplay.vue';
+import { deepClone } from '@/utils';
+
+const router = useRouter();
 
 const emit = defineEmits(['update:name']);
 const props = defineProps<{
