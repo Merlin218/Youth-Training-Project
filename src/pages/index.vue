@@ -30,15 +30,15 @@
 			</template>
 		</a-layout-header>
 		<a-layout-content class="content">
-			<!-- <div class="stepWrapper">
-				<a-steps v-model:current="currentStep" type="navigation">
-					<a-step status="finish" title="开始" />
-					<a-step status="process" title="预处理" />
-					<a-step status="wait" title="可视化" />
-					<a-step status="wait" title="发布" />
+			<div v-if="isShowSteps" class="stepWrapper">
+				<a-steps v-model:current="stepStatus" size="small" type="navigation">
+					<a-step title="开始" @click="handleMenuChange({ key: '/start' })" />
+					<a-step title="预处理" @click="handleMenuChange({ key: '/preprocess' })" />
+					<a-step title="可视化" @click="handleMenuChange({ key: '/visual' })" />
+					<a-step title="发布" @click="handleMenuChange({ key: '/publish' })" />
 				</a-steps>
-			</div> -->
-			<Scroller ref="scroller" :height="contentHeight" background-color="#fff" style="border-radius: 16px">
+			</div>
+			<Scroller ref="scroller" :height="contentHeight" background-color="#fff" :style="{ borderRadius: `${isShowSteps ? '0 0 16px' : ''} 16px` }">
 				<div class="scrollContent" :style="{ padding: '40px 20px' }">
 					<router-view v-slot="{ Component }">
 						<component :is="Component"></component>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, nextTick } from 'vue';
+import { ref, watch, computed, onMounted, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
 import docCookies from '@/utils/cookie';
@@ -65,9 +65,11 @@ const store = useMainStore();
 const scroller = ref();
 
 const selectedKeys = ref<Array<string>>([route.path]);
-// const currentStep = ref<number>(0);
+const stepStatus = ref(0);
 
-const contentHeight = window.innerHeight - 141;
+const isShowSteps = computed(() => route.path !== '/projects' && route.path !== '/login');
+
+const contentHeight = computed(() => window.innerHeight - (isShowSteps.value ? 209 : 141));
 
 const handleMenuChange = ({ key }: { key: string }) => {
 	if (key.includes(selectedKeys.value[0])) return;
@@ -127,7 +129,8 @@ onMounted(() => {
 	margin-top: 70px;
 }
 .stepWrapper {
-	padding: 0 100px;
+	border-radius: 16px 16px 0 0;
+	padding: 20px 100px 0;
 	background-color: #fff;
 }
 .footer {

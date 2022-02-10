@@ -53,7 +53,6 @@ const initScroller = () => {
 
 const refreshScroll = () => {
 	setTimeout(() => {
-		console.log('fresh');
 		betterScroll.refresh();
 	}, 2000);
 };

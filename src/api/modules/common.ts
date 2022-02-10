@@ -1,16 +1,20 @@
 import createRequest from '../axios';
+import docCookies from '@/utils/cookie';
 
-const testApi = {
-	test: () =>
-		createRequest({
-			url: '/shibes',
-			method: 'get',
-			params: {
-				count: 10,
-				urls: true,
-				httpsUrls: false,
+const commonApi = {
+	getAllProjects: () =>
+		createRequest(
+			{
+				url: '/cms/getAllProjects',
+				method: 'get',
+				params: {
+					user_name: docCookies.getItem('user'),
+				},
 			},
-		}),
+			{
+				loading: false,
+			}
+		),
 };
 
-export default testApi;
+export default commonApi;

@@ -7,13 +7,12 @@ const publishApi = {
 			method: 'post',
 			data,
 		}),
-	getProjectsData: (params: any) => {
+	getProjectsData: (params: any) =>
 		createRequest({
 			url: '/cms/getProjectData',
 			method: 'get',
 			params,
-		});
-	},
+		}),
 	getChartPicHtmlString: (params: any) =>
 		createRequest(
 			{
