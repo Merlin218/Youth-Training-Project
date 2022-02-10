@@ -25,7 +25,7 @@
 			<a-tag v-if="item.first_finished === 1" color="orange">开始</a-tag>
 			<a-tag v-if="item.second_finished === 1" color="green">预处理</a-tag>
 			<a-tag v-if="item.third_finished === 1" color="cyan">绘图</a-tag>
-			<a-tag v-if="item.share_hash !== ''" color="blue">发布</a-tag>
+			<a-tag v-if="item.index_pic !== null" color="blue">发布</a-tag>
 		</div>
 	</div>
 </template>
@@ -52,9 +52,7 @@ export default defineComponent({
 		const projectStore = useProjectStore();
 		const handleJump = item => {
 			let path = '';
-			if (item.share_hash !== '') {
-				path = '/publish';
-			} else if (item.third_finished === 1) {
+			if (item.index_pic !== null || item.third_finished === 1) {
 				path = '/publish';
 			} else if (item.second_finished === 1) {
 				path = '/visual';

@@ -70,7 +70,7 @@ export default defineComponent({
 					}
 				}
 				value.time = time;
-				if (showValue.share_hash !== '') {
+				if (showValue.index_pic !== null) {
 					recentPost.value.push(value);
 				} else {
 					recentEdit.value.push(value);
