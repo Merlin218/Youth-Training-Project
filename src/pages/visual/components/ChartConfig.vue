@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 03:31:17
+ * @LastEditTime: 2022-02-10 11:12:39
  * @Description: 请填写简介
 -->
 <template>
@@ -112,7 +112,7 @@ const handleTableChange = (newTable: any) => {
 const displayActive = ref(['1']);
 
 // 当前步骤
-const stepActive = ref('5');
+const stepActive = ref('');
 // 步骤配置
 const stepConfig = ref([
 	{
@@ -207,6 +207,12 @@ const toNext = async () => {
 	} catch (err) {}
 };
 
+onBeforeMount(() => {
+	if (visualStore.waterMarkOptions !== false) {
+		stepActive.value = '5';
+	}
+});
+
 onMounted(() => {
 	stepActive.value = '';
 });
@@ -229,7 +235,7 @@ onBeforeMount(async () => {
 			visualStore.initChart(first);
 		}
 	} else {
-		message.error('项目不存在', 1);
+		message.warn('请先选择一个项目', 1);
 		message.loading('正在返回首页', 1, () => {
 			router.replace('/projects');
 		});

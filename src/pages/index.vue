@@ -4,7 +4,7 @@
 			<div class="logo" />
 			<template v-if="route.path !== '/login'">
 				<a-menu theme="dark" :selected-keys="selectedKeys" :inline-collapsed="false" mode="horizontal" @select="handleMenuChange">
-					<a-menu-item key="/projects"> 项目 </a-menu-item>
+					<a-menu-item key="/projects"> 我的项目 </a-menu-item>
 					<!-- <a-menu-item key="/start"> 开始 </a-menu-item>
 					<a-menu-item key="/preprocess"> 预处理 </a-menu-item>
 					<a-menu-item key="/visual"> 可视化 </a-menu-item>
@@ -30,6 +30,14 @@
 			</template>
 		</a-layout-header>
 		<a-layout-content class="content">
+			<!-- <div class="stepWrapper">
+				<a-steps v-model:current="currentStep" type="navigation">
+					<a-step status="finish" title="开始" />
+					<a-step status="process" title="预处理" />
+					<a-step status="wait" title="可视化" />
+					<a-step status="wait" title="发布" />
+				</a-steps>
+			</div> -->
 			<Scroller ref="scroller" :height="contentHeight" background-color="#fff" style="border-radius: 16px">
 				<div class="scrollContent" :style="{ padding: '40px 20px' }">
 					<router-view v-slot="{ Component }">
@@ -57,8 +65,9 @@ const store = useMainStore();
 const scroller = ref();
 
 const selectedKeys = ref<Array<string>>([route.path]);
+// const currentStep = ref<number>(0);
 
-const contentHeight = window.innerHeight - 171;
+const contentHeight = window.innerHeight - 141;
 
 const handleMenuChange = ({ key }: { key: string }) => {
 	if (key.includes(selectedKeys.value[0])) return;
@@ -76,7 +85,8 @@ const toLogin = () => {
 
 const logout = async () => {
 	await loginApi.logout();
-	docCookies.setItem('user', '', null, '/');
+	docCookies.removeItem('jwt_token', '/');
+	docCookies.removeItem('user', '/');
 	store.updateStatus();
 	router.push('/login');
 };
@@ -114,7 +124,11 @@ onMounted(() => {
 }
 .content {
 	padding: 0 50px;
-	margin-top: 100px;
+	margin-top: 70px;
+}
+.stepWrapper {
+	padding: 0 100px;
+	background-color: #fff;
 }
 .footer {
 	text-align: center;
@@ -146,5 +160,12 @@ onMounted(() => {
 
 :deep(.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover) {
 	background-color: rgb(255, 255, 255);
+}
+:deep(.ant-menu-item-selected:hover .ant-menu-title-content) {
+	color: rgb(108, 108, 108);
+}
+
+:deep(.ant-message-notice-content) {
+	border-radius: 16px !important;
 }
 </style>

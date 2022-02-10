@@ -52,6 +52,7 @@ import FieldSelect from './preprocess/FieldSelect.vue';
 import FieldDefine from './preprocess/FieldDefine.vue';
 import { TableCol } from './preprocess/ProTable';
 import { getProjectId } from '../start/components/GetProjectId';
+import { startApi } from '@/api';
 
 const store = useTableStore();
 const { table } = store;
@@ -87,7 +88,7 @@ function showModal(type: number) {
 }
 
 // 下一步与保存数据按钮
-function nextStep() {
+async function nextStep() {
 	if (!table.geted) {
 		message.error('表格获取失败');
 		state.expVis = false;
@@ -122,6 +123,10 @@ function nextStep() {
 		}
 		store.tableExport.x = uncompCols.slice(0).shift().cKey || compCols.slice(0).shift().cKey;
 		store.tableExport.y = compCols.slice(0).pop().cKey;
+		await startApi.updateProjectStatus({
+			project_id: store.project_id,
+			second_finished: 1,
+		});
 		router.push('visual');
 	}
 }
