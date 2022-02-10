@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<vxe-table class="mytable-style" :edit-config="{ trigger: 'click', mode: 'cell' }" :data="mappedTable" :cell-style="cellStyle">
+	<div class="tableWapper">
+		<vxe-table height="100%" class="mytable-style" :edit-config="{ trigger: 'click', mode: 'cell' }" :data="mappedTable" :cell-style="cellStyle">
 			<vxe-column :key="-1" field="rowId" title="ID"> </vxe-column>
 			<vxe-column v-for="item in table.cols.filter(d => !d.computed)" :key="item.cid" :field="item.cKey" :title="item.cname" :edit-render="{ autofocus: '.vxe-input--inner' }">
 				<template #edit="{ row }">
@@ -67,5 +67,10 @@ export default {
 :deep(.vxe-input--inner) {
 	background-color: inherit !important;
 	color: inherit !important;
+}
+
+.tableWapper {
+	height: 100%;
+	width: 100%;
 }
 </style>

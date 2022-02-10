@@ -19,8 +19,9 @@ import ChartConfig from '../pages/visual/components/ChartConfig.vue';
 const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
-		name: 'index',
+		name: '首页',
 		component: Index,
+		redirect: '/projects',
 		children: [
 			{
 				path: '/login',
