@@ -30,6 +30,14 @@
 			</template>
 		</a-layout-header>
 		<a-layout-content class="content">
+			<!-- <div class="stepWrapper">
+				<a-steps v-model:current="currentStep" type="navigation">
+					<a-step status="finish" title="开始" />
+					<a-step status="process" title="预处理" />
+					<a-step status="wait" title="可视化" />
+					<a-step status="wait" title="发布" />
+				</a-steps>
+			</div> -->
 			<Scroller ref="scroller" :height="contentHeight" background-color="#fff" style="border-radius: 16px">
 				<div class="scrollContent" :style="{ padding: '40px 20px' }">
 					<router-view v-slot="{ Component }">
@@ -57,6 +65,7 @@ const store = useMainStore();
 const scroller = ref();
 
 const selectedKeys = ref<Array<string>>([route.path]);
+// const currentStep = ref<number>(0);
 
 const contentHeight = window.innerHeight - 141;
 
@@ -76,7 +85,8 @@ const toLogin = () => {
 
 const logout = async () => {
 	await loginApi.logout();
-	docCookies.setItem('user', '', null, '/');
+	docCookies.removeItem('jwt_token', '/');
+	docCookies.removeItem('user', '/');
 	store.updateStatus();
 	router.push('/login');
 };
@@ -115,6 +125,10 @@ onMounted(() => {
 .content {
 	padding: 0 50px;
 	margin-top: 70px;
+}
+.stepWrapper {
+	padding: 0 100px;
+	background-color: #fff;
 }
 .footer {
 	text-align: center;

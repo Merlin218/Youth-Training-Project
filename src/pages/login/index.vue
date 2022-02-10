@@ -65,7 +65,6 @@ export default {
 			docCookies.setItem('captcha_client', e.target.value, null, '/');
 		},
 		async refreshImg() {
-			console.log(1);
 			this.refreshNum();
 			const svgWrapper = document.getElementById('svgWrapper');
 			svgWrapper.innerHTML = '';
@@ -78,19 +77,17 @@ export default {
 				user_name: this.$refs.username.stateValue,
 				password: this.$refs.password.input.stateValue,
 			};
-			const fakeUser = {
-				user_name: 'alexzhli',
-				password: '123456',
-			};
 			let res = null;
 			try {
-				res = await loginApi.login(form || fakeUser);
+				res = await loginApi.login(form);
 			} catch (e) {
 				//
 			}
 			store.updateStatus();
 			switch (res?.code) {
 				case 0:
+					docCookies.setItem('jwt_token', res?.result.jwt_token, null, '/');
+					docCookies.setItem('user', res?.result.user_name, null, '/');
 					message.success('登录成功,即将跳转到主页');
 					setTimeout(() => this.$router.push({ path: `/projects` }), 3000);
 					break;
