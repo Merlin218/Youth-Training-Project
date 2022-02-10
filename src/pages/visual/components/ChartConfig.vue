@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-04 18:12:44
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 04:10:19
+ * @LastEditTime: 2022-02-10 10:11:49
  * @Description: 请填写简介
 -->
 <template>
@@ -195,7 +195,7 @@ const toNext = async () => {
 		});
 		// 更新状态
 		await startApi.updateProjectStatus({
-			project_id: visualStore.chartPicId,
+			project_id: projectStore.project_id,
 			third_finished: 1,
 		});
 		router.push('/publish');

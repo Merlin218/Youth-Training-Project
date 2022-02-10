@@ -1,10 +1,3 @@
-/*
- * @Author: Merlin218
- * @Date: 2022-02-03 21:26:54
- * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 02:15:17
- * @Description: 请填写简介
- */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { message } from 'ant-design-vue';
 import docCookies from '@/utils/cookie';
@@ -15,6 +8,7 @@ import Start from '@/pages/start/index.vue';
 import Visual from '../pages/visual/visual.vue';
 import ChartSelect from '../pages/visual/components/ChartSelect.vue';
 import ChartConfig from '../pages/visual/components/ChartConfig.vue';
+import NotFound from '@/pages/NotFound.vue';
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -72,6 +66,10 @@ const routes: RouteRecordRaw[] = [
 				component: () => import('../pages/preprocess/index.vue'),
 			},
 		],
+	},
+	{
+		path: '/:catchAll(.*)',
+		component: NotFound,
 	},
 ];
 
