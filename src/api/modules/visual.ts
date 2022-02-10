@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-08 11:19:01
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-08 14:04:07
+ * @LastEditTime: 2022-02-10 13:01:26
  * @Description: 可视化接口
  */
 
@@ -34,8 +34,18 @@ const updateChartPicConfig = (data: {
 		method: 'POST',
 		data,
 	});
+const getProjectData = (projectId: string) =>
+	createRequest({
+		url: '/cms/getProjectData',
+		method: 'get',
+		params: {
+			t: Date.now(),
+			project_id: projectId,
+		},
+	});
 
 export default {
 	updateChartPicConfig,
 	getAllChartPic,
+	getProjectData,
 };

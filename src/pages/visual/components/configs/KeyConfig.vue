@@ -2,19 +2,24 @@
  * @Author: Merlin218
  * @Date: 2022-02-01 19:26:42
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:32:23
+ * @LastEditTime: 2022-02-10 12:40:04
  * @Description: 字段配置
 -->
 <template>
 	<a-form :model="fieldConfig">
 		<a-form-item label="x轴字段">
-			<a-select v-model:value="fieldConfig.xField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.yField, fieldConfig.seriesField])"></a-select>
+			<a-select v-model:value="fieldConfig.xField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.yField, fieldConfig.seriesField, 'rowId'])"></a-select>
 		</a-form-item>
 		<a-form-item label="y轴字段">
-			<a-select v-model:value="fieldConfig.yField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.seriesField])"></a-select>
+			<a-select v-model:value="fieldConfig.yField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.seriesField, 'rowId'])"></a-select>
 		</a-form-item>
 		<a-form-item v-show="canSeries" label="分组字段">
-			<a-select v-model:value="fieldConfig.seriesField" placeholder="请选择字段" :allow-clear="true" :options="getOptions([fieldConfig.xField, fieldConfig.yField], 'string')"></a-select> </a-form-item
+			<a-select
+				v-model:value="fieldConfig.seriesField"
+				placeholder="请选择字段"
+				:allow-clear="true"
+				:options="getOptions([fieldConfig.xField, fieldConfig.yField, 'rowId'], 'string')"
+			></a-select> </a-form-item
 	></a-form>
 </template>
 

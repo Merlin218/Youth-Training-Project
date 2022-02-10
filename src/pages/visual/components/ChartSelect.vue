@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 04:10:12
+ * @LastEditTime: 2022-02-10 13:15:10
  * @Description: 选择图表
 -->
 <template>
@@ -86,6 +86,8 @@ const toConfigPage = async () => {
 				message.error('数据未定义');
 				return;
 			}
+			// const { result } = (await visualApi.getProjectData(projectStore.project_id)) as responseType;
+			// console.log(JSON.parse(result));
 			const { x, y, data } = tableStore.tableExport;
 			tableData = { x, y, data };
 		}
@@ -113,7 +115,7 @@ onMounted(async () => {
 			} = (await visualApi.getAllChartPic(id)) as responseType;
 			// 默认获取第一个图表,保存到store
 			visualStore.backupProjectData(first);
-			// console.log(first);
+			console.log(first);
 			if (first.chart_type !== null && Object.keys(G2PlotChartConfig).includes(first.chart_type)) {
 				showModal.value = true;
 			}
