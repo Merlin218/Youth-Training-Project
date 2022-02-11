@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-09 12:16:34
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 15:02:21
+ * @LastEditTime: 2022-02-10 15:48:39
  * @Description: 请填写简介
 -->
 <template>
@@ -80,6 +80,7 @@ onBeforeMount(async () => {
 			waterMarkConfigs: watermark_config === 'false' ? false : JSON.parse(watermark_config),
 			visConfig: JSON.parse(vis_config),
 		};
+		chartData.value.visConfig.autoFit = true;
 		// eslint-disable-next-line no-empty
 	} catch (err) {
 		message.warn('请先选择一个项目', 1);

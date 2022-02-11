@@ -89,10 +89,11 @@ export class TableCol {
 		this.editable = true;
 		if (!this.computed) {
 			// 如果不是计算属性就检查类型, 初始化数据定义与筛选, 计算错误
+			this.errors = { haveError: null, typeErr: this.checkType() };
 			this.checkType();
 			this.initColDefine();
 			this.initColSift();
-			this.errors = { haveError: null, typeErr: this.checkType() };
+			this.checkColDefine();
 		} else {
 			// 计算下计算属性值
 			this.refreshComputedValue();
@@ -222,7 +223,7 @@ export class TableCol {
 		colData.forEach(d => {
 			if (this.dataSift.nn && (d.v === null || d.v === undefined || d.v === '')) {
 				disableRow.push(d.rowId);
-			} else if (this.compareable) {
+			} else if (this.compareable && !this.errors.typeErr) {
 				const orderArr = [...colData];
 				orderArr.sort((a, b) => 0.5 - (typeObj.isLeq(a.v, b.v) as unknown as number));
 				if (!orderArr.length) return;
