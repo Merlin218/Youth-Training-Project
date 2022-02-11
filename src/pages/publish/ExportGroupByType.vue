@@ -83,7 +83,7 @@ watch(
 );
 
 const getTableData = async () => {
-	const res = await publishApi.getProjectsData({ project_id: projectStore.project_id });
+	const res = (await publishApi.getProjectsData({ project_id: projectStore.project_id })) as any;
 	tableData.value = props.chartData.visConfig.data || JSON.parse(res.result.data).data;
 };
 

@@ -88,7 +88,7 @@ export default {
 			} catch (e) {
 				//
 			}
-			store.updateStatus();
+			store.updateUsername(docCookies.getItem('user'));
 			switch (res?.code) {
 				case 0:
 					docCookies.setItem('jwt_token', res?.result.jwt_token, null, '/');

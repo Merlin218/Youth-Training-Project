@@ -54,7 +54,6 @@
 					/>
 				</a-steps>
 			</div>
-			<!-- <Scroller ref="scroller" :height="contentHeight" background-color="#fff" :style="{ borderRadius: `${isShowSteps ? '0 0 16px' : ''} 16px` }"> -->
 			<div class="scrollWrapper" :style="{ height: `${contentHeight}px`, borderRadius: `${isShowSteps ? '0 0 16px' : ''} 16px` }">
 				<div class="scrollContent">
 					<router-view v-slot="{ Component }">
@@ -62,7 +61,6 @@
 					</router-view>
 				</div>
 			</div>
-			<!-- </Scroller> -->
 		</a-layout-content>
 		<a-layout-footer class="footer"> Chart ©2022 Created by BugRight </a-layout-footer>
 	</a-layout>
@@ -73,14 +71,10 @@ import { ref, watch, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
 import docCookies from '@/utils/cookie';
-import { useMainStore } from '@/store/user';
 import { loginApi } from '@/api';
-// import Scroller from '@/components/Scroller.vue';
 
 const router = useRouter();
 const route = useRoute();
-const store = useMainStore();
-// const scroller = ref();
 
 const stepStatus = ref(0);
 const selectedKeys = ref<Array<string>>([route.path]);
@@ -99,10 +93,6 @@ const handleMenuChange = ({ key }: { key: string }) => {
 		}
 	});
 	router.push(key);
-	// nextTick(() => {
-	// 	scroller.value.refreshScroll();
-	// 	scroller.value.scrollToTop(0);
-	// });
 };
 
 const toLogin = () => {
@@ -113,7 +103,6 @@ const logout = async () => {
 	await loginApi.logout();
 	docCookies.removeItem('jwt_token', '/');
 	docCookies.removeItem('user', '/');
-	store.updateStatus();
 	router.push('/login');
 };
 
@@ -127,7 +116,6 @@ watch(
 
 onMounted(() => {
 	// scroller.value.refreshScroll();
-	console.log(contentHeight.value);
 });
 </script>
 
