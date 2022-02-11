@@ -8,8 +8,8 @@ export const useMainStore = defineStore({
 	}),
 	actions: {
 		// 支持同步或异步
-		updateStatus() {
-			this.username = docCookies.getItem('user');
+		updateUsername(name: string) {
+			this.username = name;
 		},
 	},
 });
