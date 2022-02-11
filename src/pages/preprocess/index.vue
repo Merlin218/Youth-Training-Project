@@ -102,9 +102,13 @@ async function nextStep() {
 	store.tableExport = table.exportTable(state.save1, state.save2);
 	if (state.curType) {
 		store.putTable(store.project_id).then(
-			d => {
+			async d => {
 				if (!d.code) {
 					message.success('保存成功');
+					await startApi.updateProjectStatus({
+						project_id: store.project_id,
+						second_finished: 1,
+					});
 					state.expVis = false;
 				} else {
 					message.error('保存失败');
@@ -123,10 +127,6 @@ async function nextStep() {
 		}
 		store.tableExport.x = uncompCols.slice(0).shift().cKey || compCols.slice(0).shift().cKey;
 		store.tableExport.y = compCols.slice(0).pop().cKey;
-		await startApi.updateProjectStatus({
-			project_id: store.project_id,
-			second_finished: 1,
-		});
 		router.push('visual');
 	}
 }
