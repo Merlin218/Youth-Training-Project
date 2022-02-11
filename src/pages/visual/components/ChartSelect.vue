@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-01-30 11:33:10
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 15:00:26
+ * @LastEditTime: 2022-02-11 13:17:06
  * @Description: 选择图表
 -->
 <template>
@@ -27,7 +27,7 @@ import { G2PlotChartConfig } from '@/configs/visual';
 import { ChartNameType } from '@/types/visual/charts';
 import { useVisualStore } from '@/store/visual';
 import { useTableStore } from '@/store/process';
-import { visualApi } from '@/api';
+import { startApi, visualApi } from '@/api';
 import { responseType } from '@/types/common';
 import ChartGrid from './views/ChartGrid.vue';
 import { useProjectStore } from '@/store/project';
@@ -82,13 +82,23 @@ const toConfigPage = async () => {
 		if (router.currentRoute.value.query.status === 'back') {
 			const { xField, yField, data } = JSON.parse(visualStore.projectData.vis_config);
 			tableData = { x: xField, y: yField, data };
-		} else {
-			if (!tableStore.tableExport) {
-				message.error('数据未定义');
-				return;
+		} else if (!tableStore.tableExport) {
+			// 如果tableStore中不存在数据。从获取数据
+			const { result } = (await visualApi.getProjectData(projectStore.project_id)) as responseType;
+			const table: any = JSON.parse(result.data);
+			if (table.cols.length < 2) {
+				message.error('数据有误，请重新选择数据');
+				// 更新状态
+				await startApi.updateProjectStatus({
+					project_id: projectStore.project_id,
+					second_finished: -1,
+					third_finished: -1,
+				});
+				router.push('/preprocess');
 			}
-			// const { result } = (await visualApi.getProjectData(projectStore.project_id)) as responseType;
-			// console.log(JSON.parse(result));
+			const { data, cols } = table;
+			tableData = { x: cols[0].cKey, y: cols[1].cKey, data };
+		} else {
 			const { x, y, data } = tableStore.tableExport;
 			tableData = { x, y, data };
 		}
@@ -116,8 +126,7 @@ onMounted(async () => {
 			} = (await visualApi.getAllChartPic(id)) as responseType;
 			// 默认获取第一个图表,保存到store
 			visualStore.backupProjectData(first);
-			console.log(first);
-			if (first.chart_type !== null && Object.keys(G2PlotChartConfig).includes(first.chart_type)) {
+			if (first.chart_type && Object.keys(G2PlotChartConfig).includes(first.chart_type)) {
 				showModal.value = true;
 			}
 		} else {

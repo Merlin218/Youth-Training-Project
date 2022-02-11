@@ -5,7 +5,7 @@
 		</template>
 		新建项目
 	</a-button>
-	<a-modal v-model:visible="visible" title="新建项目" @ok="handleOk">
+	<a-modal v-model:visible="visible" title="新建项目" ok-text="确认" cancel-text="取消" @ok="handleOk">
 		<p>为你的新项目起一个名字</p>
 		<a-input v-model:value="value" placeholder="项目名称" />
 	</a-modal>

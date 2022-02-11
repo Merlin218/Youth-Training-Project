@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-07 16:47:59
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-09 21:31:48
+ * @LastEditTime: 2022-02-11 11:17:40
  * @Description: 悬浮提示配置
 -->
 <template>
@@ -29,7 +29,7 @@ import { useVisualStore } from '@/store/visual';
 
 const store = useVisualStore();
 
-const fieldsOptions = computed(() => Object.keys(store.chartOptions?.data[0] || {}));
+const fieldsOptions = computed(() => Object.keys(store.chartOptions?.data[0] || []).filter(item => item !== 'rowId'));
 
 const tooltipConfig = ref<Exclude<TooltipOptions, false>>({
 	fields: [],
