@@ -1,7 +1,7 @@
 <template>
 	<div class="login">
-		<div>
-			<h1 style="color: #333; margin-bottom: 40px; text-align: center">登录</h1>
+		<div style="z-index: 2">
+			<h1 style="color: #333; text-align: center">登录</h1>
 			<a-form>
 				<a-form-item label="账号：" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 					<a-input ref="username" placeholder="用户名">
@@ -110,13 +110,16 @@ export default {
 
 <style lang="less" scoped>
 .login {
-	height: 80vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 	position: relative;
 	.bg__container {
+		position: absolute;
+		right: 20px;
+		bottom: -50px;
 		width: 100%;
 		display: flex;
 		align-items: center;
