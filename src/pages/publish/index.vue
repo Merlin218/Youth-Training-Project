@@ -6,25 +6,27 @@
  * @Description: 请填写简介
 -->
 <template>
-	<h1>在此发布你的作品</h1>
-	<br />
-	<a-row type="flex" justify="center" align="top">
-		<a-col :span="8">
-			<div v-if="chartData.type" class="display">
-				<ChartDisplay
-					id="publishChart"
-					class="chartWrapper"
-					:url="chartData.waterMarkConfigs ? chartData.waterMarkConfigs.url : false"
-					:name="chartData.type"
-					:options="chartData.visConfig"
-					:title="chartData.chartTitle"
-				></ChartDisplay>
-			</div>
-		</a-col>
-		<a-col :span="15">
-			<ExportGroupByType :chart-data="chartData"></ExportGroupByType>
-		</a-col>
-	</a-row>
+	<div style="padding: 0 20px">
+		<h1 style="padding-left: 3%">在此发布你的作品</h1>
+		<br />
+		<a-row type="flex" justify="center" align="top">
+			<a-col :span="8">
+				<div v-if="chartData.type" class="display">
+					<ChartDisplay
+						id="publishChart"
+						class="chartWrapper"
+						:url="chartData.waterMarkConfigs ? chartData.waterMarkConfigs.url : false"
+						:name="chartData.type"
+						:options="chartData.visConfig"
+						:title="chartData.chartTitle"
+					></ChartDisplay>
+				</div>
+			</a-col>
+			<a-col :span="15">
+				<ExportGroupByType :chart-data="chartData"></ExportGroupByType>
+			</a-col>
+		</a-row>
+	</div>
 </template>
 
 <script lang="ts" setup>
