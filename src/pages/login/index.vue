@@ -94,7 +94,7 @@ export default {
 					docCookies.setItem('jwt_token', res?.result.jwt_token, null, '/');
 					docCookies.setItem('user', res?.result.user_name, null, '/');
 					message.success('登录成功,即将跳转到主页');
-					setTimeout(() => this.$router.push({ path: `/projects` }), 3000);
+					setTimeout(() => this.$router.push({ path: `/projects` }), 2000);
 					break;
 				default:
 					this.refreshImg();

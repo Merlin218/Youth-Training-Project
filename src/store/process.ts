@@ -2,7 +2,6 @@
 import { defineStore } from 'pinia';
 import createRequest from '../api/axios';
 import { ProTable } from '../pages/preprocess/preprocess/ProTable';
-import { data } from '@/data';
 import { removeSpace, toTable } from '@/utils/preprocess';
 
 export interface IgetTableAPI {
@@ -17,7 +16,7 @@ export const useTableStore = defineStore({
 	state: () => ({
 		table: new ProTable({ getted: false }),
 		// tableExport: null as any,
-		tableExport: data as any,
+		tableExport: null as any,
 	}),
 	actions: {
 		getTable(projectId: string) {

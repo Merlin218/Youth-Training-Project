@@ -2,7 +2,7 @@
  * @Author: Merlin218
  * @Date: 2022-02-09 12:16:34
  * @LastEditors: Merlin218
- * @LastEditTime: 2022-02-10 15:02:21
+ * @LastEditTime: 2022-02-10 15:48:39
  * @Description: 请填写简介
 -->
 <template>
@@ -34,13 +34,11 @@ import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
 import ChartDisplay from '../visual/components/views/ChartDisplay.vue';
 import ExportGroupByType from './ExportGroupByType.vue';
-import { useVisualStore } from '@/store/visual';
 import { useProjectStore } from '@/store/project';
 import { publishApi, visualApi } from '@/api';
 import { html2image } from '@/utils/html2image';
 import { responseType } from '@/types/common';
 
-const visualStore = useVisualStore();
 const projectStore = useProjectStore();
 
 const chartData = ref<any>({});
@@ -50,12 +48,11 @@ const imgUrl = ref('');
 provide('getImgUrl', () => imgUrl.value);
 
 provide('updateProjectImage', async () => {
-	const res = await publishApi.updateCurrentChartPicExport({
+	await publishApi.updateCurrentChartPicExport({
 		project_id: projectStore.project_id,
 		chartpic_id: chartData.value.id,
 		export_img: imgUrl.value,
 	});
-	console.log(visualStore.chartPicId, res);
 });
 
 onMounted(async () => {
@@ -73,7 +70,6 @@ onBeforeMount(async () => {
 				data: [first],
 			},
 		} = (await visualApi.getAllChartPic(projectStore.project_id)) as responseType;
-		console.log(first);
 		const { chartpic_id, chart_type, chart_title, vis_config, watermark_config } = first;
 		chartData.value = {
 			id: chartpic_id,
@@ -82,6 +78,7 @@ onBeforeMount(async () => {
 			waterMarkConfigs: watermark_config === 'false' ? false : JSON.parse(watermark_config),
 			visConfig: JSON.parse(vis_config),
 		};
+		chartData.value.visConfig.autoFit = true;
 		// eslint-disable-next-line no-empty
 	} catch (err) {
 		message.warn('请先选择一个项目', 1);
