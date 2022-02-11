@@ -1,8 +1,6 @@
 <template>
 	<div class="outWrapper">
-		<div class="imgWrapper">
-			<img :src="imgUrl" />
-		</div>
+		<div class="imgWrapper" :style="{ backgroundImage: `url(${imgUrl})` }"></div>
 		<a-form class="form">
 			<a-form-item> <a-button @click="updateProjectImage">保存为封面</a-button></a-form-item>
 			<a-form-item label="导出格式">
@@ -44,9 +42,9 @@ export default {
 }
 .imgWrapper {
 	flex: 1;
-	img {
-		width: 100%;
-	}
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 .form {
 	margin-top: 40px;
