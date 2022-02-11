@@ -146,7 +146,7 @@ export default {
 <style lang="less" scoped>
 .card-wrapper {
 	position: relative;
-	top: -60px;
+	top: -85px;
 }
 :deep(.ant-card-body) {
 	height: 420px;

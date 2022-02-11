@@ -44,7 +44,7 @@
 						"
 					/>
 					<a-step
-						title="发布"
+						title="导出"
 						:disabled="stepStatus <= 1"
 						@click="
 							() => {
