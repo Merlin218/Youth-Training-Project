@@ -1,5 +1,7 @@
 # 青训营项目
 
+项目后端：👉[zhonghangAlex/Data2Chart: Data2Chart Project (github.com)](https://github.com/zhonghangAlex/Data2Chart)👈
+
 ### 技术栈
 
 - [pnpm](https://www.pnpm.cn/)
