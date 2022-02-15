@@ -48,4 +48,4 @@ jobs:
           SOURCE: dist/*
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: root
-          TARGET: /www/wwwroot/www.merlin218.top/data-to-chart
+          TARGET: /www/wwwroot/data2chart.merlin218.top
