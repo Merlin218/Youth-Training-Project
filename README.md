@@ -1,5 +1,6 @@
 # 青训营项目
 
+线上地址：[测试账号：admin 111111](data2chart.merlin218.top)
 项目后端：👉[zhonghangAlex/Data2Chart: Data2Chart Project (github.com)](https://github.com/zhonghangAlex/Data2Chart)👈
 
 ### 技术栈
