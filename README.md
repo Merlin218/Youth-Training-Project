@@ -1,6 +1,6 @@
 # 青训营项目
 
-线上地址：[测试账号：admin 111111](https://data2chart.all1024.com)
+线上地址：[测试账号：admin 123456](https://data2chart.all1024.com)
 
 项目后端：👉[zhonghangAlex/Data2Chart: Data2Chart Project (github.com)](https://github.com/zhonghangAlex/Data2Chart)👈
 
